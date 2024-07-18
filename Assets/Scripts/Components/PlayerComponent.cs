@@ -7,13 +7,20 @@ public class PlayerComponent : MonoBehaviour {
     public static PlayerComponent player;
 
     [Header("Movement Attributes")]
+    [Tooltip("Max speed horizontally the character can move")]
     public float moveSpeed = 0.1f;
+    [Tooltip("Max speed horizontally the character can move while jumping or falling")]
     public float inAirMoveSpeed = 0.1f;
+    [Tooltip("Time it takes to go from a stand-still to that max speed")]
     public float accelerationTime = 0.5f;
     [Header("Jump Attributes")]
+    [Tooltip("Time after leaving a platform that the character can still jump")]
     public float coyoteTime = 0.1f;
+    [Tooltip("Time the player can hold down the jump key to change the character's height")]
     public float jumpHoldTime = 0.1f;
+    [Tooltip("The character's upward velocity for jumping")]
     public float jumpSpeed = 10.0f;
+    [Tooltip("The character's downward acceleration from gravity")]
     public float gravity = 10.0f;
     
     private float lookDirection = 1.0f;

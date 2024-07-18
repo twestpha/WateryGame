@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 1219962245785274710}
   - component: {fileID: 1219962245785274714}
   - component: {fileID: 1219962245785274711}
+  - component: {fileID: 1962653996}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -249,3 +250,20 @@ MonoBehaviour:
   jumpHoldTime: 0.2
   jumpSpeed: 10
   gravity: 16
+--- !u!114 &1962653996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219962245785274713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f6a6a4022773146bfcbaed85a865dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincible: 0
+  maxHealth: 50
+  currentHealth: 0
+  team: 1
+  resistances: []

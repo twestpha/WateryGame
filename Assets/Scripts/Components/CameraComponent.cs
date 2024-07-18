@@ -8,10 +8,15 @@ public class CameraComponent : MonoBehaviour {
     public PlayerComponent player;
     
     [Header("Camera Attributes")]
+    [Tooltip("Time the camera will take to move into position while the character is in motion or not grounded")]
     public float movingSeekTime = 0.2f;
+    [Tooltip("Time the camera will take to move into position while the character is still")]
     public float stillSeekTime = 0.2f;
+    [Tooltip("Distance ahead the character the camera will target while the character is still")]
     public float lookAheadDistanceStill = 1.0f;
+    [Tooltip("Distance ahead the character the camera will target while the character is in motion or not grounded")]
     public float lookAheadDistanceMoving = 2.0f;
+    [Tooltip("Distance up the camera will look at all times")]
     public float lookUpDistance = 0.2f;
     
     private Vector3 acceleration;
