@@ -131,10 +131,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  movingSeekTime: 0.18
+  movingSeekTime: 0.2
   stillSeekTime: 0.5
   lookAheadDistanceStill: 2
   lookAheadDistanceMoving: 3
+  lookUpDistance: 0.25
 --- !u!1 &6279871697231694120
 GameObject:
   m_ObjectHideFlags: 0

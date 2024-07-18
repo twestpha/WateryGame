@@ -21,6 +21,11 @@ public class PlayerComponent : MonoBehaviour {
         get { return lookDirection; }
     }
     
+    private bool grounded;
+    public bool Grounded {
+        get { return grounded; }
+    }
+    
     private float moveVelocity;
     public float MoveVelocity {
         get { return moveVelocity; }
@@ -46,7 +51,7 @@ public class PlayerComponent : MonoBehaviour {
     }
 
     void Update(){
-        bool grounded = characterController.isGrounded;
+        grounded = characterController.isGrounded;
         if(grounded){
             coyoteTimer.Start();
         }
@@ -89,6 +94,10 @@ public class PlayerComponent : MonoBehaviour {
         float verticalMove = Mathf.Abs(transform.position.y - previousPosition.y) / Time.deltaTime;
         if(verticalVelocity > 0.1f && verticalMove < 0.1f){
             verticalVelocity = 0.0f;
+        }
+        
+        if(verticalVelocity < -0.1f && verticalMove < 0.1f){
+            grounded = true;
         }
         
         // If grounded, add velocity uppp
