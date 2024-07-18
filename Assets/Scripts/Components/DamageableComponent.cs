@@ -23,9 +23,8 @@ using UnityEngine;
 //##################################################################################################
 public enum DamageType {
     None,
-    Bullet,
-    Explosion,
-    Trigger,
+    PlayerTrident,
+    GenericFishAttack,
     // ...
 }
 

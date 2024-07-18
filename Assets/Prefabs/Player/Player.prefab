@@ -113,7 +113,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1219962245785274710}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &1219962244289272212
 Light:
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 1219962245785274714}
   - component: {fileID: 1219962245785274711}
   - component: {fileID: 1962653996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,6 +209,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1219962244151120031}
+  - {fileID: 2025570854844797451}
   - {fileID: 1219962244289272219}
   - {fileID: 6848679746462648816}
   m_Father: {fileID: 0}
@@ -230,7 +231,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1219962245785274711
 MonoBehaviour:
@@ -266,6 +267,51 @@ MonoBehaviour:
   currentHealth: 0
   team: 1
   resistances: []
+--- !u!1 &2219974307827846899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025570854844797451}
+  - component: {fileID: 1132980791374301716}
+  m_Layer: 3
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2025570854844797451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219974307827846899}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1219962245785274710}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1132980791374301716
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219974307827846899}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &631779103020379928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,7 +321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6327524829207127784, guid: e4ed25c9a860a2f45b3722c9be6fb61b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6327524829207127784, guid: e4ed25c9a860a2f45b3722c9be6fb61b, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,11 +1,12 @@
 
 Code Items
 ==========================================================================
-[x] Swimming controls rather than platformer
-    
-[x] Downres fish textures
-[x] Simple Enemy with AI
+[/] Swimming controls rather than platformer
+[/] Downres fish textures
+
+[x] Base Enemy with AI
+    - raycasting/viewcone for player
 [x] Attacking, damaging on both sides
-    - Player snapping to nearest at circle around
+    - Player move-snapping to nearest at circle around
 [x] Test graphics with hand-painting filter
 

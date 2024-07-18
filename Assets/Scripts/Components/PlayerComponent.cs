@@ -63,8 +63,9 @@ public class PlayerComponent : MonoBehaviour {
         targetVelocity = targetVelocity.normalized * moveSpeed;
         moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
         
-        Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
-        characterController.Move(actualVelocityToApply * Time.deltaTime);
+        // Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        characterController.Move(moveVelocity * Time.deltaTime);
+        Debug.Log(moveVelocity);
     
         // Always hard-clamp x
         Vector3 pos = transform.position;
