@@ -1,0 +1,11 @@
+
+Code Items
+==========================================================================
+[/] Better camera (slight lookahead)
+
+[x] Player health
+    - Port over damageable from other projects
+[x] Simple Enemy with AI
+[x] Attacking, damaging on both sides
+    - Player snapping to nearest at circle around
+[x] Test graphics with hand-painting filter

@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerComponent : MonoBehaviour {
+    
+    public static PlayerComponent player;
 
+    [Header("Movement Attributes")]
     public float moveSpeed = 0.1f;
     public float inAirMoveSpeed = 0.1f;
     public float accelerationTime = 0.5f;
-    [Space(10)]
+    [Header("Jump Attributes")]
     public float coyoteTime = 0.1f;
     public float jumpHoldTime = 0.1f;
     public float jumpSpeed = 10.0f;
     public float gravity = 10.0f;
     
+    private float lookDirection = 1.0f;
+    public float LookDirection {
+        get { return lookDirection; }
+    }
+    
     private float moveVelocity;
+    public float MoveVelocity {
+        get { return moveVelocity; }
+    }
+    
     private float acceleration;
     private float verticalVelocity;
     
@@ -22,6 +34,10 @@ public class PlayerComponent : MonoBehaviour {
     private Timer jumpHoldTimer;
     
     private CharacterController characterController;
+    
+    void Awake(){
+        player = this;
+    }
     
     void Start(){
         characterController = GetComponent<CharacterController>();
@@ -44,6 +60,7 @@ public class PlayerComponent : MonoBehaviour {
         
         direction *= (grounded ? moveSpeed : inAirMoveSpeed);
         moveVelocity = Mathf.SmoothDamp(moveVelocity, direction, ref acceleration, accelerationTime);   
+        lookDirection = moveVelocity < 0.0f ? -1.0f : 1.0f;
     
         // Keep a little down-velocity on the ground, otherwise apply gravity downward
         if(grounded){
