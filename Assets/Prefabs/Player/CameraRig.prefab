@@ -227,5 +227,5 @@ MonoBehaviour:
   player: {fileID: 0}
   movingSeekTime: 0.2
   stillSeekTime: 1.2
-  lookAheadDistanceMoving: 1
+  lookAheadDistanceMoving: 2
   lookAheadDistanceStill: 0.5
