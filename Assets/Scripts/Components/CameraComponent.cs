@@ -12,12 +12,10 @@ public class CameraComponent : MonoBehaviour {
     public float movingSeekTime = 0.2f;
     [Tooltip("Time the camera will take to move into position while the character is still")]
     public float stillSeekTime = 0.2f;
-    [Tooltip("Distance ahead the character the camera will target while the character is still")]
-    public float lookAheadDistanceStill = 1.0f;
     [Tooltip("Distance ahead the character the camera will target while the character is in motion or not grounded")]
     public float lookAheadDistanceMoving = 2.0f;
-    [Tooltip("Distance up the camera will look at all times")]
-    public float lookUpDistance = 0.2f;
+    [Tooltip("Distance ahead the character the camera will target while the character is still")]
+    public float lookAheadDistanceStill = 1.0f;
     
     private Vector3 acceleration;
     
@@ -26,12 +24,11 @@ public class CameraComponent : MonoBehaviour {
     }
     
     void Update(){
-        bool moving = (Mathf.Abs(player.MoveVelocity) > 0.1f) || !player.Grounded;
-        
-        Vector3 targetPosition = player.transform.position;
-        targetPosition += (Vector3.forward * player.LookDirection * (moving ? lookAheadDistanceMoving : lookAheadDistanceStill));
-        targetPosition += (Vector3.up * lookUpDistance);
-        
+        Vector3 playerVelocity = player.MoveVelocity;
+        bool moving = playerVelocity.magnitude > 0.1f;
+        playerVelocity.Normalize();
+ 
+        Vector3 targetPosition = player.transform.position + (playerVelocity * (moving ? lookAheadDistanceMoving : lookAheadDistanceStill));
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref acceleration, moving ? movingSeekTime : stillSeekTime);
     }
 }

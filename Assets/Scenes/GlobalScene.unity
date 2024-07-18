@@ -2535,14 +2535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1219962244289272212, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1219962244289272212, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
-      propertyPath: m_Shadows.m_Resolution
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274710, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2616,6 +2608,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1962653995}
+    - target: {fileID: 6279871696718242640, guid: aa14a27be6e8bc749a90de68a4f76270, type: 3}
+      propertyPath: stillSeekTime
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279871696718242640, guid: aa14a27be6e8bc749a90de68a4f76270, type: 3}
+      propertyPath: movingSeekTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279871696718242640, guid: aa14a27be6e8bc749a90de68a4f76270, type: 3}
+      propertyPath: lookAheadDistanceStill
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279871696718242640, guid: aa14a27be6e8bc749a90de68a4f76270, type: 3}
+      propertyPath: lookAheadDistanceMoving
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6279871696718242646, guid: aa14a27be6e8bc749a90de68a4f76270, type: 3}
       propertyPath: m_Name
       value: CameraRig

@@ -9,109 +9,63 @@ public class PlayerComponent : MonoBehaviour {
     [Header("Movement Attributes")]
     [Tooltip("Max speed horizontally the character can move")]
     public float moveSpeed = 0.1f;
-    [Tooltip("Max speed horizontally the character can move while jumping or falling")]
-    public float inAirMoveSpeed = 0.1f;
-    [Tooltip("Time it takes to go from a stand-still to that max speed")]
+    [Tooltip("How much time it takes to reach moveSpeed when a button is pressed")]
     public float accelerationTime = 0.5f;
-    [Header("Jump Attributes")]
-    [Tooltip("Time after leaving a platform that the character can still jump")]
-    public float coyoteTime = 0.1f;
-    [Tooltip("Time the player can hold down the jump key to change the character's height")]
-    public float jumpHoldTime = 0.1f;
-    [Tooltip("The character's upward velocity for jumping")]
-    public float jumpSpeed = 10.0f;
-    [Tooltip("The character's downward acceleration from gravity")]
-    public float gravity = 10.0f;
+    [Tooltip("How much time it takes to reach moveSpeed when no buttons are pressed")]
+    public float decelerationTime = 1.0f;
+    [Tooltip("The character's downward velocity from gravity")]
+    public float downVelocity = 1.0f;
+    [Tooltip("How long after the player presses buttons until we apply the downVelocity")]
+    public float downVelocityApplyTime;
     
-    private float lookDirection = 1.0f;
-    public float LookDirection {
-        get { return lookDirection; }
-    }
-    
-    private bool grounded;
-    public bool Grounded {
-        get { return grounded; }
-    }
-    
-    private float moveVelocity;
-    public float MoveVelocity {
+    private Vector3 moveVelocity;
+    public Vector3 MoveVelocity {
         get { return moveVelocity; }
     }
     
-    private float acceleration;
-    private float verticalVelocity;
-    
-    private bool jumping;
-    private Timer coyoteTimer;
-    private Timer jumpHoldTimer;
-    
+    private Vector3 acceleration;
     private CharacterController characterController;
+    private Timer downVelocityApplyTimer;
     
     void Awake(){
         player = this;
+        downVelocityApplyTimer = new Timer(downVelocityApplyTime);
     }
     
     void Start(){
         characterController = GetComponent<CharacterController>();
-        coyoteTimer = new Timer(coyoteTime);
-        jumpHoldTimer = new Timer(jumpHoldTime);
     }
 
     void Update(){
-        grounded = characterController.isGrounded;
-        if(grounded){
-            coyoteTimer.Start();
-        }
+        Vector3 targetVelocity = Vector3.zero;
+        bool keyPress = false;
         
-        float direction = 0.0f;
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            direction = -1.0f;
+            targetVelocity.z = -1.0f;
+            keyPress = true;
         } else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            direction = 1.0f;
+            targetVelocity.z = 1.0f;
+            keyPress = true;
         }
         
-        direction *= (grounded ? moveSpeed : inAirMoveSpeed);
-        moveVelocity = Mathf.SmoothDamp(moveVelocity, direction, ref acceleration, accelerationTime);   
-        lookDirection = moveVelocity < 0.0f ? -1.0f : 1.0f;
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+            targetVelocity.y = 1.0f;
+            keyPress = true;
+        } else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
+            targetVelocity.y = -1.0f;
+            keyPress = true;
+        }
+        
+        if(keyPress){
+            downVelocityApplyTimer.Start();
+        }
+        
+        targetVelocity = targetVelocity.normalized * moveSpeed;
+        moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
+        
+        Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        characterController.Move(actualVelocityToApply * Time.deltaTime);
     
-        // Keep a little down-velocity on the ground, otherwise apply gravity downward
-        if(grounded){
-            verticalVelocity = -0.5f;
-        } else {
-            verticalVelocity += -(gravity) * Time.deltaTime;
-        }
-        
-        if(Input.GetKeyDown(KeyCode.Space) && (grounded || !coyoteTimer.Finished())){
-            jumping = true;
-            jumpHoldTimer.Start();
-        }
-        if(jumping){
-            verticalVelocity = jumpSpeed;
-            
-            if(jumpHoldTimer.Finished() || !Input.GetKey(KeyCode.Space)){
-                jumping = false;
-            }
-        }
-        
-        Vector3 velocity = new Vector3(0.0f, verticalVelocity, moveVelocity);
-        Vector3 previousPosition = transform.position;
-        characterController.Move(velocity * Time.deltaTime);
-        
-        // Zero out velocity if we bumped our head
-        float verticalMove = Mathf.Abs(transform.position.y - previousPosition.y) / Time.deltaTime;
-        if(verticalVelocity > 0.1f && verticalMove < 0.1f){
-            verticalVelocity = 0.0f;
-        }
-        
-        if(verticalVelocity < -0.1f && verticalMove < 0.1f){
-            grounded = true;
-        }
-        
-        // If grounded, add velocity uppp
-        // else, down just a bit
-        // Coyote time
-        // Hold-to-jump
-        
         // Always hard-clamp x
         Vector3 pos = transform.position;
         pos.x = 0.0f;
