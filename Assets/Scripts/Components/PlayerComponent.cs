@@ -8,6 +8,8 @@ public class PlayerComponent : MonoBehaviour {
     public float inAirMoveSpeed = 0.1f;
     public float accelerationTime = 0.5f;
     [Space(10)]
+    public float coyoteTime = 0.1f;
+    public float jumpHoldTime = 0.1f;
     public float jumpSpeed = 10.0f;
     public float gravity = 10.0f;
     
@@ -15,14 +17,23 @@ public class PlayerComponent : MonoBehaviour {
     private float acceleration;
     private float verticalVelocity;
     
+    private bool jumping;
+    private Timer coyoteTimer;
+    private Timer jumpHoldTimer;
+    
     private CharacterController characterController;
     
     void Start(){
         characterController = GetComponent<CharacterController>();
+        coyoteTimer = new Timer(coyoteTime);
+        jumpHoldTimer = new Timer(jumpHoldTime);
     }
 
     void Update(){
         bool grounded = characterController.isGrounded;
+        if(grounded){
+            coyoteTimer.Start();
+        }
         
         float direction = 0.0f;
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
@@ -41,8 +52,16 @@ public class PlayerComponent : MonoBehaviour {
             verticalVelocity += -(gravity) * Time.deltaTime;
         }
         
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && (grounded || !coyoteTimer.Finished())){
+            jumping = true;
+            jumpHoldTimer.Start();
+        }
+        if(jumping){
             verticalVelocity = jumpSpeed;
+            
+            if(jumpHoldTimer.Finished() || !Input.GetKey(KeyCode.Space)){
+                jumping = false;
+            }
         }
         
         Vector3 velocity = new Vector3(0.0f, verticalVelocity, moveVelocity);
