@@ -1,6 +1,10 @@
 
 Code Items
 ==========================================================================
+
+[x] Fog color volume
+[x] Bubble fx
+[x] Plant wind shader in and working
 [x] Base Enemy with AI
     - raycasting/viewcone for player
 [x] Player Attacking

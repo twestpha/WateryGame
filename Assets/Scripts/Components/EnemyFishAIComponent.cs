@@ -50,6 +50,13 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Range(0.0f, 1.0f)]
     public float specialAbilityChance;
     public GameObject attackSpecialAbility;
+    [Header("Animation Attributes")]
+    public string idleAnimationName;
+    public string movingAnimationName;
+    public string spottedAnimationName;
+    public string attackAnimationName;
+    public string specialAbilityAnimationName;
+    public string dyingAnimationName;
     
     public enum PatrolState {
         IdleA, AtoB, IdleB, BtoA

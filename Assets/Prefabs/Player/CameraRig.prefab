@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 276627274}
   - component: {fileID: 276627275}
   - component: {fileID: 276627277}
+  - component: {fileID: 2317272016072553500}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -179,6 +180,24 @@ MonoBehaviour:
   heightDensity: 2
   startDistance: 0
   fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
+--- !u!114 &2317272016072553500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279871695916854969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.081
+  intensity: 1.87
+  blurSize: 0.38
+  blurIterations: 1
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!1 &6279871696718242646
 GameObject:
   m_ObjectHideFlags: 0
