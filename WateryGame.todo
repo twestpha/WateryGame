@@ -3,7 +3,9 @@ Code Items
 ==========================================================================
 [w] Plant wind shader in and working
 [/] Bubble fx
+[/] Fish particles 
 
+[x] Bake AO for the helmet
 [x] Player 3D model
     - Armor
     - Trident/Weapon
