@@ -518,7 +518,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194798318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.39, z: -6.79}
+  m_LocalPosition: {x: 0, y: 6.8, z: -7.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -562,13 +562,14 @@ MonoBehaviour:
   playerSpotAngle: 10
   patrolDistance: 3
   patrolHeight: 1
+  goBackToIdleDistance: 0
   startState: 1
-  currentState: 1
   allowMotionlessState: 1
   allowPatrollingState: 1
   allowSpottedPlayerState: 1
   allowPursuingPlayerState: 1
   allowAttackingPlayerState: 1
+  allowAttackAbilityPlayerState: 1
   allowWaitingToAttackPlayerState: 1
   allowFleeingState: 1
   allowDeadState: 1
@@ -577,6 +578,10 @@ MonoBehaviour:
   attackDuration: 0.1
   attackDamageRange: {x: 5, y: 8}
   attackDamageType: 2
+  specialAbilityChance: 0
+  attackSpecialAbility: {fileID: 0}
+  currentState: 1
+  patrolState: 0
 --- !u!1 &252548041
 GameObject:
   m_ObjectHideFlags: 0

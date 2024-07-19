@@ -1,12 +1,11 @@
 
 Code Items
 ==========================================================================
-[/] Swimming controls rather than platformer
-[/] Downres fish textures
-
 [x] Base Enemy with AI
     - raycasting/viewcone for player
-[x] Attacking, damaging on both sides
-    - Player move-snapping to nearest at circle around
-[x] Test graphics with hand-painting filter
+[x] Player Attacking
+[x] Enemy Attacking
+[x] First fish with abilities
 
+[x] Player 3D model
+[x] Baitfish 3D model
