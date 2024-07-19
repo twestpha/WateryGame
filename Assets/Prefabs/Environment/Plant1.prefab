@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190283450298558152}
-  m_LocalRotation: {x: -0, y: 0.5521527, z: -0, w: -0.833743}
+  m_LocalRotation: {x: 0, y: 0.5521554, z: -0, w: -0.83374125}
   m_LocalPosition: {x: -0.113, y: 0.721, z: 1.035}
   m_LocalScale: {x: 0.8444775, y: 0.8444775, z: 0.8444775}
   m_ConstrainProportionsScale: 0
@@ -99,4 +99,4 @@ MonoBehaviour:
   model: {fileID: 190283450298558167}
   amplitudes: {x: 0, y: 0, z: 1}
   frequencies: {x: 0, y: 0, z: 3}
-  randomize: 0
+  randomize: 1
