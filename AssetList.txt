@@ -2,6 +2,7 @@ Broadly:
 https://polyhaven.com/models
 https://opengameart.org/
 https://www.turbosquid.com/
+https://www.mixamo.com
 
 Specifically:
 https://opengameart.org/content/rocks-03
