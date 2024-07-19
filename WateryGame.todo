@@ -3,6 +3,10 @@ Code Items
 ==========================================================================
 [w] Plant wind shader in and working
 
+[x] Player 3D model
+    - Armor
+    - Trident/Weapon
+
 [x] Fog color volume
 [x] Bubble fx
 [x] Base Enemy with AI
@@ -11,5 +15,6 @@ Code Items
 [x] Enemy Attacking
 [x] First fish with abilities
 
-[x] Player 3D model
 [x] Baitfish 3D model
+
+[x] Test building to web
