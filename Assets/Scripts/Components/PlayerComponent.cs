@@ -1,6 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
+public struct ImpartedVelocity { // for later :P
+    public Vector3 velocity;
+    public Timer impartTimer;
+    public bool decreaseOverTime;
+    
+    public ImpartedVelocity(Vector3 velocity_, float time, bool decreaseOverTime_)
+    {
+        velocity = velocity_;
+        impartTimer = new Timer(time);
+        decreaseOverTime = decreaseOverTime_;
+    }
+}
 
 public class PlayerComponent : MonoBehaviour {
     
@@ -63,9 +77,8 @@ public class PlayerComponent : MonoBehaviour {
         targetVelocity = targetVelocity.normalized * moveSpeed;
         moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
         
-        // Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
-        characterController.Move(moveVelocity * Time.deltaTime);
-        Debug.Log(moveVelocity);
+        Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        characterController.Move(actualVelocityToApply * Time.deltaTime);
     
         // Always hard-clamp x
         Vector3 pos = transform.position;
