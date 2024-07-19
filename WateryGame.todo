@@ -4,11 +4,11 @@ Code Items
 [w] Plant wind shader in and working
 [/] Bubble fx
 [/] Fish particles 
+[/] Armor
 
 [x] Bake AO for the helmet
 [x] Player 3D model
-    - Armor
-    - Trident/Weapon
+    [x] Trident/Weapon
 
 [x] Fog color volume
 [x] Base Enemy with AI
