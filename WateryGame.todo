@@ -2,13 +2,13 @@
 Code Items
 ==========================================================================
 [w] Plant wind shader in and working
+[/] Bubble fx
 
 [x] Player 3D model
     - Armor
     - Trident/Weapon
 
 [x] Fog color volume
-[x] Bubble fx
 [x] Base Enemy with AI
     - raycasting/viewcone for player
 [x] Player Attacking
