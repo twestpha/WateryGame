@@ -1,14 +1,10 @@
 
 Code Items
 ==========================================================================
-[/] Baitfish 3D model, anims
-[/] animation
-[/] Short dash towards player to align attack
-[/] Enemy Attacking
-    [/] Dealing damage
 [/] Plant wind shader in and working
     - replace/remove model sway component
 [/] Make player instantly snap to direction when attacking
+[/] Red flash on damaged for all stuff
 
 [x] Document ai settings
 [x] First fish with abilities
@@ -19,7 +15,7 @@ Code Items
 [x] Camera wobble on damaged (unscaled time!)
 [x] Big glowy smash hit particles/animation
 [x] Knockback on player hit something
-[x] Red flash on damaged for all stuff, invincibility for short time for player
+[x] player invincibility for short time for player after getting damaged
 [x] Any enemy touch damages the player (very little)
 
 Stretch Goals

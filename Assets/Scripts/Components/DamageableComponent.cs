@@ -64,7 +64,7 @@ public class DamageableComponent : MonoBehaviour {
     }
 
     public DamageResistance[] resistances;
-
+    
     public delegate void OnDamageableDamaged(DamageableComponent damage);
     public delegate void OnDamageableKilled(DamageableComponent damage);
     public delegate void OnDamageableHealed(DamageableComponent damage);
