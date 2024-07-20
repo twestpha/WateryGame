@@ -1,20 +1,20 @@
 
 Code Items
 ==========================================================================
-[w] Plant wind shader in and working
 [/] Bubble fx
 [/] Fish particles 
 [/] Armor
 [/] Bake AO for the helmet
+[/] Player movement direction
+[/] Player 3D model
 
-[x] Player movement direction
-[x] Player 3D model
-    [x] Trident/Weapon
+[x] Trident/Weapon
 [x] Fog color volume
 [x] Base Enemy with AI
     - raycasting/viewcone for player
 [x] Player Attacking
 [x] Enemy Attacking
-[x] First fish with abilities
 [x] Baitfish 3D model
+[x] First fish with abilities
 [x] Test building to webplayer
+[x] Plant wind shader in and working
