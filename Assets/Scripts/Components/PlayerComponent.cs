@@ -44,6 +44,7 @@ public class PlayerComponent : MonoBehaviour {
     public Vector3 MoveVelocity {
         get { return moveVelocity; }
     }
+    private Vector3 previousMoveVelocityRecorded;
     
     private Vector3 acceleration;
     private CharacterController characterController;
@@ -83,6 +84,10 @@ public class PlayerComponent : MonoBehaviour {
             keyPress = true;
         }
         
+        if(Input.GetKeyDown(KeyCode.Space)){
+            modelAnimator.SetTrigger("basicslash");
+        }
+        
         if(keyPress){
             downVelocityApplyTimer.Start();
         }
@@ -101,7 +106,8 @@ public class PlayerComponent : MonoBehaviour {
     
     private void UpdateModelAndAnimations(){
         if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
-            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(1.0f, 0.0f, 0.0f));
+            previousMoveVelocityRecorded.y = 0.0f;
+            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad); 
             
             modelAnimator.SetBool("swimming", false);
@@ -110,6 +116,8 @@ public class PlayerComponent : MonoBehaviour {
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad); 
             
             modelAnimator.SetBool("swimming", true);
+            
+            previousMoveVelocityRecorded = moveVelocity;
         }
     }
 }
