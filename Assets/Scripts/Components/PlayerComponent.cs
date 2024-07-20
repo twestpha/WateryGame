@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public struct ImpartedVelocity { // for later :P
+public class ImpartedVelocity {
     public Vector3 velocity;
     public Timer impartTimer;
     public bool decreaseOverTime;
@@ -21,7 +21,7 @@ public class PlayerComponent : MonoBehaviour {
     public static PlayerComponent player;
 
     [Header("Movement Attributes")]
-    [Tooltip("Max speed horizontally the character can move")]
+    [Tooltip("Max speed directionally the character can move")]
     public float moveSpeed = 0.1f;
     [Tooltip("How much time it takes to reach moveSpeed when a button is pressed")]
     public float accelerationTime = 0.5f;
@@ -33,7 +33,9 @@ public class PlayerComponent : MonoBehaviour {
     public float downVelocityApplyTime;
     
     [Header("Model Rotation Attributes")]
+    [Tooltip("How fast (in degrees per second) the model root returns to the idle state")]
     public float idleRotationRate;
+    [Tooltip("How fast (in degrees per second) the model root moves toward the velocity while the character is moving")]
     public float movingRotationRate;
     
     [Header("Connections")]
@@ -44,11 +46,14 @@ public class PlayerComponent : MonoBehaviour {
     public Vector3 MoveVelocity {
         get { return moveVelocity; }
     }
-    private Vector3 previousMoveVelocityRecorded;
+    private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
     
     private Vector3 acceleration;
     private CharacterController characterController;
     private Timer downVelocityApplyTimer;
+    
+    private List<ImpartedVelocity> impartedVelocities = new();
+    private List<int> impartedVelocitiesToRemove = new();
     
     void Awake(){
         player = this;
@@ -86,6 +91,9 @@ public class PlayerComponent : MonoBehaviour {
         
         if(Input.GetKeyDown(KeyCode.Space)){
             modelAnimator.SetTrigger("basicslash");
+            
+            // TODO move this to hit-react and deal-damage-react
+            // ImpartVelocity(new ImpartedVelocity(-moveVelocity * 2.0f, 0.5f, true));
         }
         
         if(keyPress){
@@ -94,8 +102,23 @@ public class PlayerComponent : MonoBehaviour {
         
         targetVelocity = targetVelocity.normalized * moveSpeed;
         moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
+        moveVelocity.x = 0.0f;
         
         Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        
+        // Apply imparted velocities
+        for(int i = 0; i < impartedVelocities.Count; ++i){
+            ImpartedVelocity v = impartedVelocities[i];
+            actualVelocityToApply += v.velocity * (v.decreaseOverTime ? 1.0f - v.impartTimer.Parameterized() : 1.0f);
+            
+            if(v.impartTimer.Finished()){
+                impartedVelocities[i] = impartedVelocities[impartedVelocities.Count - 1];
+                impartedVelocities.RemoveAt(impartedVelocities.Count - 1);
+                i--;
+            }
+        }
+        
+        // Apply the move
         characterController.Move(actualVelocityToApply * Time.deltaTime);
     
         // Always hard-clamp x
@@ -119,5 +142,10 @@ public class PlayerComponent : MonoBehaviour {
             
             previousMoveVelocityRecorded = moveVelocity;
         }
+    }
+    
+    public void ImpartVelocity(ImpartedVelocity v){
+        impartedVelocities.Add(v);
+        v.impartTimer.Start();
     }
 }

@@ -78,6 +78,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private Vector3 velocity;
     private Vector3 acceleration;
     
+    private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
+    
     void Start(){
         originPosition = transform.position;
         character = GetComponent<CharacterController>();
@@ -90,7 +92,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         UpdateMovement();
     }
     
-    private void UpdateState(){
+    private void UpdateState(){        
         if(currentState == FishAIState.Motionless){
             if(CanSeePlayer()){
                 if(allowSpottedPlayerState){
@@ -160,6 +162,12 @@ public class EnemyFishAIComponent : MonoBehaviour {
         velocity = Vector3.SmoothDamp(velocity, toTarget.normalized * moveSpeed, ref acceleration, accelerationTime);
         character.Move(velocity * Time.deltaTime);
         
+        if(velocity.magnitude >= (moveSpeed / 4.0f)){
+            previousMoveVelocityRecorded = velocity;
+        }
+        
+        // TODO apply previousMoveVelocityRecorded to model root transform
+        
         // Always hard-clamp x
         Vector3 pos = transform.position;
         pos.x = 0.0f;
@@ -167,6 +175,21 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private bool CanSeePlayer(){
+        Vector3 toPlayer = PlayerComponent.player.transform.position - transform.position;
+        
+        if(toPlayer.magnitude < playerSpotDistance){
+            Vector3 lookDirection = velocity;
+            lookDirection.x = 0.0f;
+            
+            if(Vector3.Angle(toPlayer, lookDirection) < playerSpotAngle){
+                if(!Physics.Raycast(transform.position, toPlayer, toPlayer.magnitude, 1 << 0 /* default only */, QueryTriggerInteraction.Ignore)){
+                    // Debug.DrawLine(transform.position, PlayerComponent.player.transform.position, Color.green, 0.0f, false);
+                    return true;
+                }
+            }
+        }
+        
+        // Debug.DrawLine(transform.position, PlayerComponent.player.transform.position, Color.red, 0.0f, false);
         return false;
     }
     

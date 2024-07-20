@@ -1,20 +1,20 @@
 
 Code Items
 ==========================================================================
-[/] Bubble fx
-[/] Fish particles 
-[/] Armor
-[/] Bake AO for the helmet
-[/] Player movement direction
 [/] Player 3D model
-
-[x] Trident/Weapon
-[x] Fog color volume
-[x] Base Enemy with AI
+[/] Trident/Weapon
+[/] Player Attacking
+[/] Base Enemy with AI
     - raycasting/viewcone for player
-[x] Player Attacking
+    
+[x] Fog color volume
 [x] Enemy Attacking
-[x] Baitfish 3D model
+[x] Baitfish 3D model, anims
 [x] First fish with abilities
 [x] Test building to webplayer
+    - causes computer shutdown?
 [x] Plant wind shader in and working
+    - replace/remove model sway component
+[x] Time slowdown on player hit and player deal damage
+[x] Hit particles/animation
+[x] Knockback on player hit something
