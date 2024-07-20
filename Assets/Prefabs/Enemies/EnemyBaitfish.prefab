@@ -205,11 +205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533d4d2804c548c4aa4f5cd05193bf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   accelerationTime: 0.5
-  idleRotationRate: 10
-  movingRotationRate: 50
-  playerSpotDistance: 5
+  idleRotationRate: 80
+  movingRotationRate: 40
+  playerSpotDistance: 8
   playerSpotAngle: 10
   patrolDistance: 3
   patrolHeight: 1
@@ -231,12 +231,6 @@ MonoBehaviour:
   attackDamageType: 2
   specialAbilityChance: 0
   attackSpecialAbility: {fileID: 0}
-  idleAnimationName: 
-  movingAnimationName: 
-  spottedAnimationName: 
-  attackAnimationName: 
-  specialAbilityAnimationName: 
-  dyingAnimationName: 
   modelRoot: {fileID: 1517018727300254032}
   modelAnimator: {fileID: 2757447419063201431}
   currentState: 1

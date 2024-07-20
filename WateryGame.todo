@@ -4,9 +4,9 @@ Code Items
 [/] Base Enemy with AI
     - raycasting/viewcone for player
 [/] Fog color volume
+[/] Baitfish 3D model, anims
 
 [x] Enemy Attacking
-[x] Baitfish 3D model, anims
 [x] First fish with abilities
 [x] Test building to webplayer
     - causes computer shutdown?
@@ -15,5 +15,5 @@ Code Items
 [x] Time slowdown on player hit and player deal damage
 [x] Camera wobble
 [x] Hit particles/animation
-[x] Knockback on player hit something
-[x] Red flash on damaged for all stuff
+[x] Knockback on player hit something, took damage
+[x] Red flash on damaged for all stuff, invincibility for short time for player

@@ -57,13 +57,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Range(0.0f, 1.0f)]
     public float specialAbilityChance;
     public GameObject attackSpecialAbility;
-    [Header("Animation Attributes")]
-    public string idleAnimationName;
-    public string movingAnimationName;
-    public string spottedAnimationName;
-    public string attackAnimationName;
-    public string specialAbilityAnimationName;
-    public string dyingAnimationName;
     [Header("Animation Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
@@ -191,6 +184,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else if(state == FishAIState.SpottedPlayer){
             StopMoving();
             spotAlertTimer.Start();
+            modelAnimator.SetTrigger("alert");
             // Animation alert
         } else if(state == FishAIState.PursuingPlayer){
             // Animation moving
@@ -245,11 +239,16 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private void UpdateModel(){
         // TODO better look direction calculations; using the target if applicable
         if(velocity.magnitude < (moveSpeed / 4.0f)){
+            modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
             Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad);
         } else {
-            Quaternion targetRotation = Quaternion.LookRotation(velocity + NONZERO_VECTOR);
+            modelAnimator.SetBool("swimming", true);
+            
+            Vector3 displayVelocity = velocity;
+            displayVelocity.z *= displayVelocity.z * (displayVelocity.z < 0.0f ? -1.0f : 1.0f); // make the z movement more significant
+            Quaternion targetRotation = Quaternion.LookRotation(displayVelocity + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad);
             
             previousMoveVelocityRecorded = velocity;
@@ -282,6 +281,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private void MoveTo(Vector3 position){
         moveTarget = position;
         previousMoveDistance = 99999999.0f;
+        previousMoveVelocityRecorded = position - transform.position;
     }
     
     private bool AtGoal(){
