@@ -35,6 +35,7 @@ Shader "Polygon Wind/Tree" {
 
     Properties {
         _MainTex ("Main Texture", 2D) = "white" {}
+        _Emissive ("Emission", 2D) = "black" {}
         _Cutoff( "Mask Clip Value", Float ) = 0.5
         _Normal ("Normal Texture", 2D) = "white" {}
         _Tint ("Tint", Color) = (1,1,1,1)
@@ -80,6 +81,7 @@ Shader "Polygon Wind/Tree" {
             float _b_influence;
 
             sampler2D _MainTex;
+            sampler2D _Emissive;
             sampler2D _Normals;
             uniform float _Cutoff = 0.5;
             fixed4 _Tint;
@@ -98,14 +100,17 @@ Shader "Polygon Wind/Tree" {
                     //Tree Movement and Wiggle
                     // i.vertex.x += (cos(_Time.z * _tree_sway_speed + (worldPos.x/_wind_size) + (sin(_Time.z * _tree_sway_stutter * _tree_sway_speed + (worldPos.x/_wind_size)) * _tree_sway_stutter_influence) ) + 1)/2 * _tree_sway_disp * _wind_dir.x * (i.vertex.y / 10) +
                     // cos(_Time.w * i.vertex.x * _leaves_wiggle_speed + (worldPos.x/_wind_size)) * _leaves_wiggle_disp * _wind_dir.x * i.color.b * _b_influence;
-                    //
+                    // 
                     // i.vertex.z += (cos(_Time.z * _tree_sway_speed + (worldPos.z/_wind_size) + (sin(_Time.z * _tree_sway_stutter * _tree_sway_speed + (worldPos.z/_wind_size)) * _tree_sway_stutter_influence) ) + 1)/2 * _tree_sway_disp * _wind_dir.z * (i.vertex.y / 10) +
                     // cos(_Time.w * i.vertex.z * _leaves_wiggle_speed + (worldPos.x/_wind_size)) * _leaves_wiggle_disp * _wind_dir.z * i.color.b * _b_influence;
-                    //
+                    // 
                     // i.vertex.y += cos(_Time.z * _tree_sway_speed + (worldPos.z/_wind_size)) * _tree_sway_disp * _wind_dir.y * (i.vertex.y / 10);
 
                     //Branches Movement
-                    i.vertex.y += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.z/_wind_size)) * _branches_disp  * i.color.r * _r_influence;
+                    // i.vertex.y += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.z/_wind_size)) * _branches_disp  * i.color.r * _r_influence;
+                    i.vertex.x += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.x * _wind_size * 20.0) + i.vertex.z) * _branches_disp * i.color.r * _r_influence;
+                    i.vertex.y += cos(_Time.w * _tree_sway_speed + _wind_dir.y + (worldPos.y * _wind_size * 20.0) + i.vertex.x) * _branches_disp * i.color.r * _r_influence;
+                    i.vertex.z += sin(_Time.w * _tree_sway_speed + _wind_dir.z + (worldPos.z * _wind_size * 20.0) + i.vertex.y) * _branches_disp * i.color.r * _r_influence;
                 }
 
                 // Surface Shader
@@ -114,7 +119,8 @@ Shader "Polygon Wind/Tree" {
                     o.Normal = UnpackScaleNormal( tex2D( _Normals, IN.uv_MainTex ), 1.0);
                     o.Albedo = c.rgb;
                     o.Alpha = c.a;
-
+                    o.Emission = tex2D(_Emissive, IN.uv_MainTex) * c.a;
+                    
                     clip( c.a - _Cutoff );
                 }
 

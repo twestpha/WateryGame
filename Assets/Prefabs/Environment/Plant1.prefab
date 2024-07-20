@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 190283450298558167}
   - component: {fileID: 190283450298558166}
   - component: {fileID: 190283450298558153}
-  - component: {fileID: 7596671974998872836}
   m_Layer: 0
   m_Name: Plant1
   m_TagString: Untagged
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 190283450298558152}
   m_LocalRotation: {x: 0, y: 0.5521554, z: -0, w: -0.83374125}
   m_LocalPosition: {x: -0.113, y: 0.721, z: 1.035}
-  m_LocalScale: {x: 0.8444775, y: 0.8444775, z: 0.8444775}
+  m_LocalScale: {x: 7.991219, y: 7.9912186, z: 7.991219}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4876898515049803453}
@@ -42,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190283450298558152}
-  m_Mesh: {fileID: -2432090755550338912, guid: 556bac465d8e66a498b891450de825a2, type: 3}
+  m_Mesh: {fileID: -462981019419857548, guid: 1c1b4b160734cfd4e805008c50bc7fdd, type: 3}
 --- !u!23 &190283450298558153
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85,22 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7596671974998872836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190283450298558152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b231a611f9e9f146b891e0cc541d31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 190283450298558167}
-  amplitudes: {x: 0, y: 0, z: 1}
-  frequencies: {x: 0, y: 0, z: 3}
-  randomize: 1
 --- !u!1 &2017394417606879490
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4876898515049803453
 Transform:
   m_ObjectHideFlags: 0

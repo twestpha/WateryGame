@@ -7,14 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: diffuse
+  m_Name: diffuse 1
   m_Shader: {fileID: 4800000, guid: 408b3e6513042904cacecc999d00497b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ALPHATEST_ON
-  - _EMISSION
   - _NORMALMAP
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -24,7 +23,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 257f788fb2daf524c9c961a5e413c2d0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 27ac19eb6adaf804ea865280bd76ec75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,15 +39,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: ab3b8b2dfa97d6d4d87eca10c77640d6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3532c990ad9380c4fb914fec3ad3abd7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive:
-        m_Texture: {fileID: 2800000, guid: ab3b8b2dfa97d6d4d87eca10c77640d6, type: 3}
+        m_Texture: {fileID: 2800000, guid: cb25eb8eaa3acd54d81394cb13a35a44, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 5af057b925e742f45aa6120e8a04e49c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 73c102f319fe4d449a6883fcad44ee40, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -56,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ace692413fe1bdc418da0a17c47bb33b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -78,7 +77,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 1
@@ -93,7 +92,7 @@ Material:
     - _branches_disp: 0.3
     - _leaves_wiggle_disp: 0.07
     - _leaves_wiggle_speed: 0.01
-    - _r_influence: 0.02
+    - _r_influence: 0.044
     - _tree_sway_disp: 0.3
     - _tree_sway_speed: 1
     - _tree_sway_stutter: 1.5
@@ -101,7 +100,7 @@ Material:
     - _wind_size: 15
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
-    - _wind_dir: {r: 0.5, g: 20, b: 0.5, a: 0}
+    - _wind_dir: {r: 1.2, g: -0.1, b: 0.62, a: 0}
   m_BuildTextureStacks: []

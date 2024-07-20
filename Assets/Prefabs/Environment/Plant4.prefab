@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6988355176507658682}
   - component: {fileID: 6988355176507658683}
   - component: {fileID: 6988355176507658660}
-  - component: {fileID: 807104354880791657}
   m_Layer: 0
   m_Name: Plant4
   m_TagString: Untagged
@@ -41,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6988355176507658661}
-  m_Mesh: {fileID: -2432090755550338912, guid: 556bac465d8e66a498b891450de825a2, type: 3}
+  m_Mesh: {fileID: -462981019419857548, guid: 1c1b4b160734cfd4e805008c50bc7fdd, type: 3}
 --- !u!23 &6988355176507658660
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84,19 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &807104354880791657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988355176507658661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b231a611f9e9f146b891e0cc541d31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 6988355176507658682}
-  amplitudes: {x: 0, y: 0, z: 1.5}
-  frequencies: {x: 0, y: 0, z: 4.5}
-  randomize: 1
