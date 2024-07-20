@@ -1,22 +1,32 @@
 
-Code Items
+[/] = done
+[x] = to do
+[!] = Emergency bug
+[b] = bug
+[t] = needs testing
+[w] = won't do
+[s] = stretch goal
+
+TODO List
 ==========================================================================
 [/] Plant wind shader in and working
     - replace/remove model sway component
 [/] Make player instantly snap to direction when attacking
 [/] Red flash on damaged for all stuff
+[/] Test building to webplayer
 
 [x] Document ai settings
 [x] First fish with abilities
-[x] Test building to webplayer
-    - causes computer shutdown?
 [x] Time slowdown on player hit and player deal damage
 [x] fish killed spawn blood fx WaterBloodFX.prefab
 [x] Camera wobble on damaged (unscaled time!)
-[x] Big glowy smash hit particles/animation
+[x] Big glowy smash hit particles/animation for player
 [x] Knockback on player hit something
 [x] player invincibility for short time for player after getting damaged
 [x] Any enemy touch damages the player (very little)
+
+[b] Quaternion.RotateTowards appears to behave differently on web builds, resulting in very slow rotations of the character and fish
+    - it's delta time
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
