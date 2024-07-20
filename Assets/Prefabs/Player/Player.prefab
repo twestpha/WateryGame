@@ -316,11 +316,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9cc6242c76b0a40aeba4558ec0fccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  accelerationTime: 0.2
-  decelerationTime: 0.5
-  downVelocity: -1
-  downVelocityApplyTime: 2
+  moveSpeed: 3.25
+  accelerationTime: 0.15
+  decelerationTime: 0.4
+  downVelocity: -0.85
+  downVelocityApplyTime: 5
   idleRotationRate: 10
   movingRotationRate: 20
   modelRoot: {fileID: 8010830638675754283}
