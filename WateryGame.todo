@@ -6,8 +6,8 @@ Code Items
 [/] Player Attacking
 [/] Base Enemy with AI
     - raycasting/viewcone for player
+[/] Fog color volume
     
-[x] Fog color volume
 [x] Enemy Attacking
 [x] Baitfish 3D model, anims
 [x] First fish with abilities
@@ -19,3 +19,4 @@ Code Items
 [x] Camera wobble
 [x] Hit particles/animation
 [x] Knockback on player hit something
+[x] Red flash on damaged for all stuff
