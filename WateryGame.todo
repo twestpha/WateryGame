@@ -2,19 +2,24 @@
 Code Items
 ==========================================================================
 [/] Baitfish 3D model, anims
+[/] animation
+[/] Short dash towards player to align attack
+[/] Enemy Attacking
+    [/] Dealing damage
 
-[x] Enemy Attacking
-    [/] animation
-    [x] Short dash towards player
-    [x] Dealing damage
 [x] First fish with abilities
 [x] Test building to webplayer
     - causes computer shutdown?
 [x] Plant wind shader in and working
     - replace/remove model sway component
 [x] Time slowdown on player hit and player deal damage
-[x] Blood in the water particles
+[x] Blood in the water particles once fish killed
 [x] Camera wobble
 [x] Big glowy smash hit particles/animation
-[x] Knockback on player hit something, took damage
+[x] Knockback on player hit something
 [x] Red flash on damaged for all stuff, invincibility for short time for player
+[x] Make player instantly snap to direction when attacking
+[x] Any enemy touch damages the player (very little)
+
+Stretch Goals
+[s] Custom player attach animation because the current ones aren't great

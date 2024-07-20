@@ -4,44 +4,47 @@ using UnityEngine;
 
 public class DamageMeshComponent : MonoBehaviour {
 
+    public GameObject hitEffects;
+    public GameObject ignoredEffects;
+    
     private Collider damageCollider;
     private GameObject caster;
-    // private AbilityData abilityData;
-    // private MobaUnitComponent casterUnit;
     private DamageableComponent casterDamageable;
 
     private bool casting;
-    private Timer castTimer = new Timer();
+    private Vector2 attackDamageRange;
+    private DamageType attackDamageType;
 
     void Start(){
         damageCollider = GetComponent<Collider>();
         damageCollider.enabled = false;
     }
 
-    // public void CastDamageMesh(AbilityData abilityData_, GameObject caster_){
-    //     caster = caster_;
-    //     abilityData = abilityData_;
-    // 
-    //     casterUnit = caster.GetComponentInParent<MobaUnitComponent>();
-    //     casterDamageable = caster.GetComponentInParent<DamageableComponent>();
-    // 
-    //     casting = true;
-    //     StartCoroutine(CastDamageMeshRoutine());
-    // }
+    public void CastDamageMesh(GameObject caster_, float delay, float duration, Vector2 attackDamageRange_, DamageType attackDamageType_){
+        caster = caster_;
+        casterDamageable = caster.GetComponentInParent<DamageableComponent>();
+        
+        if(!casting){
+            attackDamageRange = attackDamageRange_;
+            attackDamageType = attackDamageType_;
+            StartCoroutine(CastDamageMeshRoutine(delay, duration));
+        }
+    }
 
-    private IEnumerator CastDamageMeshRoutine(){
-        damageCollider.enabled = true;
-
-        // castTimer.SetDuration(abilityData.damageMeshDuration);
+    private IEnumerator CastDamageMeshRoutine(float delay, float duration){
+        casting = true;
+        
+        Timer delayTimer = new Timer(delay);
+        delayTimer.Start();
+        
+        while(!delayTimer.Finished()){
+            yield return null;
+        }
+        
+        Timer castTimer = new Timer(duration);
         castTimer.Start();
-
-        // Run for at least five frames, because of physics stuff
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-        yield return null;
-
+        damageCollider.enabled = true;
+        
         while(casting && !castTimer.Finished()){
             yield return null;
         }
@@ -51,41 +54,23 @@ public class DamageMeshComponent : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other){
-        // DamageableComponent otherDamageable = other.gameObject.GetComponentInParent<DamageableComponent>();
-        // 
-        // if(otherDamageable != null && otherDamageable != casterDamageable){
-        //     if(abilityData.affectEnemies && DamageableComponent.Hostile(casterDamageable.team, otherDamageable.team)){
-        //         otherDamageable.DealDamage(
-        //             AbilityData.CalculateDamage(casterUnit.GetUnitData(), casterDamageable, abilityData),
-        //             abilityData.damageType,
-        //             transform.position,
-        //             caster
-        //         );
-        // 
-        //         if(abilityData.damageMeshImpactEffects != null){
-        //             GameObject fx = GameObject.Instantiate(abilityData.damageMeshImpactEffects);
-        //             fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
-        //         }
-        //         if(abilityData.damageFirstHit){
-        //             casting = false;
-        //             damageCollider.enabled = false;
-        //         }
-        //     }
-        //     if(abilityData.affectAllies && DamageableComponent.Friendly(casterDamageable.team, otherDamageable.team)){
-        // 
-        //         otherDamageable.Heal(
-        //             AbilityData.CalculateDamage(casterUnit.GetUnitData(), casterDamageable, abilityData)
-        //         );
-        // 
-        //         if(abilityData.damageMeshImpactEffects != null){
-        //             GameObject fx = GameObject.Instantiate(abilityData.damageMeshImpactEffects);
-        //             fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
-        //         }
-        //         if(abilityData.damageFirstHit){
-        //             casting = false;
-        //             damageCollider.enabled = false;
-        //         }
-        //     }
-        // }
+        DamageableComponent otherDamageable = other.gameObject.GetComponentInParent<DamageableComponent>();
+        
+        if(otherDamageable != null && otherDamageable != casterDamageable){
+            if(DamageableComponent.Hostile(casterDamageable.team, otherDamageable.team)){
+                bool damageApplied = otherDamageable.DealDamage(
+                    UnityEngine.Random.Range(attackDamageRange.x, attackDamageRange.y),
+                    attackDamageType,
+                    transform.position,
+                    caster
+                );
+
+                GameObject fx = GameObject.Instantiate(damageApplied ? hitEffects : ignoredEffects);
+                fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
+                
+                casting = false;
+                damageCollider.enabled = false;
+            }
+        }
     }
 }

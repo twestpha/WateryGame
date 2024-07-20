@@ -19,6 +19,7 @@ public class ImpartedVelocity {
 public class PlayerComponent : MonoBehaviour {
     
     private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
+    private const float DAMAGED_VELOCITY = 5.0f;
     
     public static PlayerComponent player;
 
@@ -49,10 +50,11 @@ public class PlayerComponent : MonoBehaviour {
         get { return moveVelocity; }
     }
     private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
-    
     private Vector3 acceleration;
-    private CharacterController characterController;
     private Timer downVelocityApplyTimer;
+    
+    private CharacterController characterController;
+    private DamageableComponent damageable;
     
     private List<ImpartedVelocity> impartedVelocities = new();
     private List<int> impartedVelocitiesToRemove = new();
@@ -64,6 +66,10 @@ public class PlayerComponent : MonoBehaviour {
     
     void Start(){
         characterController = GetComponent<CharacterController>();
+        damageable = GetComponent<DamageableComponent>();
+        
+        damageable.damagedDelegates.Register(OnDamaged);
+        damageable.killedDelegates.Register(OnKilled);
     }
 
     void Update(){
@@ -93,9 +99,6 @@ public class PlayerComponent : MonoBehaviour {
         
         if(Input.GetKeyDown(KeyCode.Space)){
             modelAnimator.SetTrigger("basicslash");
-            
-            // TODO move this to hit-react and deal-damage-react
-            // ImpartVelocity(new ImpartedVelocity(-moveVelocity * 2.0f, 0.5f, true));
         }
         
         if(keyPress){
@@ -144,6 +147,18 @@ public class PlayerComponent : MonoBehaviour {
             
             previousMoveVelocityRecorded = moveVelocity;
         }
+    }
+    
+    private void OnDamaged(DamageableComponent damage){
+        Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
+        
+        ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
+        
+        Debug.Log("Yeowch!");
+    }
+    
+    private void OnKilled(DamageableComponent damage){
+        // TODO
     }
     
     public void ImpartVelocity(ImpartedVelocity v){

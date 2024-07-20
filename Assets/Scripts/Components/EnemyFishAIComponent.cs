@@ -23,6 +23,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private const float SPOTTED_ALERT_TIME = 1.0f;
     private const float PLAYER_ATTACK_RADIUS = 2.0f;
     private const float PURSUIT_UPDATE_TIME = 0.5f;
+    private const float ATTACK_MAX_TIME = 1.5f;
     
     [Header("Movement Attributes")]
     public float patrolSpeed;
@@ -49,7 +50,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public bool allowFleeingState = true;
     public bool allowDeadState = true;
     [Header("Attack Attributes")]
-    public GameObject attackMesh;
+    public DamageMeshComponent attackMesh;
     public float attackStartDelay;
     public float attackDuration;
     public Vector2 attackDamageRange;
@@ -76,6 +77,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private Timer patrolTimer = new Timer(PATROL_IDLE_TIME);
     private Timer spotAlertTimer = new Timer(SPOTTED_ALERT_TIME);
     private Timer pursuitUpdateTimer = new Timer(PURSUIT_UPDATE_TIME);
+    private Timer attackMaxTimer = new Timer(ATTACK_MAX_TIME);
     
     // Movement variables
     private Vector3 moveTarget;
@@ -151,6 +153,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
                     MoveTo(GetPlayerAttackReadyPosition());
                     SetState(FishAIState.PursuingPlayer);
                 } else if(allowAttackAbilityPlayerState){
+                    // TODO random chance rolls?
                     SetState(FishAIState.AttackAbility);
                 } else if(allowAttackingPlayerState){
                     SetState(FishAIState.AttackingPlayer);
@@ -162,14 +165,22 @@ public class EnemyFishAIComponent : MonoBehaviour {
                     MoveTo(GetPlayerAttackReadyPosition());
                 }
             } else {
+                // TODO random chance rolls?
                 if(allowAttackAbilityPlayerState){
                     SetState(FishAIState.AttackAbility);
                 } else if(allowAttackingPlayerState){
                     SetState(FishAIState.AttackingPlayer);
                 }
             }
-        } else if(currentState == FishAIState.AttackAbility){
-            // blep
+        } else if(currentState == FishAIState.AttackingPlayer){
+            if(attackMaxTimer.Finished()){
+                // TODO go into waiting mode if more than one attacking?
+                if(allowPursuingPlayerState){
+                    SetState(FishAIState.PursuingPlayer);
+                } else if(allowPatrollingState){
+                    SetState(FishAIState.Patrolling);
+                }
+            }
         }
     }
     
@@ -181,17 +192,26 @@ public class EnemyFishAIComponent : MonoBehaviour {
         if(state == FishAIState.Patrolling){
             patrolState = PatrolState.BtoA;
             StopMoving();
-            // Animation idle
         } else if(state == FishAIState.SpottedPlayer){
             StopMoving();
             spotAlertTimer.Start();
             modelAnimator.SetTrigger("alert");
-            // Animation alert
         } else if(state == FishAIState.PursuingPlayer){
-            // Animation moving
+            // Nop
         } else if(state == FishAIState.AttackingPlayer){
-            StopMoving();
-            // Animation attack
+            // Move to slightly past player
+            Vector3 toPlayer = PlayerComponent.player.transform.position - transform.position;
+            MoveTo(transform.position + (toPlayer * 1.2f));
+            
+            modelAnimator.SetTrigger("attack");
+            
+            if(attackMesh != null){
+                attackMesh.CastDamageMesh(gameObject, attackStartDelay, attackDuration, attackDamageRange, attackDamageType);
+            } else { 
+                Debug.LogError("NO ATTACK MESH");
+            }
+            
+            attackMaxTimer.Start();
         } else if(state == FishAIState.AttackAbility){
             StopMoving();
             // Animation ability attack

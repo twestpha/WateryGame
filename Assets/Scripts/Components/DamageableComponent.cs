@@ -112,7 +112,7 @@ public class DamageableComponent : MonoBehaviour {
     // If this would kill the damageable, notify the killed-delegates of this too. Note that both
     // damaged and killed delegates can be sent, they are not exclusive.
     //##############################################################################################
-    public void DealDamage(float damage, DamageType type, Vector3 position, GameObject damager_){
+    public bool DealDamage(float damage, DamageType type, Vector3 position, GameObject damager_){
 
         // Total Damage = (multiplier * damage) + offset
         // This allows for multipliers like 0.5 (i.e. take half damage) and offsets of 0
@@ -128,7 +128,7 @@ public class DamageableComponent : MonoBehaviour {
 
         // If we won't do any damage, return early
         if(damage <= 0.0f || invincible || currentHealth <= 0){
-            return;
+            return false;
         }
 
         currentHealth -= damage;
@@ -140,6 +140,8 @@ public class DamageableComponent : MonoBehaviour {
         if(currentHealth <= 0){
             killedDelegates.Invoke(this);
         }
+        
+        return true;
     }
 
     //##############################################################################################
