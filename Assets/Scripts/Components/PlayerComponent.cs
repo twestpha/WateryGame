@@ -18,6 +18,8 @@ public class ImpartedVelocity {
 
 public class PlayerComponent : MonoBehaviour {
     
+    private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
+    
     public static PlayerComponent player;
 
     [Header("Movement Attributes")]
@@ -130,12 +132,12 @@ public class PlayerComponent : MonoBehaviour {
     private void UpdateModelAndAnimations(){
         if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
             previousMoveVelocityRecorded.y = 0.0f;
-            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded);
+            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad); 
             
             modelAnimator.SetBool("swimming", false);
         } else {
-            Quaternion targetRotation = Quaternion.LookRotation(moveVelocity);
+            Quaternion targetRotation = Quaternion.LookRotation(moveVelocity + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad); 
             
             modelAnimator.SetBool("swimming", true);

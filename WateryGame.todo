@@ -1,13 +1,10 @@
 
 Code Items
 ==========================================================================
-[/] Player 3D model
-[/] Trident/Weapon
-[/] Player Attacking
 [/] Base Enemy with AI
     - raycasting/viewcone for player
 [/] Fog color volume
-    
+
 [x] Enemy Attacking
 [x] Baitfish 3D model, anims
 [x] First fish with abilities

@@ -18,6 +18,9 @@ public enum FishAIState {
 public class EnemyFishAIComponent : MonoBehaviour {
     
     private const float PATROL_IDLE_TIME = 1.5f;
+    private const float SPOTTED_ALERT_TIME = 1.0f;
+    private const float PLAYER_ATTACK_RADIUS = 2.0f;
+    private const float PURSUIT_UPDATE_TIME = 0.5f;
     
     [Header("Movement Attributes")]
     public float moveSpeed;
@@ -69,8 +72,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private CharacterController character;
     private Vector3 originPosition;
     
-    // Patrol variables
     private Timer patrolTimer = new Timer(PATROL_IDLE_TIME);
+    private Timer spotAlertTimer = new Timer(SPOTTED_ALERT_TIME);
+    private Timer pursuitUpdateTimer = new Timer(PURSUIT_UPDATE_TIME);
     
     // Movement variables
     private Vector3 moveTarget;
@@ -92,14 +96,13 @@ public class EnemyFishAIComponent : MonoBehaviour {
         UpdateMovement();
     }
     
-    private void UpdateState(){        
+    private void UpdateState(){
         if(currentState == FishAIState.Motionless){
             if(CanSeePlayer()){
                 if(allowSpottedPlayerState){
-                    currentState = FishAIState.SpottedPlayer;
-                }
-                if(allowPursuingPlayerState){
-                    currentState = FishAIState.PursuingPlayer;
+                    SetState(FishAIState.SpottedPlayer);
+                } else if(allowPursuingPlayerState){
+                    SetState(FishAIState.PursuingPlayer);
                 }
             }
         } else if(currentState == FishAIState.Patrolling){
@@ -135,17 +138,78 @@ public class EnemyFishAIComponent : MonoBehaviour {
             
             if(CanSeePlayer()){
                 if(allowSpottedPlayerState){
-                    currentState = FishAIState.SpottedPlayer;
-                }
-                if(allowPursuingPlayerState){
-                    currentState = FishAIState.PursuingPlayer;
+                    SetState(FishAIState.SpottedPlayer);
+                } else if(allowPursuingPlayerState){
+                    SetState(FishAIState.PursuingPlayer);
                 }
             }
         } else if(currentState == FishAIState.SpottedPlayer){
-            // Pause for a moment, playing a "!" animation
+            if(spotAlertTimer.Finished()){
+                if(allowPursuingPlayerState){
+                    MoveTo(GetPlayerAttackReadyPosition());
+                    SetState(FishAIState.PursuingPlayer);
+                } else if(allowAttackAbilityPlayerState){
+                    SetState(FishAIState.AttackAbility);
+                } else if(allowAttackingPlayerState){
+                    SetState(FishAIState.AttackingPlayer);
+                }
+            }
         } else if(currentState == FishAIState.PursuingPlayer){
-            // Move towards player
+            if(!AtGoal()){
+                if(pursuitUpdateTimer.Finished()){
+                    MoveTo(GetPlayerAttackReadyPosition());
+                }
+            } else {
+                if(allowAttackAbilityPlayerState){
+                    SetState(FishAIState.AttackAbility);
+                } else if(allowAttackingPlayerState){
+                    SetState(FishAIState.AttackingPlayer);
+                }
+            }
+        } else if(currentState == FishAIState.AttackAbility){
+            // blep
         }
+    }
+    
+    private void SetState(FishAIState state){
+        if(currentState == FishAIState.Dead){
+            return;
+        }
+        
+        if(state == FishAIState.Patrolling){
+            patrolState = PatrolState.BtoA;
+            StopMoving();
+            // Animation idle
+        } else if(state == FishAIState.SpottedPlayer){
+            StopMoving();
+            spotAlertTimer.Start();
+            // Animation alert
+        } else if(state == FishAIState.PursuingPlayer){
+            // Animation moving
+        } else if(state == FishAIState.AttackingPlayer){
+            StopMoving();
+            // Animation attack
+        } else if(state == FishAIState.AttackAbility){
+            StopMoving();
+            // Animation ability attack
+        } else if(state == FishAIState.WaitingToAttackPlayer){
+            // Animation idle
+        } else if(state == FishAIState.Fleeing){
+            // Animation moving
+        } else if(state == FishAIState.Dead){
+            StopMoving();
+            // Animation death
+        }
+        
+        // Debug.Log(gameObject + ": " + currentState + "-->" + state);
+        currentState = state;
+    }
+    
+    private Vector3 GetPlayerAttackReadyPosition(){
+        // TODO add in some sin(time) to change the heights
+        Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
+        Vector3 target = PlayerComponent.player.transform.position + (fromPlayer.normalized * PLAYER_ATTACK_RADIUS);
+        return target;
     }
     
     private void UpdateMovement(){
@@ -191,6 +255,10 @@ public class EnemyFishAIComponent : MonoBehaviour {
         
         // Debug.DrawLine(transform.position, PlayerComponent.player.transform.position, Color.red, 0.0f, false);
         return false;
+    }
+    
+    private void StopMoving(){
+        MoveTo(transform.position);
     }
     
     private void MoveTo(Vector3 position){
