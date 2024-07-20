@@ -32,6 +32,14 @@ public class PlayerComponent : MonoBehaviour {
     [Tooltip("How long after the player presses buttons until we apply the downVelocity")]
     public float downVelocityApplyTime;
     
+    [Header("Model Rotation Attributes")]
+    public float idleRotationRate;
+    public float movingRotationRate;
+    
+    [Header("Connections")]
+    public Transform modelRoot;
+    public Animator modelAnimator;
+    
     private Vector3 moveVelocity;
     public Vector3 MoveVelocity {
         get { return moveVelocity; }
@@ -51,6 +59,11 @@ public class PlayerComponent : MonoBehaviour {
     }
 
     void Update(){
+        UpdateInput();
+        UpdateModelAndAnimations();
+    }
+    
+    private void UpdateInput(){
         Vector3 targetVelocity = Vector3.zero;
         bool keyPress = false;
         
@@ -84,5 +97,19 @@ public class PlayerComponent : MonoBehaviour {
         Vector3 pos = transform.position;
         pos.x = 0.0f;
         transform.position = pos;
+    }
+    
+    private void UpdateModelAndAnimations(){
+        if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(1.0f, 0.0f, 0.0f));
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad); 
+            
+            modelAnimator.SetBool("swimming", false);
+        } else {
+            Quaternion targetRotation = Quaternion.LookRotation(moveVelocity);
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad); 
+            
+            modelAnimator.SetBool("swimming", true);
+        }
     }
 }

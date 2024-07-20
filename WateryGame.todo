@@ -5,18 +5,16 @@ Code Items
 [/] Bubble fx
 [/] Fish particles 
 [/] Armor
+[/] Bake AO for the helmet
 
-[x] Bake AO for the helmet
+[x] Player movement direction
 [x] Player 3D model
     [x] Trident/Weapon
-
 [x] Fog color volume
 [x] Base Enemy with AI
     - raycasting/viewcone for player
 [x] Player Attacking
 [x] Enemy Attacking
 [x] First fish with abilities
-
 [x] Baitfish 3D model
-
-[x] Test building to web
+[x] Test building to webplayer
