@@ -17,6 +17,8 @@ public enum FishAIState {
 
 public class EnemyFishAIComponent : MonoBehaviour {
     
+    private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
+
     private const float PATROL_IDLE_TIME = 1.5f;
     private const float SPOTTED_ALERT_TIME = 1.0f;
     private const float PLAYER_ATTACK_RADIUS = 2.0f;
@@ -25,6 +27,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Header("Movement Attributes")]
     public float moveSpeed;
     public float accelerationTime;
+    public float idleRotationRate;
+    public float movingRotationRate;
     [Header("Player Awakening Attributes")]
     public float playerSpotDistance;
     public float playerSpotAngle;
@@ -60,6 +64,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public string attackAnimationName;
     public string specialAbilityAnimationName;
     public string dyingAnimationName;
+    [Header("Animation Connections")]
+    public Transform modelRoot;
+    public Animator modelAnimator;
     
     public enum PatrolState {
         IdleA, AtoB, IdleB, BtoA
@@ -94,6 +101,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     void Update(){
         UpdateState();
         UpdateMovement();
+        UpdateModel();
     }
     
     private void UpdateState(){
@@ -226,16 +234,26 @@ public class EnemyFishAIComponent : MonoBehaviour {
         velocity = Vector3.SmoothDamp(velocity, toTarget.normalized * moveSpeed, ref acceleration, accelerationTime);
         character.Move(velocity * Time.deltaTime);
         
-        if(velocity.magnitude >= (moveSpeed / 4.0f)){
-            previousMoveVelocityRecorded = velocity;
-        }
         
-        // TODO apply previousMoveVelocityRecorded to model root transform
         
         // Always hard-clamp x
         Vector3 pos = transform.position;
         pos.x = 0.0f;
         transform.position = pos;
+    }
+    
+    private void UpdateModel(){
+        // TODO better look direction calculations; using the target if applicable
+        if(velocity.magnitude < (moveSpeed / 4.0f)){
+            // previousMoveVelocityRecorded.y = 0.0f;
+            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad);
+        } else {
+            Quaternion targetRotation = Quaternion.LookRotation(velocity + NONZERO_VECTOR);
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad);
+            
+            previousMoveVelocityRecorded = velocity;
+        }
     }
     
     private bool CanSeePlayer(){
