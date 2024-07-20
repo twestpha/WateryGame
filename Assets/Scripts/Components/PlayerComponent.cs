@@ -49,8 +49,10 @@ public class PlayerComponent : MonoBehaviour {
     public Vector3 MoveVelocity {
         get { return moveVelocity; }
     }
+    
     private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
     private Vector3 acceleration;
+    private Vector3 inputDirection;
     private Timer downVelocityApplyTimer;
     
     private CharacterController characterController;
@@ -78,34 +80,38 @@ public class PlayerComponent : MonoBehaviour {
     }
     
     private void UpdateInput(){
-        Vector3 targetVelocity = Vector3.zero;
+        inputDirection = Vector3.zero;
         bool keyPress = false;
         
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            targetVelocity.z = -1.0f;
+            inputDirection.z = -1.0f;
             keyPress = true;
         } else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            targetVelocity.z = 1.0f;
+            inputDirection.z = 1.0f;
             keyPress = true;
         }
         
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-            targetVelocity.y = 1.0f;
+            inputDirection.y = 1.0f;
             keyPress = true;
         } else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-            targetVelocity.y = -1.0f;
+            inputDirection.y = -1.0f;
             keyPress = true;
         }
         
         if(Input.GetKeyDown(KeyCode.Space)){
             modelAnimator.SetTrigger("basicslash");
+
+            // Snap instantly to 85% of the input direction
+            Quaternion targetRotation = Quaternion.LookRotation(inputDirection + NONZERO_VECTOR);
+            modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
         }
         
         if(keyPress){
             downVelocityApplyTimer.Start();
         }
         
-        targetVelocity = targetVelocity.normalized * moveSpeed;
+        Vector3 targetVelocity = inputDirection.normalized * moveSpeed;
         moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
         moveVelocity.x = 0.0f;
         

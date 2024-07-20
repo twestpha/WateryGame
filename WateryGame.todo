@@ -6,20 +6,20 @@ Code Items
 [/] Short dash towards player to align attack
 [/] Enemy Attacking
     [/] Dealing damage
+[/] Plant wind shader in and working
+    - replace/remove model sway component
+[/] Make player instantly snap to direction when attacking
 
 [x] Document ai settings
 [x] First fish with abilities
 [x] Test building to webplayer
     - causes computer shutdown?
-[x] Plant wind shader in and working
-    - replace/remove model sway component
 [x] Time slowdown on player hit and player deal damage
 [x] fish killed spawn blood fx WaterBloodFX.prefab
-[x] Camera wobble
+[x] Camera wobble on damaged (unscaled time!)
 [x] Big glowy smash hit particles/animation
 [x] Knockback on player hit something
 [x] Red flash on damaged for all stuff, invincibility for short time for player
-[x] Make player instantly snap to direction when attacking
 [x] Any enemy touch damages the player (very little)
 
 Stretch Goals

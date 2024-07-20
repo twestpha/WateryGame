@@ -108,9 +108,9 @@ Shader "Polygon Wind/Tree" {
 
                     //Branches Movement
                     // i.vertex.y += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.z/_wind_size)) * _branches_disp  * i.color.r * _r_influence;
-                    i.vertex.x += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.x * _wind_size * 20.0) + i.vertex.z) * _branches_disp * i.color.r * _r_influence;
-                    i.vertex.y += cos(_Time.w * _tree_sway_speed + _wind_dir.y + (worldPos.y * _wind_size * 20.0) + i.vertex.x) * _branches_disp * i.color.r * _r_influence;
-                    i.vertex.z += sin(_Time.w * _tree_sway_speed + _wind_dir.z + (worldPos.z * _wind_size * 20.0) + i.vertex.y) * _branches_disp * i.color.r * _r_influence;
+                    i.vertex.x += sin(_Time.w * _tree_sway_speed + _wind_dir.x + (worldPos.x + worldPos.y + worldPos.z) + i.vertex.z) * _branches_disp * i.color.r * _r_influence;
+                    i.vertex.y += 0.5 * cos(_Time.w * _tree_sway_speed + _wind_dir.y + (worldPos.x + worldPos.y + worldPos.z) + i.vertex.x) * _branches_disp * i.color.r * _r_influence;
+                    i.vertex.z += sin(_Time.w * _tree_sway_speed + _wind_dir.z + (worldPos.x + worldPos.y + worldPos.z) + i.vertex.y) * _branches_disp * i.color.r * _r_influence;
                 }
 
                 // Surface Shader
