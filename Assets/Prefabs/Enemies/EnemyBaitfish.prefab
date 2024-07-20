@@ -290,8 +290,8 @@ MonoBehaviour:
   patrolSpeed: 1
   pursueSpeed: 4
   accelerationTime: 0.5
-  idleRotationRate: 40
-  movingRotationRate: 80
+  idleRotationRate: 50
+  movingRotationRate: 360
   playerSpotDistance: 8
   playerSpotAngle: 10
   patrolDistance: 3

@@ -142,12 +142,12 @@ public class PlayerComponent : MonoBehaviour {
         if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
             previousMoveVelocityRecorded.y = 0.0f;
             Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
-            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Mathf.Deg2Rad); 
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime); 
             
             modelAnimator.SetBool("swimming", false);
         } else {
             Quaternion targetRotation = Quaternion.LookRotation(moveVelocity + NONZERO_VECTOR);
-            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Mathf.Deg2Rad); 
+            modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Time.deltaTime); 
             
             modelAnimator.SetBool("swimming", true);
             

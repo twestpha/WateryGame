@@ -14,7 +14,9 @@ TODO List
 [/] Make player instantly snap to direction when attacking
 [/] Red flash on damaged for all stuff
 [/] Test building to webplayer
-
+[/] Quaternion.RotateTowards appears to behave differently on web builds, resulting in very slow rotations of the character and fish
+    - it's delta time
+    
 [x] Document ai settings
 [x] First fish with abilities
 [x] Time slowdown on player hit and player deal damage
@@ -24,9 +26,6 @@ TODO List
 [x] Knockback on player hit something
 [x] player invincibility for short time for player after getting damaged
 [x] Any enemy touch damages the player (very little)
-
-[b] Quaternion.RotateTowards appears to behave differently on web builds, resulting in very slow rotations of the character and fish
-    - it's delta time
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
