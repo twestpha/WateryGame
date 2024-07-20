@@ -60,4 +60,6 @@ Preset:
     propertyPath: modelAnimator
     value: 
     objectReference: {fileID: 0}
-  m_ExcludedProperties: []
+  m_ExcludedProperties:
+  - modelRoot
+  - modelAnimator

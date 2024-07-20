@@ -12653,23 +12653,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274711, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: moveSpeed
-      value: 1.65
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274711, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: downVelocity
-      value: -0.85
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274711, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: accelerationTime
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274711, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: decelerationTime
-      value: 0.75
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274711, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: downVelocityApplyTime
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1219962245785274713, guid: 1c8411e5ded0bd74ba21f32359d294d4, type: 3}
       propertyPath: m_Name

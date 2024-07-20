@@ -16,5 +16,6 @@ Code Items
 [x] Plant wind shader in and working
     - replace/remove model sway component
 [x] Time slowdown on player hit and player deal damage
+[x] Camera wobble
 [x] Hit particles/animation
 [x] Knockback on player hit something
