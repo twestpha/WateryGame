@@ -25,7 +25,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private const float PURSUIT_UPDATE_TIME = 0.5f;
     
     [Header("Movement Attributes")]
-    public float moveSpeed;
+    public float patrolSpeed;
+    public float pursueSpeed;
     public float accelerationTime;
     public float idleRotationRate;
     public float movingRotationRate;
@@ -223,12 +224,11 @@ public class EnemyFishAIComponent : MonoBehaviour {
         }
         previousMoveDistance = targetDistance;
         
-        // Debug.DrawLine(transform.position, moveTarget, Color.red, 0.0f, false);
+        Debug.DrawLine(transform.position, moveTarget, Color.red, 0.0f, false);
         
-        velocity = Vector3.SmoothDamp(velocity, toTarget.normalized * moveSpeed, ref acceleration, accelerationTime);
+        float speed = currentState == FishAIState.Patrolling ? patrolSpeed : pursueSpeed;
+        velocity = Vector3.SmoothDamp(velocity, toTarget.normalized * speed, ref acceleration, accelerationTime);
         character.Move(velocity * Time.deltaTime);
-        
-        
         
         // Always hard-clamp x
         Vector3 pos = transform.position;
@@ -238,7 +238,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     
     private void UpdateModel(){
         // TODO better look direction calculations; using the target if applicable
-        if(velocity.magnitude < (moveSpeed / 4.0f)){
+        if(velocity.magnitude < (patrolSpeed / 4.0f)){
             modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
             Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
