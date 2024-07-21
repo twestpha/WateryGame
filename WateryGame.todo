@@ -9,20 +9,14 @@
 
 TODO List
 ==========================================================================
-[/] Quaternion.RotateTowards appears to behave differently on web builds, resulting in very slow rotations of the character and fish
-    - it's delta time
-[/] Document ai settings
-[/] Big glowy smash hit particles/animation for player
-[/] Time slowdown on player hit
+[/] Time slowdown on player deal damage
+[/] Knockback on player hit something, and for the hit thing too
+[/] player invincibility for short time after getting damaged
 
-[x] Fish AI damage state, just timer and does nothing
 [x] First fish with abilities
 [x] fish killed spawn blood, chunks: fx WaterBloodFX.prefab
 [x] Camera wobble on damaged (unscaled time!)
-[x] Knockback on player hit something, and for the hit thing too
-[x] player invincibility for short time after getting damaged
 [x] Any enemy touch damages the player, pushes away (very little)
-[x] Time slowdown on player deal damage
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great

@@ -52,6 +52,8 @@ public class PlayerComponent : MonoBehaviour {
     public Vector2 attackDamageRange;
     [Tooltip("type of damage applied on an attack hit")]
     public DamageType attackDamageType;
+    [Tooltip("After taking damage, how long the player should be incible from other damage")]
+    public float invincibilityTime;
     
     [Header("Connections")]
     public Transform modelRoot;
@@ -68,7 +70,10 @@ public class PlayerComponent : MonoBehaviour {
     private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
     private Vector3 acceleration;
     private Vector3 inputDirection;
+    
     private Timer downVelocityApplyTimer;
+    private Timer invincibilityTimer;
+    private bool invincible;
     
     private CharacterController characterController;
     private DamageableComponent damageable;
@@ -77,7 +82,6 @@ public class PlayerComponent : MonoBehaviour {
     
     void Awake(){
         player = this;
-        downVelocityApplyTimer = new Timer(downVelocityApplyTime);
     }
     
     void Start(){
@@ -86,11 +90,18 @@ public class PlayerComponent : MonoBehaviour {
         
         damageable.damagedDelegates.Register(OnDamaged);
         damageable.killedDelegates.Register(OnKilled);
+        
+        downVelocityApplyTimer = new Timer(downVelocityApplyTime);
+        invincibilityTimer = new Timer(invincibilityTime);
     }
 
     void Update(){
         UpdateInput();
         UpdateModelAndAnimations();
+        
+        if(invincible && invincibilityTimer.Finished()){
+            damageable.SetInvincible(false);
+        }
     }
     
     private void UpdateInput(){
@@ -180,6 +191,10 @@ public class PlayerComponent : MonoBehaviour {
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
         
         SlowTime(0.6f);
+        
+        invincible = true;
+        damageable.SetInvincible(true);
+        invincibilityTimer.Start();
     }
     
     private void OnKilled(DamageableComponent damage){

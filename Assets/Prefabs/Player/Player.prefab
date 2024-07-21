@@ -438,6 +438,7 @@ MonoBehaviour:
   attackDuration: 0.1
   attackDamageRange: {x: 10, y: 20}
   attackDamageType: 1
+  invincibilityTime: 0.25
   modelRoot: {fileID: 8010830638675754283}
   modelAnimator: {fileID: 4721101285764113514}
   timeSlowdownCurve:
