@@ -36,6 +36,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public float idleRotationRate;
     [Tooltip("Rate the fish turns while moving")]
     public float movingRotationRate;
+    
     [Header("Player Awakening Attributes")]
     [Tooltip("How far away to spot the player")]
     public float playerSpotDistance;
@@ -60,6 +61,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public bool allowWaitingToAttackPlayerState = true;
     public bool allowFleeingState = true;
     public bool allowDeadState = true;
+    
     [Header("Attack Attributes")]
     [Tooltip("Attach Mesh component connection")]
     public DamageMeshComponent attackMesh;
@@ -71,6 +73,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public Vector2 attackDamageRange;
     [Tooltip("type of damage applied on an attack hit")]
     public DamageType attackDamageType;
+    
     [Header("Ability Attributes")]
     [Tooltip("UNUSED")]
     [Range(0.0f, 1.0f)]
@@ -219,7 +222,11 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else if(state == FishAIState.AttackingPlayer){
             // Move to slightly past player
             Vector3 toPlayer = PlayerComponent.player.transform.position - transform.position;
-            MoveTo(transform.position + (toPlayer * 1.2f));
+            MoveTo(transform.position + (toPlayer * 0.8f));
+            
+            // Snap instantly to 85% of the input direction
+            Quaternion targetRotation = Quaternion.LookRotation(toPlayer + NONZERO_VECTOR);
+            modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
             
             modelAnimator.SetTrigger("attack");
             

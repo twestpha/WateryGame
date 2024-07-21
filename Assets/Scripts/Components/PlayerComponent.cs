@@ -41,9 +41,24 @@ public class PlayerComponent : MonoBehaviour {
     [Tooltip("How fast (in degrees per second) the model root moves toward the velocity while the character is moving")]
     public float movingRotationRate;
     
+    [Header("Attack Attributes")]
+    [Tooltip("Attach Mesh component connection")]
+    public DamageMeshComponent attackMesh;
+    [Tooltip("how long from the start of an 'attack' the mesh should enabled")]
+    public float attackStartDelay;
+    [Tooltip("once the mesh is enabled, how long it stays enabled")]
+    public float attackDuration;
+    [Tooltip("range of randomly rolled damage dealt on an attack hit")]
+    public Vector2 attackDamageRange;
+    [Tooltip("type of damage applied on an attack hit")]
+    public DamageType attackDamageType;
+    
     [Header("Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
+    
+    [Header("Misc")]
+    public AnimationCurve timeSlowdownCurve;
     
     private Vector3 moveVelocity;
     public Vector3 MoveVelocity {
@@ -105,6 +120,12 @@ public class PlayerComponent : MonoBehaviour {
             // Snap instantly to 85% of the input direction
             Quaternion targetRotation = Quaternion.LookRotation(inputDirection + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
+            
+            if(attackMesh != null){
+                attackMesh.CastDamageMesh(gameObject, attackStartDelay, attackDuration, attackDamageRange, attackDamageType);
+            } else { 
+                Debug.LogError("NO ATTACK MESH");
+            }
         }
         
         if(keyPress){
@@ -159,16 +180,39 @@ public class PlayerComponent : MonoBehaviour {
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
         
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
-        
-        Debug.Log("Yeowch!");
+        SlowTime(0.6f);
     }
     
     private void OnKilled(DamageableComponent damage){
         // TODO
     }
     
+    // Helper functions for global interactions
     public void ImpartVelocity(ImpartedVelocity v){
         impartedVelocities.Add(v);
         v.impartTimer.Start();
+    }
+    
+    public void SlowTime(float realTimeDuration){
+        StartCoroutine(SlowTimeCoroutine(realTimeDuration));
+    }
+    
+    private bool slowingTime;
+    private IEnumerator SlowTimeCoroutine(float duration){
+        if(slowingTime){
+            yield break;
+        }
+        slowingTime = true;
+        
+        IndependentTimer timeSlowdownTimer = new IndependentTimer(duration);
+        timeSlowdownTimer.Start();
+        
+        while(!timeSlowdownTimer.Finished()){            
+            Time.timeScale = timeSlowdownCurve.Evaluate(timeSlowdownTimer.Parameterized());
+            yield return null;
+        }
+        
+        Time.timeScale = 1.0f;        
+        slowingTime = false;
     }
 }

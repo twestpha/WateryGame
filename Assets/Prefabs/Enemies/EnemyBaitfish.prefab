@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 2177854590393221116}
   - component: {fileID: 2177854590393221090}
   - component: {fileID: 2177854590393221089}
+  - component: {fileID: 8107855030776698412}
   m_Layer: 0
   m_Name: EnemyBaitfish
   m_TagString: Untagged
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 1
+  maxHealth: 500
   currentHealth: 0
   team: 2
   resistances: []
@@ -308,7 +309,7 @@ MonoBehaviour:
   allowFleeingState: 1
   allowDeadState: 1
   attackMesh: {fileID: 2690826640731914308}
-  attackStartDelay: 0.3
+  attackStartDelay: 0.48
   attackDuration: 0.15
   attackDamageRange: {x: 5, y: 8}
   attackDamageType: 2
@@ -318,6 +319,22 @@ MonoBehaviour:
   modelAnimator: {fileID: 2757447419063201431}
   currentState: 1
   patrolState: 0
+--- !u!114 &8107855030776698412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2177854590393221117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b298feb36936ccd4182854213cc046a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagedMaterial: {fileID: 2100000, guid: 394323f213b016446965474bd846c09e, type: 2}
+  renderersToChange: []
+  skinnedRenderersToChange:
+  - {fileID: 1281931730584008858}
 --- !u!1 &2177854590565642484
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2546658736765047138}
   m_LocalRotation: {x: 0.70710576, y: 0.70710784, z: -0.0000020862658, w: 0.000002086272}
-  m_LocalPosition: {x: 0, y: 0, z: -0.166}
+  m_LocalPosition: {x: 0, y: 0, z: 0.39}
   m_LocalScale: {x: 0.45934185, y: 0.5227, z: 0.5227}
   m_ConstrainProportionsScale: 0
   m_Children: []
