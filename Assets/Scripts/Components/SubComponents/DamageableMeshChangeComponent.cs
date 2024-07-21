@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageableMeshChangeComponent : MonoBehaviour {
     
     private int CYCLES = 6;
-    private float DURATION = 0.2f;
+    private float DURATION = 0.15f;
 
     public Material damagedMaterial;
     public MeshRenderer[] renderersToChange;
