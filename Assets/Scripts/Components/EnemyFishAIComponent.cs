@@ -12,6 +12,7 @@ public enum FishAIState {
     AttackAbility,
     WaitingToAttackPlayer,
     Fleeing,
+    Damaged,
     Dead,
 }
 
@@ -24,6 +25,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private const float PLAYER_ATTACK_RADIUS = 2.0f;
     private const float PURSUIT_UPDATE_TIME = 0.5f;
     private const float ATTACK_MAX_TIME = 1.5f;
+    private const float DAMAGE_STUN_TIME = 1.5f;
+    
+    public const float DAMAGED_VELOCITY = 5.0f;
     
     [Header("Movement Attributes")]
     [Tooltip("Move speed while patrolling")]
@@ -93,12 +97,14 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public PatrolState patrolState;
     
     private CharacterController character;
+    private DamageableComponent damageable;
     private Vector3 originPosition;
     
     private Timer patrolTimer = new Timer(PATROL_IDLE_TIME);
     private Timer spotAlertTimer = new Timer(SPOTTED_ALERT_TIME);
     private Timer pursuitUpdateTimer = new Timer(PURSUIT_UPDATE_TIME);
     private Timer attackMaxTimer = new Timer(ATTACK_MAX_TIME);
+    private Timer damageStunTimer = new Timer(DAMAGE_STUN_TIME);
     
     // Movement variables
     private Vector3 moveTarget;
@@ -107,10 +113,15 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private Vector3 acceleration;
     
     private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
+    private List<ImpartedVelocity> impartedVelocities = new();
     
     void Start(){
         originPosition = transform.position;
         character = GetComponent<CharacterController>();
+        damageable = GetComponent<DamageableComponent>();
+        
+        damageable.damagedDelegates.Register(OnDamaged);
+        damageable.killedDelegates.Register(OnKilled);
         
         currentState = startState;
     }
@@ -202,6 +213,23 @@ public class EnemyFishAIComponent : MonoBehaviour {
                     SetState(FishAIState.Patrolling);
                 }
             }
+        } else if(currentState == FishAIState.AttackAbility){
+        } else if(currentState == FishAIState.WaitingToAttackPlayer){
+        } else if(currentState == FishAIState.Fleeing){
+        } else if(currentState == FishAIState.Damaged){
+            if(damageStunTimer.Finished()){
+                if(allowPursuingPlayerState){
+                    MoveTo(GetPlayerAttackReadyPosition());
+                    SetState(FishAIState.PursuingPlayer);
+                } else if(allowAttackAbilityPlayerState){
+                    // TODO random chance rolls?
+                    SetState(FishAIState.AttackAbility);
+                } else if(allowAttackingPlayerState){
+                    SetState(FishAIState.AttackingPlayer);
+                }
+            }
+        } else if(currentState == FishAIState.Dead){
+        
         }
     }
     
@@ -244,6 +272,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
             // Animation idle
         } else if(state == FishAIState.Fleeing){
             // Animation moving
+        } else if(state == FishAIState.Damaged){
+            StopMoving();
+            damageStunTimer.Start();
         } else if(state == FishAIState.Dead){
             StopMoving();
             // Animation death
@@ -273,7 +304,21 @@ public class EnemyFishAIComponent : MonoBehaviour {
         
         float speed = currentState == FishAIState.Patrolling ? patrolSpeed : pursueSpeed;
         velocity = Vector3.SmoothDamp(velocity, toTarget.normalized * speed, ref acceleration, accelerationTime);
-        character.Move(velocity * Time.deltaTime);
+        
+        // Apply imparted velocities
+        Vector3 actualVelocityToApply = velocity;
+        for(int i = 0; i < impartedVelocities.Count; ++i){
+            ImpartedVelocity v = impartedVelocities[i];
+            actualVelocityToApply += v.velocity * (v.decreaseOverTime ? 1.0f - v.impartTimer.Parameterized() : 1.0f);
+            
+            if(v.impartTimer.Finished()){
+                impartedVelocities[i] = impartedVelocities[impartedVelocities.Count - 1];
+                impartedVelocities.RemoveAt(impartedVelocities.Count - 1);
+                i--;
+            }
+        }
+        
+        character.Move(actualVelocityToApply * Time.deltaTime);
         
         // Always hard-clamp x
         Vector3 pos = transform.position;
@@ -332,5 +377,24 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private bool AtGoal(){
         Vector3 toTarget = moveTarget - transform.position;
         return toTarget.sqrMagnitude < 0.1f;
+    }
+    
+    private void OnDamaged(DamageableComponent damage){
+        SetState(FishAIState.Damaged);
+        
+        Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
+        ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
+        
+        PlayerComponent.player.SlowTime(0.6f);
+        PlayerComponent.player.ImpartVelocity(new ImpartedVelocity(-fromDamager.normalized * PlayerComponent.DAMAGED_VELOCITY, 0.5f, true));
+    }
+    
+    private void OnKilled(DamageableComponent damage){
+        // TODO
+    }
+    
+    public void ImpartVelocity(ImpartedVelocity v){
+        impartedVelocities.Add(v);
+        v.impartTimer.Start();
     }
 }

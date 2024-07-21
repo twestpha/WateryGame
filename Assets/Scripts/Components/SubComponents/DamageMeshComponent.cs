@@ -58,18 +58,20 @@ public class DamageMeshComponent : MonoBehaviour {
         
         if(otherDamageable != null && otherDamageable != casterDamageable){
             if(DamageableComponent.Hostile(casterDamageable.team, otherDamageable.team)){
-                bool damageApplied = otherDamageable.DealDamage(
+                DamageResult result = otherDamageable.DealDamage(
                     UnityEngine.Random.Range(attackDamageRange.x, attackDamageRange.y),
                     attackDamageType,
                     transform.position,
                     caster
                 );
-
-                GameObject fx = GameObject.Instantiate(damageApplied ? hitEffects : ignoredEffects);
-                fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
                 
-                casting = false;
-                damageCollider.enabled = false;
+                if(result != DamageResult.AlreadyDead){
+                    GameObject fx = GameObject.Instantiate(result == DamageResult.DealtDamage ? hitEffects : ignoredEffects);
+                    fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
+                    
+                    casting = false;
+                    damageCollider.enabled = false;
+                }
             }
         }
     }

@@ -16,6 +16,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DamageResult {
+    DealtDamage,
+    Resisted,
+    AlreadyDead,
+}
+
 //##################################################################################################
 // Damage Type
 // Used for resistances to certain types of damages
@@ -112,8 +118,12 @@ public class DamageableComponent : MonoBehaviour {
     // If this would kill the damageable, notify the killed-delegates of this too. Note that both
     // damaged and killed delegates can be sent, they are not exclusive.
     //##############################################################################################
-    public bool DealDamage(float damage, DamageType type, Vector3 position, GameObject damager_){
+    public DamageResult DealDamage(float damage, DamageType type, Vector3 position, GameObject damager_){
 
+        if(currentHealth <= 0){
+            return DamageResult.AlreadyDead;
+        }
+        
         // Total Damage = (multiplier * damage) + offset
         // This allows for multipliers like 0.5 (i.e. take half damage) and offsets of 0
         // Or constant changes, like an offset of -1 (i.e. always take one less damage)
@@ -127,8 +137,8 @@ public class DamageableComponent : MonoBehaviour {
         }
 
         // If we won't do any damage, return early
-        if(damage <= 0.0f || invincible || currentHealth <= 0){
-            return false;
+        if(damage <= 0.0f || invincible){
+            return DamageResult.Resisted;
         }
 
         currentHealth -= damage;
@@ -141,7 +151,7 @@ public class DamageableComponent : MonoBehaviour {
             killedDelegates.Invoke(this);
         }
         
-        return true;
+        return DamageResult.DealtDamage;
     }
 
     //##############################################################################################

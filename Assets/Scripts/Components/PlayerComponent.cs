@@ -19,7 +19,7 @@ public class ImpartedVelocity {
 public class PlayerComponent : MonoBehaviour {
     
     private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
-    private const float DAMAGED_VELOCITY = 5.0f;
+    public const float DAMAGED_VELOCITY = 5.0f;
     
     public static PlayerComponent player;
 
@@ -74,7 +74,6 @@ public class PlayerComponent : MonoBehaviour {
     private DamageableComponent damageable;
     
     private List<ImpartedVelocity> impartedVelocities = new();
-    private List<int> impartedVelocitiesToRemove = new();
     
     void Awake(){
         player = this;
@@ -178,8 +177,8 @@ public class PlayerComponent : MonoBehaviour {
     
     private void OnDamaged(DamageableComponent damage){
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
-        
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
+        
         SlowTime(0.6f);
     }
     
