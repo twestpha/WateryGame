@@ -15,13 +15,13 @@ TODO List
 [/] Big glowy smash hit particles/animation for player
 [/] Time slowdown on player hit
 
-[x] Fish AI damage state, just timer
+[x] Fish AI damage state, just timer and does nothing
 [x] First fish with abilities
-[x] fish killed spawn blood fx WaterBloodFX.prefab
+[x] fish killed spawn blood, chunks: fx WaterBloodFX.prefab
 [x] Camera wobble on damaged (unscaled time!)
 [x] Knockback on player hit something, and for the hit thing too
-[x] player invincibility for short time for player after getting damaged
-[x] Any enemy touch damages the player (very little)
+[x] player invincibility for short time after getting damaged
+[x] Any enemy touch damages the player, pushes away (very little)
 [x] Time slowdown on player deal damage
 
 Stretch Goals
