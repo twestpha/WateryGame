@@ -303,7 +303,7 @@ MonoBehaviour:
   allowSpottedPlayerState: 1
   allowPursuingPlayerState: 1
   allowAttackingPlayerState: 1
-  allowAttackAbilityPlayerState: 1
+  allowAttackAbilityPlayerState: 0
   allowWaitingToAttackPlayerState: 1
   allowFleeingState: 1
   allowDeadState: 1

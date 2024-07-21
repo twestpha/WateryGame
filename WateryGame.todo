@@ -16,8 +16,8 @@ TODO List
 [/] Test building to webplayer
 [/] Quaternion.RotateTowards appears to behave differently on web builds, resulting in very slow rotations of the character and fish
     - it's delta time
+[/] Document ai settings
     
-[x] Document ai settings
 [x] First fish with abilities
 [x] Time slowdown on player hit and player deal damage
 [x] fish killed spawn blood fx WaterBloodFX.prefab

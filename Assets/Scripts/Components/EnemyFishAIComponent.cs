@@ -26,18 +26,29 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private const float ATTACK_MAX_TIME = 1.5f;
     
     [Header("Movement Attributes")]
+    [Tooltip("Move speed while patrolling")]
     public float patrolSpeed;
+    [Tooltip("Move speed while doing anything other than patrolling")]
     public float pursueSpeed;
+    [Tooltip("Time it takes to get up to max speed")]
     public float accelerationTime;
+    [Tooltip("Rate the fish turns when not moving")]
     public float idleRotationRate;
+    [Tooltip("Rate the fish turns while moving")]
     public float movingRotationRate;
     [Header("Player Awakening Attributes")]
+    [Tooltip("How far away to spot the player")]
     public float playerSpotDistance;
+    [Tooltip("What angle along the horizontal that the fish can spot the player")]
     public float playerSpotAngle;
+    [Tooltip("How far one side of the patrol should be")]
     public float patrolDistance;
+    [Tooltip("How high up and down the patrol will randomly be")]
     public float patrolHeight;
+    [Tooltip("UNUSED")]
     public float goBackToIdleDistance;
     [Header("State Attributes")]
+    [Tooltip("What state to start the AI in")]
     public FishAIState startState;
     [Space(10)]
     public bool allowMotionlessState = true;
@@ -50,14 +61,21 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public bool allowFleeingState = true;
     public bool allowDeadState = true;
     [Header("Attack Attributes")]
+    [Tooltip("Attach Mesh component connection")]
     public DamageMeshComponent attackMesh;
+    [Tooltip("how long from the start of an 'attack' the mesh should enabled")]
     public float attackStartDelay;
+    [Tooltip("once the mesh is enabled, how long it stays enabled")]
     public float attackDuration;
+    [Tooltip("range of randomly rolled damage dealt on an attack hit")]
     public Vector2 attackDamageRange;
+    [Tooltip("type of damage applied on an attack hit")]
     public DamageType attackDamageType;
     [Header("Ability Attributes")]
+    [Tooltip("UNUSED")]
     [Range(0.0f, 1.0f)]
     public float specialAbilityChance;
+    [Tooltip("UNUSED")]
     public GameObject attackSpecialAbility;
     [Header("Animation Connections")]
     public Transform modelRoot;

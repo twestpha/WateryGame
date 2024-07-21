@@ -4507,10 +4507,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2177854590393221089, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
-      propertyPath: allowAttackAbilityPlayerState
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2177854590393221091, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
       propertyPath: m_RootOrder
       value: 5
