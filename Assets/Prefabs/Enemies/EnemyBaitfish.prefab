@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230615237817583246}
-  m_LocalRotation: {x: -0.013794564, y: -5.1002056e-25, z: -3.0630186e-18, w: 0.9999049}
-  m_LocalPosition: {x: -4.6971948e-21, y: -0.0021999632, z: 0.000021154294}
+  m_LocalRotation: {x: -0.013798277, y: -0.00012918863, z: 0.009603398, w: 0.9998587}
+  m_LocalPosition: {x: -4.6971948e-21, y: -0.0019, z: 0}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -257,7 +257,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2177854590393221090
 MonoBehaviour:
@@ -272,8 +272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 500
-  currentHealth: 0
+  maxHealth: 1
+  currentHealth: 1
   team: 2
   resistances: []
 --- !u!114 &2177854590393221089
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolSpeed: 1
   pursueSpeed: 4
-  accelerationTime: 0.5
+  accelerationTime: 0.2
   idleRotationRate: 50
   movingRotationRate: 360
   playerSpotDistance: 8
@@ -313,6 +313,8 @@ MonoBehaviour:
   attackDuration: 0.15
   attackDamageRange: {x: 5, y: 8}
   attackDamageType: 2
+  deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
+  deathAbilityToGiveToPlayer: 0
   specialAbilityChance: 0
   attackSpecialAbility: {fileID: 0}
   modelRoot: {fileID: 1517018727300254032}
@@ -554,7 +556,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5126894363282199795}
-  m_LocalRotation: {x: 0.0000019827835, y: -0.0012976385, z: 0.99999917, w: 0.000000046284367}
+  m_LocalRotation: {x: 0, y: -0.0013002879, z: 0.9999992, w: 0}
   m_LocalPosition: {x: -4.1872737e-27, y: -4.5583873e-11, z: 7.4505804e-11}
   m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000033}
   m_ConstrainProportionsScale: 0
@@ -586,7 +588,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6607009740078432572}
-  m_LocalRotation: {x: -0.023346948, y: -0.007509173, z: 0.007094081, w: 0.9996741}
+  m_LocalRotation: {x: -0.024299946, y: 0.0021512315, z: -0.17982614, w: 0.98339593}
   m_LocalPosition: {x: -6.951063e-27, y: 0.029583601, z: -9.3132255e-12}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0

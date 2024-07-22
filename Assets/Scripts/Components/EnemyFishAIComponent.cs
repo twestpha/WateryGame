@@ -78,6 +78,10 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Tooltip("type of damage applied on an attack hit")]
     public DamageType attackDamageType;
     
+    [Header("Dying Attributes")]
+    public GameObject deathEffectsPrefab;
+    public AbilityType deathAbilityToGiveToPlayer;
+    
     [Header("Ability Attributes")]
     [Tooltip("UNUSED")]
     [Range(0.0f, 1.0f)]
@@ -87,6 +91,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Header("Animation Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
+    
     
     public enum PatrolState {
         IdleA, AtoB, IdleB, BtoA
@@ -331,6 +336,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         if(velocity.magnitude < (patrolSpeed / 4.0f)){
             modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
+
             Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime);
         } else {
@@ -390,7 +396,14 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private void OnKilled(DamageableComponent damage){
-        // TODO
+        GameObject deathEffects = GameObject.Instantiate(deathEffectsPrefab);
+        deathEffects.transform.position = transform.position;
+        
+        if(deathAbilityToGiveToPlayer != AbilityType.None){
+            Debug.Log("TODO give the player " + deathAbilityToGiveToPlayer);
+        }
+        
+        Destroy(gameObject);
     }
     
     public void ImpartVelocity(ImpartedVelocity v){
