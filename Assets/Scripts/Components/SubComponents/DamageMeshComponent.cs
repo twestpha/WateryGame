@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageMeshComponent : MonoBehaviour {
 
+    public bool disableAfterSingleHit;
+    
     public GameObject hitEffects;
     public GameObject ignoredEffects;
     
@@ -69,8 +71,10 @@ public class DamageMeshComponent : MonoBehaviour {
                     GameObject fx = GameObject.Instantiate(result == DamageResult.DealtDamage ? hitEffects : ignoredEffects);
                     fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
                     
-                    casting = false;
-                    damageCollider.enabled = false;
+                    if(disableAfterSingleHit){
+                        casting = false;
+                        damageCollider.enabled = false;
+                    }
                 }
             }
         }

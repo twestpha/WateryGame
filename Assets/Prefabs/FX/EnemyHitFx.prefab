@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7261233010313654740}
-  m_LocalRotation: {x: 0.9659259, y: -0, z: -0, w: -0.25881898}
-  m_LocalPosition: {x: 0.35, y: 0, z: 0}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: -0.00000043213367}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8863524773405740071}
-  m_RootOrder: 2
+  m_Father: {fileID: 8658188433270945127}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 210, y: 0, z: 0}
 --- !u!198 &7697132804989416030
 ParticleSystem:
@@ -4910,7 +4910,6 @@ Transform:
   m_Children:
   - {fileID: 8863524774031643982}
   - {fileID: 8658188433270945127}
-  - {fileID: 2225987020079976241}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9750,6 +9749,7 @@ GameObject:
   - component: {fileID: 8658188433270945127}
   - component: {fileID: 7746142352040865471}
   - component: {fileID: 1231047332575979982}
+  - component: {fileID: 4654742665574699949}
   m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
@@ -9768,7 +9768,8 @@ Transform:
   m_LocalPosition: {x: 0.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2225987020079976241}
   m_Father: {fileID: 8863524773405740071}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
@@ -14618,3 +14619,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &4654742665574699949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920332169954448481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50bbb966bd668b84c8e4708e05eddd90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  low: {x: 0, y: 0, z: 0}
+  high: {x: 360, y: 0, z: 0}

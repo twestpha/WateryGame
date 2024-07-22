@@ -14,17 +14,23 @@ TODO List
 [/] player invincibility for short time after getting damaged
 [/] Fish AI seems to nose up suddenly while patrolling
 [/] fish killed spawn blood, chunks: fx WaterBloodFX.prefab
+[/] water ripples as world space particles with distortion intermittently
 
 [x] Finish AI code
     - multiple attackers taking turns
     - fleeing when low health
-    
+[x] Any enemy touch damages the player (very little), pushes away 
+
 [x] Ability system for both player and fish
 [x] First fish with abilities
 [x] Getting ability from dead fish, giving to player for time
+
 [x] Camera wobble on damaged (unscaled time!)
-[x] Any enemy touch damages the player (very little), pushes away 
+[x] Game UI prototype
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
 [s] system for offsetting patrol directions so the fish aren't in perfect sync
+[s] Fish AI multiattack chains
+[s] projector water caustics from above
+[s] Implement Abzu fog https://youtu.be/l9NX06mvp2E

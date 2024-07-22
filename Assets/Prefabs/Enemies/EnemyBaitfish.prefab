@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badad5fbf9895da47847e92067da0f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableAfterSingleHit: 1
   hitEffects: {fileID: 8863524773405740064, guid: 599f8d2fee6b2d3488880c32c8262d8d, type: 3}
   ignoredEffects: {fileID: 0}
 --- !u!1 &3190945699303988219
