@@ -60,6 +60,8 @@ public class DamageableComponent : MonoBehaviour {
     public float maxHealth;
     [SerializeField]
     private float currentHealth;
+    
+    public bool hasArmor;
 
     public Team team;
 
@@ -139,6 +141,11 @@ public class DamageableComponent : MonoBehaviour {
 
         // If we won't do any damage, return early
         if(damage <= 0.0f || invincible){
+            return DamageResult.Resisted;
+        }
+        
+        if(hasArmor){
+            hasArmor = false;
             return DamageResult.Resisted;
         }
 

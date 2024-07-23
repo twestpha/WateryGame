@@ -9,18 +9,13 @@
 
 TODO List
 ==========================================================================
-[/] differentiate baitfish types
-[/] system for offsetting patrol directions so the fish aren't in perfect sync
-[/] fleeing when low health
 [w] Any enemy touch damages the player (very little), pushes away 
-    - won't do because it just means player takes overall less damage than from actual attacks
 [w] Generic "object spawns fx and flies to hit player" system for drops and powers
-
-[x] Baitfish dropping items
-    - drop health, light, armor(?)
-[x] Finish AI code
-    [x] multiple attackers taking turns instead of mobbing
-        - not sure if needed
+[/] Baitfish dropping items
+    [/] give instantly
+    [/] drop health, light, armor(?)
+    [/] get armor, health, light pickups working correctly
+[/] Implement light system
 
 [x] Ability system for both player and fish
 [x] Ability Fishes
@@ -31,10 +26,13 @@ TODO List
     - Boss (Flashbulb added on)
 [x] Getting ability from dead fish, giving to player for time
 
+[x] Play sparkles on player during different pickups
 [x] Game UI prototype
-[x] Music player system, trigger volumes
+[x] Connor: Music player system, trigger volumes
 [x] Player death, restart game
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
 [s] Camera wobble on damaged (unscaled time!)
+[s] Multiple AI attackers taking turns instead of mobbing
+    - not sure if needed

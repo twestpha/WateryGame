@@ -434,6 +434,7 @@ MonoBehaviour:
   invincible: 0
   maxHealth: 11
   currentHealth: 11
+  hasArmor: 0
   team: 2
   resistances: []
 --- !u!114 &2177854590393221089
@@ -476,7 +477,7 @@ MonoBehaviour:
   deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
   deathHealthToGiveToPlayer: 0
   deathArmorToGiveToPlayer: 0
-  deathLightToGiveToPlayer: 0
+  deathLightToGiveToPlayer: 0.2
   deathAbilityToGiveToPlayer: 0
   flyToPlayerPrefab: {fileID: 258470452019486265, guid: 2cdb394ad4c802647ad9f3dad0483b43, type: 3}
   specialAbilityChance: 0

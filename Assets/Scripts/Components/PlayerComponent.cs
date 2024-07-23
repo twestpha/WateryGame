@@ -55,9 +55,21 @@ public class PlayerComponent : MonoBehaviour {
     [Tooltip("After taking damage, how long the player should be incible from other damage")]
     public float invincibilityTime;
     
+    [Header("Attack Attributes")]
+    [Range(0, 1)]
+    [Tooltip("DEBUG: What percentage is the players light at right now")]
+    public float currentLightAmount;
+    [Tooltip("How fast should the player's light drain")]
+    public float lightDrainRate;
+    [Tooltip("What intensities should the light be, where when lightAmount is 0 it's x, and at 1, y")]
+    public Vector2 lightIntensityRange;
+    [Tooltip("What radii should the light be, where when lightAmount is 0 it's x, and at 1, y")]
+    public Vector2 lightRadiusRange;
+    
     [Header("Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
+    public Light playerLight;
     
     [Header("Misc")]
     public AnimationCurve timeSlowdownCurve;
@@ -98,6 +110,7 @@ public class PlayerComponent : MonoBehaviour {
     void Update(){
         UpdateInput();
         UpdateModelAndAnimations();
+        UpdateLight();
         
         if(invincible && invincibilityTimer.Finished()){
             damageable.SetInvincible(false);
@@ -186,6 +199,12 @@ public class PlayerComponent : MonoBehaviour {
         }
     }
     
+    private void UpdateLight(){
+        currentLightAmount = Mathf.Max(currentLightAmount - (lightDrainRate * Time.deltaTime), 0.0f);
+        playerLight.intensity = Mathf.Lerp(lightIntensityRange.x, lightIntensityRange.y, currentLightAmount);
+        playerLight.range = Mathf.Lerp(lightRadiusRange.x, lightRadiusRange.y, currentLightAmount);
+    }
+    
     private void OnDamaged(DamageableComponent damage){
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
@@ -226,7 +245,26 @@ public class PlayerComponent : MonoBehaviour {
             yield return null;
         }
         
-        Time.timeScale = 1.0f;        
+        Time.timeScale = 1.0f;
         slowingTime = false;
+    }
+    
+    public void GiveResources(float health, bool armor, float light, AbilityType ability){
+        if(health > 0.0f){
+            Debug.Log("Player getting " + health + " health!");
+            damageable.Heal(health);
+        }
+        if(armor){
+            Debug.Log("Player getting " + armor + " armor!");
+            damageable.hasArmor = true;
+        }
+        if(light > 0.0f){
+            Debug.Log("Player getting " + light + " light!");
+            currentLightAmount = Mathf.Clamp(currentLightAmount + light, 0.0f, 1.0f);
+        }
+        if(ability != AbilityType.None){
+            Debug.Log("Player getting " + ability + " ability!");
+            // ???
+        }
     }
 }

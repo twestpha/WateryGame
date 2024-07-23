@@ -440,8 +440,13 @@ MonoBehaviour:
   attackDamageRange: {x: 10, y: 10}
   attackDamageType: 1
   invincibilityTime: 0.25
+  currentLightAmount: 0
+  lightDrainRate: 0.1
+  lightIntensityRange: {x: 5, y: 1.2}
+  lightRadiusRange: {x: 4, y: 20}
   modelRoot: {fileID: 8010830638675754283}
   modelAnimator: {fileID: 4721101285764113514}
+  playerLight: {fileID: 5876439259088980064}
   timeSlowdownCurve:
     serializedVersion: 2
     m_Curve:
@@ -490,6 +495,7 @@ MonoBehaviour:
   invincible: 0
   maxHealth: 50
   currentHealth: 0
+  hasArmor: 0
   team: 1
   resistances: []
 --- !u!114 &6420582579310188928
