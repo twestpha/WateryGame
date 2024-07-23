@@ -14,14 +14,14 @@ TODO List
 [/] Rework fog volume to affect sun lighting too, more of a 1-0 of "daylight" amount
 [/] Setup second under-lighting with purple light
 
+[x] Baitfish dropping items
+    - differentiate type, always spawn their drop
+    - drop health, light, armor(?)
+
 [x] Finish AI code
     [x] multiple attackers taking turns instead of mobbing
     [x] fleeing when low health
 [x] Any enemy touch damages the player (very little), pushes away 
-
-[x] Baitfish dropping items
-    - differentiate type, always spawn their drop
-    - drop health, light, armor(?)
 
 [x] Ability system for both player and fish
 [x] Ability Fishes
