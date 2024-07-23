@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: badad5fbf9895da47847e92067da0f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableAfterSingleHit: 0
   hitEffects: {fileID: 8863524773405740064, guid: 94c1f28d93eeae747bbcc695efb3ed49, type: 3}
   ignoredEffects: {fileID: 8863524773405740064, guid: 94c1f28d93eeae747bbcc695efb3ed49, type: 3}
 --- !u!1 &1085896714945212422
@@ -1314,9 +1315,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.3160377, g: 1, b: 0.55285186, a: 1}
-  m_Intensity: 1.5
-  m_Range: 10
+  m_Color: {r: 0.21568629, g: 1, b: 0.7019608, a: 1}
+  m_Intensity: 4
+  m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

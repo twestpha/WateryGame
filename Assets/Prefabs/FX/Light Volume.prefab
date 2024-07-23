@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5988189130672469823}
   - component: {fileID: 5988189130672469820}
   m_Layer: 0
-  m_Name: Fog Volume
+  m_Name: Light Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
