@@ -82,7 +82,11 @@ public class EnemyFishAIComponent : MonoBehaviour {
     
     [Header("Dying Attributes")]
     public GameObject deathEffectsPrefab;
+    public float deathHealthToGiveToPlayer;
+    public float deathArmorToGiveToPlayer;
+    public float deathLightToGiveToPlayer;
     public AbilityType deathAbilityToGiveToPlayer;
+    public GameObject flyToPlayerPrefab;
     
     [Header("Ability Attributes")]
     [Tooltip("UNUSED")]
@@ -413,9 +417,17 @@ public class EnemyFishAIComponent : MonoBehaviour {
         GameObject deathEffects = GameObject.Instantiate(deathEffectsPrefab);
         deathEffects.transform.position = transform.position;
         
-        if(deathAbilityToGiveToPlayer != AbilityType.None){
-            Debug.Log("TODO give the player " + deathAbilityToGiveToPlayer);
-        }
+        // This ended up not looking like anything, not sure if it's possible to make it good
+        // if(flyToPlayerPrefab != null){
+        //     GameObject flyToPlayerObject = GameObject.Instantiate(flyToPlayerPrefab);
+        //     flyToPlayerObject.transform.position = transform.position;
+        // 
+        //     FlyToPlayerComponent flyToPlayerComponent = flyToPlayerObject.GetComponent<FlyToPlayerComponent>();
+        //     flyToPlayerComponent.healthToGive = deathHealthToGiveToPlayer;
+        //     flyToPlayerComponent.armorToGive = deathArmorToGiveToPlayer;
+        //     flyToPlayerComponent.lightToGive = deathLightToGiveToPlayer;
+        //     flyToPlayerComponent.abilityToGive = deathAbilityToGiveToPlayer;
+        // }
         
         Destroy(gameObject);
     }

@@ -14,12 +14,13 @@ TODO List
 [/] fleeing when low health
 [w] Any enemy touch damages the player (very little), pushes away 
     - won't do because it just means player takes overall less damage than from actual attacks
+[w] Generic "object spawns fx and flies to hit player" system for drops and powers
 
 [x] Baitfish dropping items
     - drop health, light, armor(?)
-    - instantly granted
 [x] Finish AI code
     [x] multiple attackers taking turns instead of mobbing
+        - not sure if needed
 
 [x] Ability system for both player and fish
 [x] Ability Fishes
