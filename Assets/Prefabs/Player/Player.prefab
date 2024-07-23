@@ -437,7 +437,7 @@ MonoBehaviour:
   attackMesh: {fileID: 4677415248550846910}
   attackStartDelay: 0.23
   attackDuration: 0.1
-  attackDamageRange: {x: 10, y: 20}
+  attackDamageRange: {x: 10, y: 10}
   attackDamageType: 1
   invincibilityTime: 0.25
   modelRoot: {fileID: 8010830638675754283}

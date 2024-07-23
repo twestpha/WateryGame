@@ -28,6 +28,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private const float DAMAGE_STUN_TIME = 1.5f;
     
     public const float DAMAGED_VELOCITY = 5.0f;
+    public const float FLEE_PERCENT = 0.25f;
+    public const float FLEE_DISTANCE = 12.0f;
     
     [Header("Movement Attributes")]
     [Tooltip("Move speed while patrolling")]
@@ -129,6 +131,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
         damageable.killedDelegates.Register(OnKilled);
         
         currentState = startState;
+        
+        // Randomize patrol direction to desync duplicate fishies
+        patrolState = UnityEngine.Random.value < 0.5f ? PatrolState.IdleA : PatrolState.IdleB;
     }
     
     void Update(){
@@ -167,7 +172,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
                     patrolState = PatrolState.IdleB;
                 }
             } else if(patrolState == PatrolState.IdleB){
-                
                 if(patrolTimer.Finished()){
                     Vector3 moveTarget = originPosition
                                          - (Vector3.forward * patrolDistance) 
@@ -221,9 +225,18 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else if(currentState == FishAIState.AttackAbility){
         } else if(currentState == FishAIState.WaitingToAttackPlayer){
         } else if(currentState == FishAIState.Fleeing){
+            if(AtGoal()){
+                if(allowPatrollingState){
+                    SetState(FishAIState.Patrolling);
+                } else if(allowMotionlessState){
+                    SetState(FishAIState.Motionless);
+                } 
+            }
         } else if(currentState == FishAIState.Damaged){
             if(damageStunTimer.Finished()){
-                if(allowPursuingPlayerState){
+                if(allowFleeingState && damageable.CurrentHealth() / damageable.maxHealth <= FLEE_PERCENT){
+                    SetState(FishAIState.Fleeing);
+                } else if(allowPursuingPlayerState){
                     MoveTo(GetPlayerAttackReadyPosition());
                     SetState(FishAIState.PursuingPlayer);
                 } else if(allowAttackAbilityPlayerState){
@@ -276,7 +289,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else if(state == FishAIState.WaitingToAttackPlayer){
             // Animation idle
         } else if(state == FishAIState.Fleeing){
-            // Animation moving
+            Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
+            MoveTo(transform.position + (fromPlayer.normalized * FLEE_DISTANCE));
         } else if(state == FishAIState.Damaged){
             StopMoving();
             damageStunTimer.Start();

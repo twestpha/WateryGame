@@ -9,7 +9,6 @@ public class FogVolumeComponent : MonoBehaviour {
     public float daylightPercentage;
         
     private void OnTriggerEnter(Collider other){
-        Debug.Log(other.gameObject);
         if(other.tag == "Player"){
             LightingManagerComponent.instance.ChangeLighting(daylightPercentage);
         }

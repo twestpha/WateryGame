@@ -2599,7 +2599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 12.25
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2635,7 +2635,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.z
@@ -4179,7 +4179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4215,7 +4215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.z
@@ -4318,7 +4318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 7.25
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469822, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4354,7 +4354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5988189130672469823, guid: bdece5a20f3007b44be81cef9c618c33, type: 3}
       propertyPath: m_Size.z

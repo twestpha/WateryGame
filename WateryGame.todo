@@ -9,19 +9,17 @@
 
 TODO List
 ==========================================================================
-[/] fish killed spawn blood, chunks: fx WaterBloodFX.prefab
-[/] water ripples as world space particles with distortion intermittently
-[/] Rework fog volume to affect sun lighting too, more of a 1-0 of "daylight" amount
-[/] Setup second under-lighting with purple light
+[/] differentiate baitfish types
+[/] system for offsetting patrol directions so the fish aren't in perfect sync
+[/] fleeing when low health
+[w] Any enemy touch damages the player (very little), pushes away 
+    - won't do because it just means player takes overall less damage than from actual attacks
 
 [x] Baitfish dropping items
-    - differentiate type, always spawn their drop
     - drop health, light, armor(?)
-
+    - instantly granted
 [x] Finish AI code
     [x] multiple attackers taking turns instead of mobbing
-    [x] fleeing when low health
-[x] Any enemy touch damages the player (very little), pushes away 
 
 [x] Ability system for both player and fish
 [x] Ability Fishes
@@ -34,11 +32,8 @@ TODO List
 
 [x] Game UI prototype
 [x] Music player system, trigger volumes
+[x] Player death, restart game
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
-[s] system for offsetting patrol directions so the fish aren't in perfect sync
-[s] Fish AI multiattack chains
-[s] projector water caustics from above
-[s] Implement Abzu fog https://youtu.be/l9NX06mvp2E
 [s] Camera wobble on damaged (unscaled time!)

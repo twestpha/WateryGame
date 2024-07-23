@@ -32,6 +32,7 @@ public enum DamageType {
     PlayerTrident,
     GenericFishAttack,
     ChargeFishAttack,
+    FishCollision,
 }
 
 //##################################################################################################
