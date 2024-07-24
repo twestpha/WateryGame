@@ -316,7 +316,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: baitfish_alert
+  m_Name: dashfish_alert
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -331,7 +331,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: fdf0003dcddb97046908ee26b22619b4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1b485c0ac3a687948bb1744326af5410, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -22,7 +22,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
 
     private const float PATROL_IDLE_TIME = 1.5f;
     private const float SPOTTED_ALERT_TIME = 1.0f;
-    private const float PLAYER_ATTACK_RADIUS = 2.0f;
     private const float PURSUIT_UPDATE_TIME = 0.5f;
     private const float ATTACK_MAX_TIME = 1.5f;
     private const float DAMAGE_STUN_TIME = 1.5f;
@@ -71,6 +70,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Header("Attack Attributes")]
     [Tooltip("Attach Mesh component connection")]
     public DamageMeshComponent attackMesh;
+    [Tooltip("How close to the player does this fish need to be to attack or use ability")]
+    public float attackRange;
     [Tooltip("how long from the start of an 'attack' the mesh should enabled")]
     public float attackStartDelay;
     [Tooltip("once the mesh is enabled, how long it stays enabled")]
@@ -88,15 +89,12 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public AbilityType deathAbilityToGiveToPlayer;
     
     [Header("Ability Attributes")]
-    [Tooltip("UNUSED")]
     [Range(0.0f, 1.0f)]
     public float specialAbilityChance;
-    [Tooltip("UNUSED")]
-    public GameObject attackSpecialAbility;
+    public AbilityType attackSpecialAbility;
     [Header("Animation Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
-    
     
     public enum PatrolState {
         IdleA, AtoB, IdleB, BtoA
@@ -108,6 +106,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     
     private CharacterController character;
     private DamageableComponent damageable;
+    private AbilityManagerComponent abilityManager;
+    
     private Vector3 originPosition;
     
     private Timer patrolTimer = new Timer(PATROL_IDLE_TIME);
@@ -129,6 +129,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         originPosition = transform.position;
         character = GetComponent<CharacterController>();
         damageable = GetComponent<DamageableComponent>();
+        abilityManager = GetComponent<AbilityManagerComponent>();
         
         damageable.damagedDelegates.Register(OnDamaged);
         damageable.killedDelegates.Register(OnKilled);
@@ -139,6 +140,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
         patrolState = UnityEngine.Random.value < 0.5f ? PatrolState.IdleA : PatrolState.IdleB;
     }
     
+    //--------------------------------------------------------------------------
+    // Update Functions
+    //--------------------------------------------------------------------------
     void Update(){
         UpdateState();
         UpdateMovement();
@@ -194,10 +198,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else if(currentState == FishAIState.SpottedPlayer){
             if(spotAlertTimer.Finished()){
                 if(allowPursuingPlayerState){
-                    MoveTo(GetPlayerAttackReadyPosition());
                     SetState(FishAIState.PursuingPlayer);
-                } else if(allowAttackAbilityPlayerState){
-                    // TODO random chance rolls?
+                } else if(RollForAbilityChance()){
                     SetState(FishAIState.AttackAbility);
                 } else if(allowAttackingPlayerState){
                     SetState(FishAIState.AttackingPlayer);
@@ -209,8 +211,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
                     MoveTo(GetPlayerAttackReadyPosition());
                 }
             } else {
-                // TODO random chance rolls?
-                if(allowAttackAbilityPlayerState){
+                if(RollForAbilityChance()){
                     SetState(FishAIState.AttackAbility);
                 } else if(allowAttackingPlayerState){
                     SetState(FishAIState.AttackingPlayer);
@@ -226,7 +227,17 @@ public class EnemyFishAIComponent : MonoBehaviour {
                 }
             }
         } else if(currentState == FishAIState.AttackAbility){
+            if(!abilityManager.Casting(attackSpecialAbility)){
+                if(allowPursuingPlayerState){
+                    SetState(FishAIState.PursuingPlayer);
+                } else if(allowPatrollingState){
+                    SetState(FishAIState.Patrolling);
+                } else if(allowMotionlessState){
+                    SetState(FishAIState.Motionless);
+                }
+            }
         } else if(currentState == FishAIState.WaitingToAttackPlayer){
+            // TODO
         } else if(currentState == FishAIState.Fleeing){
             if(AtGoal()){
                 if(allowPatrollingState){
@@ -250,67 +261,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
                 }
             }
         } else if(currentState == FishAIState.Dead){
-        
-        }
-    }
-    
-    private void SetState(FishAIState state){
-        if(currentState == FishAIState.Dead){
-            return;
-        }
-        
-        if(state == FishAIState.Patrolling){
-            patrolState = PatrolState.BtoA;
-            StopMoving();
-        } else if(state == FishAIState.SpottedPlayer){
-            StopMoving();
-            spotAlertTimer.Start();
-            modelAnimator.SetTrigger("alert");
-        } else if(state == FishAIState.PursuingPlayer){
             // Nop
-        } else if(state == FishAIState.AttackingPlayer){
-            // Move to slightly past player
-            Vector3 toPlayer = PlayerComponent.player.transform.position - transform.position;
-            MoveTo(transform.position + (toPlayer * 0.8f));
-            
-            // Snap instantly to 85% of the input direction
-            Quaternion targetRotation = Quaternion.LookRotation(toPlayer + NONZERO_VECTOR);
-            modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
-            
-            modelAnimator.SetTrigger("attack");
-            
-            if(attackMesh != null){
-                attackMesh.CastDamageMesh(gameObject, attackStartDelay, attackDuration, attackDamageRange, attackDamageType);
-            } else { 
-                Debug.LogError("NO ATTACK MESH");
-            }
-            
-            attackMaxTimer.Start();
-        } else if(state == FishAIState.AttackAbility){
-            StopMoving();
-            // Animation ability attack
-        } else if(state == FishAIState.WaitingToAttackPlayer){
-            // Animation idle
-        } else if(state == FishAIState.Fleeing){
-            Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
-            MoveTo(transform.position + (fromPlayer.normalized * FLEE_DISTANCE));
-        } else if(state == FishAIState.Damaged){
-            StopMoving();
-            damageStunTimer.Start();
-        } else if(state == FishAIState.Dead){
-            StopMoving();
-            // Animation death
         }
-        
-        // Debug.Log(gameObject + ": " + currentState + "-->" + state);
-        currentState = state;
-    }
-    
-    private Vector3 GetPlayerAttackReadyPosition(){
-        // TODO add in some sin(time) to change the heights
-        Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
-        Vector3 target = PlayerComponent.player.transform.position + (fromPlayer.normalized * PLAYER_ATTACK_RADIUS);
-        return target;
     }
     
     private void UpdateMovement(){
@@ -366,6 +318,81 @@ public class EnemyFishAIComponent : MonoBehaviour {
             
             previousMoveVelocityRecorded = velocity;
         }
+    }
+    
+    //--------------------------------------------------------------------------
+    // Helper Functions
+    //--------------------------------------------------------------------------
+    private void SetState(FishAIState state){
+        if(currentState == FishAIState.Dead){
+            return;
+        }
+        
+        if(state == FishAIState.Patrolling){
+            patrolState = PatrolState.BtoA;
+            StopMoving();
+        } else if(state == FishAIState.SpottedPlayer){
+            StopMoving();
+            spotAlertTimer.Start();
+            modelAnimator.SetTrigger("alert");
+        } else if(state == FishAIState.PursuingPlayer){
+            MoveTo(GetPlayerAttackReadyPosition());
+        } else if(state == FishAIState.AttackingPlayer){
+            // Move to slightly past player
+            Vector3 toPlayer = PlayerComponent.player.transform.position - transform.position;
+            MoveTo(transform.position + (toPlayer * 0.8f));
+            
+            // Snap instantly to 85% of the input direction
+            Quaternion targetRotation = Quaternion.LookRotation(toPlayer + NONZERO_VECTOR);
+            modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
+            
+            modelAnimator.SetTrigger("attack");
+            
+            if(attackMesh != null){
+                attackMesh.CastDamageMesh(gameObject, attackStartDelay, attackDuration, attackDamageRange, attackDamageType);
+            } else { 
+                Debug.LogError("NO ATTACK MESH");
+            }
+            
+            attackMaxTimer.Start();
+        } else if(state == FishAIState.AttackAbility){
+            StopMoving();
+            if(abilityManager != null && attackSpecialAbility != AbilityType.None){
+                abilityManager.CastAbility(attackSpecialAbility);
+            } else {
+                Debug.LogError("INVALID ABILITY");
+            }
+        } else if(state == FishAIState.WaitingToAttackPlayer){
+            // Animation idle
+        } else if(state == FishAIState.Fleeing){
+            Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
+            MoveTo(transform.position + (fromPlayer.normalized * FLEE_DISTANCE));
+        } else if(state == FishAIState.Damaged){
+            StopMoving();
+            damageStunTimer.Start();
+        } else if(state == FishAIState.Dead){
+            StopMoving();
+            // Animation death
+        }
+        
+        // Debug.Log(gameObject + ": " + currentState + "-->" + state);
+        currentState = state;
+    }
+    
+    private Vector3 GetPlayerAttackReadyPosition(){
+        Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
+        Vector3 target = PlayerComponent.player.transform.position + (fromPlayer.normalized * attackRange);
+        // target.y += Mathf.Sin(transform.position.y + Time.time * transform.position.z) * 2.0f;
+        
+        return target;
+    }
+    
+    private bool RollForAbilityChance(){
+        if(!allowAttackAbilityPlayerState){
+            return false;
+        }
+        
+        return UnityEngine.Random.value < specialAbilityChance;
     }
     
     private bool CanSeePlayer(){

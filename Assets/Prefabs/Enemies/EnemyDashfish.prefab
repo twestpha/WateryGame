@@ -252,6 +252,8 @@ GameObject:
   - component: {fileID: 6847353849578145782}
   - component: {fileID: 6847353849578145781}
   - component: {fileID: 3583484366050438712}
+  - component: {fileID: 9056825768378290481}
+  - component: {fileID: 663982093332095413}
   m_Layer: 0
   m_Name: EnemyDashfish
   m_TagString: Untagged
@@ -345,6 +347,7 @@ MonoBehaviour:
   allowFleeingState: 1
   allowDeadState: 1
   attackMesh: {fileID: 0}
+  attackRange: 5
   attackStartDelay: 0.48
   attackDuration: 0.15
   attackDamageRange: {x: 5, y: 8}
@@ -353,9 +356,9 @@ MonoBehaviour:
   deathHealthToGiveToPlayer: 0
   deathArmorToGiveToPlayer: 0
   deathLightToGiveToPlayer: 0.2
-  deathAbilityToGiveToPlayer: 0
-  specialAbilityChance: 0
-  attackSpecialAbility: {fileID: 0}
+  deathAbilityToGiveToPlayer: 1
+  specialAbilityChance: 1
+  attackSpecialAbility: 2
   modelRoot: {fileID: 7454993828369314689}
   modelAnimator: {fileID: 4592120252584851939}
   currentState: 1
@@ -376,6 +379,34 @@ MonoBehaviour:
   renderersToChange: []
   skinnedRenderersToChange:
   - {fileID: 526505469346841216}
+--- !u!114 &9056825768378290481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847353849578145769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7fd3b4da98bed14b8e7d050b0e55277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &663982093332095413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847353849578145769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268609e4fd4846d4f8e65576c551a5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  needsUpdate: 0
+  dashTime: 0
+  dashDistance: 0
+  damageMesh: {fileID: 0}
 --- !u!1 &7001458014507253890
 GameObject:
   m_ObjectHideFlags: 0

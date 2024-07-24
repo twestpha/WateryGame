@@ -18,13 +18,28 @@ TODO List
 [/] Implement light system
 
 [x] Ability system for both player and fish
-[x] Ability Fishes
-    - Dash Fish
-    - Spike Fish
-    - Boss (Electric Tentacles)
-    - Bubble Fish
-    - Boss (Flashbulb added on)
-[x] Getting ability from dead fish, giving to player for time
+[x] Getting ability from dead fish, giving to player
+
+[x] Dash Fish
+    [/] Dash Fish Model
+    [x] Dash Fish Animations
+    [x] Dash Fish Ability
+[x] Spike Fish
+    [x] Spike Fish Fish Model
+    [x] Spike Fish Fish Animations
+    [x] Spike Fish Fish Ability
+[x] Boss (Electric Tentacles)
+    [x] Tentacles Model
+    [x] Tentacles Animations
+    [x] Tentacles Ability
+[x] Bubble Fish
+    [x] Bubble Fish Model
+    [x] Bubble Fish Animations
+    [x] Bubble Fish Ability
+[x] Boss (Flashbulb added on)
+    [x] Boss Fish Model
+    [x] Boss Fish Animations
+    [x] Boss Fish Ability
 
 [x] Play sparkles on player during different pickups
 [x] Game UI prototype
