@@ -614,6 +614,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   movementInputsEnabled: 1
+  controlData: {fileID: 11400000, guid: 4ebe156ded3b48b48a73de61edc801ef, type: 2}
 --- !u!114 &1962653996
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,6 +75,7 @@ public class PlayerComponent : MonoBehaviour {
     [Header("Misc")]
     public AnimationCurve timeSlowdownCurve;
     public bool movementInputsEnabled;
+    public ControlData controlData;
     
     private Vector3 moveVelocity;
     public Vector3 MoveVelocity {
@@ -140,24 +141,24 @@ public class PlayerComponent : MonoBehaviour {
         bool keyPress = false;
         
         if(movementInputsEnabled){
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
+            if(Input.GetKey(controlData.left)){
                 inputDirection.z = -1.0f;
                 keyPress = true;
-            } else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
+            } else if(Input.GetKey(controlData.right)){
                 inputDirection.z = 1.0f;
                 keyPress = true;
             }
             
-            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+            if(Input.GetKey(controlData.up)){
                 inputDirection.y = 1.0f;
                 keyPress = true;
-            } else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
+            } else if(Input.GetKey(controlData.down)){
                 inputDirection.y = -1.0f;
                 keyPress = true;
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(controlData.attack)){
             modelAnimator.SetTrigger("basicslash");
 
             // Snap instantly to 85% of the input direction
@@ -171,7 +172,7 @@ public class PlayerComponent : MonoBehaviour {
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.LeftShift) && currentAbility != AbilityType.None){
+        if(Input.GetKeyDown(controlData.ability) && currentAbility != AbilityType.None){
             abilityManager.CastAbility(currentAbility);
         }
         
