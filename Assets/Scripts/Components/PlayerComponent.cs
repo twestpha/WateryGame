@@ -20,6 +20,7 @@ public class PlayerComponent : MonoBehaviour {
     
     private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
     public const float DAMAGED_VELOCITY = 5.0f;
+    public const float ABILITY_TIME = 3.0f;
     
     public static PlayerComponent player;
 
@@ -85,10 +86,16 @@ public class PlayerComponent : MonoBehaviour {
     
     private Timer downVelocityApplyTimer;
     private Timer invincibilityTimer;
+    private Timer abilityTimer = new Timer(ABILITY_TIME);
+    
     private bool invincible;
+    private bool slowingTime;
+    
+    private AbilityType currentAbility;
     
     private CharacterController characterController;
     private DamageableComponent damageable;
+    private AbilityManagerComponent abilityManager;
     
     private List<ImpartedVelocity> impartedVelocities = new();
     
@@ -99,6 +106,7 @@ public class PlayerComponent : MonoBehaviour {
     void Start(){
         characterController = GetComponent<CharacterController>();
         damageable = GetComponent<DamageableComponent>();
+        abilityManager = GetComponent<AbilityManagerComponent>();
         
         damageable.damagedDelegates.Register(OnDamaged);
         damageable.killedDelegates.Register(OnKilled);
@@ -114,6 +122,10 @@ public class PlayerComponent : MonoBehaviour {
         
         if(invincible && invincibilityTimer.Finished()){
             damageable.SetInvincible(false);
+        }
+        
+        if(currentAbility != AbilityType.None && abilityTimer.Finished()){
+            currentAbility = AbilityType.None;
         }
     }
     
@@ -149,6 +161,10 @@ public class PlayerComponent : MonoBehaviour {
             } else { 
                 Debug.LogError("NO ATTACK MESH");
             }
+        }
+        
+        if(Input.GetKeyDown(KeyCode.E) && currentAbility != AbilityType.None){
+            abilityManager.CastAbility(currentAbility);
         }
         
         if(keyPress){
@@ -190,7 +206,7 @@ public class PlayerComponent : MonoBehaviour {
             
             modelAnimator.SetBool("swimming", false);
         } else {
-            Quaternion targetRotation = Quaternion.LookRotation(moveVelocity + NONZERO_VECTOR);
+            Quaternion targetRotation = Quaternion.LookRotation(moveVelocity);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Time.deltaTime); 
             
             modelAnimator.SetBool("swimming", true);
@@ -230,7 +246,6 @@ public class PlayerComponent : MonoBehaviour {
         StartCoroutine(SlowTimeCoroutine(realTimeDuration));
     }
     
-    private bool slowingTime;
     private IEnumerator SlowTimeCoroutine(float duration){
         if(slowingTime){
             yield break;
@@ -264,7 +279,12 @@ public class PlayerComponent : MonoBehaviour {
         }
         if(ability != AbilityType.None){
             Debug.Log("Player getting " + ability + " ability!");
-            // ???
+            currentAbility = ability;
+            abilityTimer.Start();
         }
+    }
+    
+    public Vector3 GetPreviousMoveVelocity(){
+        return previousMoveVelocityRecorded;
     }
 }

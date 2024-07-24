@@ -31,14 +31,16 @@ public class AbilityManagerComponent : MonoBehaviour {
     }
     
     public void CastAbility(AbilityType abilityType){
-        if(!abilities.ContainsKey(abilityType)){
-            abilities[abilityType] = GetComponent(AbilityLookup[abilityType]) as AbilityComponent;
+        if(!Casting(abilityType)){
+            if(!abilities.ContainsKey(abilityType)){
+                abilities[abilityType] = GetComponent(AbilityLookup[abilityType]) as AbilityComponent;
+            }
+            
+            abilities[abilityType].CastAbility();
         }
-        
-        abilities[abilityType].CastAbility();
     }
     
     public bool Casting(AbilityType abilityType){
-        return !abilities[abilityType].needsUpdate;
+        return abilities.ContainsKey(abilityType) ? abilities[abilityType].needsUpdate : false;
     }
 }

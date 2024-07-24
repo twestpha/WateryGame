@@ -284,7 +284,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         for(int i = 0; i < impartedVelocities.Count; ++i){
             ImpartedVelocity v = impartedVelocities[i];
             actualVelocityToApply += v.velocity * (v.decreaseOverTime ? 1.0f - v.impartTimer.Parameterized() : 1.0f);
-            
+            Debug.Log("actualVelocityToApply: " + actualVelocityToApply);
             if(v.impartTimer.Finished()){
                 impartedVelocities[i] = impartedVelocities[impartedVelocities.Count - 1];
                 impartedVelocities.RemoveAt(impartedVelocities.Count - 1);
@@ -301,7 +301,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private void UpdateModel(){
-        // TODO better look direction calculations; using the target if applicable
         if(velocity.magnitude < (patrolSpeed / 4.0f)){
             modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
@@ -310,10 +309,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime);
         } else {
             modelAnimator.SetBool("swimming", true);
-            
-            Vector3 displayVelocity = velocity;
-            displayVelocity.z *= displayVelocity.z * (displayVelocity.z < 0.0f ? -1.0f : 1.0f); // make the z movement more significant
-            Quaternion targetRotation = Quaternion.LookRotation(displayVelocity + NONZERO_VECTOR);
+
+            Quaternion targetRotation = Quaternion.LookRotation(velocity);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Time.deltaTime);
             
             previousMoveVelocityRecorded = velocity;
@@ -372,7 +369,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
             damageStunTimer.Start();
         } else if(state == FishAIState.Dead){
             StopMoving();
-            // Animation death
         }
         
         // Debug.Log(gameObject + ": " + currentState + "-->" + state);
@@ -382,7 +378,6 @@ public class EnemyFishAIComponent : MonoBehaviour {
     private Vector3 GetPlayerAttackReadyPosition(){
         Vector3 fromPlayer = transform.position - PlayerComponent.player.transform.position;
         Vector3 target = PlayerComponent.player.transform.position + (fromPlayer.normalized * attackRange);
-        // target.y += Mathf.Sin(transform.position.y + Time.time * transform.position.z) * 2.0f;
         
         return target;
     }
@@ -414,14 +409,13 @@ public class EnemyFishAIComponent : MonoBehaviour {
         return false;
     }
     
-    private void StopMoving(){
+    public void StopMoving(){
         MoveTo(transform.position);
     }
     
     private void MoveTo(Vector3 position){
         moveTarget = position;
         previousMoveDistance = 99999999.0f;
-        previousMoveVelocityRecorded = position - transform.position;
     }
     
     private bool AtGoal(){
@@ -456,5 +450,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public void ImpartVelocity(ImpartedVelocity v){
         impartedVelocities.Add(v);
         v.impartTimer.Start();
+    }
+    
+    public Vector3 GetPreviousMoveVelocity(){
+        return previousMoveVelocityRecorded;
     }
 }

@@ -9,21 +9,13 @@
 
 TODO List
 ==========================================================================
-[w] Any enemy touch damages the player (very little), pushes away 
-[w] Generic "object spawns fx and flies to hit player" system for drops and powers
-[/] Baitfish dropping items
-    [/] give instantly
-    [/] drop health, light, armor(?)
-    [/] get armor, health, light pickups working correctly
-[/] Implement light system
-
-[x] Ability system for both player and fish
-[x] Getting ability from dead fish, giving to player
-
-[x] Dash Fish
+[/] Dash Fish
     [/] Dash Fish Model
-    [x] Dash Fish Animations
-    [x] Dash Fish Ability
+    [/] Dash Fish Animations
+    [/] Dash Fish Ability
+[/] Ability system for both player and fish
+[/] Getting ability from dead fish, giving to player
+
 [x] Spike Fish
     [x] Spike Fish Fish Model
     [x] Spike Fish Fish Animations
