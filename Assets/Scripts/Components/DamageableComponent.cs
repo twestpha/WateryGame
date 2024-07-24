@@ -57,9 +57,9 @@ public class DamageableComponent : MonoBehaviour {
     [SerializeField]
     private bool invincible;
 
-    public float maxHealth;
+    public int maxHealth;
     [SerializeField]
-    private float currentHealth;
+    private int currentHealth;
     
     public bool hasArmor;
 
@@ -91,7 +91,7 @@ public class DamageableComponent : MonoBehaviour {
     // Set to full health by default after error checking
     //##############################################################################################
 	void Start(){
-        if(maxHealth <= 0.0f){
+        if(maxHealth <= 0){
             Debug.LogError("Max Health on " + gameObject.name + "'s DamageableComponent cannot be less than or equal zero");
         }
 
@@ -149,7 +149,7 @@ public class DamageableComponent : MonoBehaviour {
             return DamageResult.Resisted;
         }
 
-        currentHealth -= damage;
+        currentHealth -= (int) Mathf.Floor(damage);
         damagerOrigin = position;
         damager = damager_;
 
@@ -167,8 +167,8 @@ public class DamageableComponent : MonoBehaviour {
     // healed some amount.
     //##############################################################################################
     public bool Heal(float amount){
-        if(currentHealth > 0.0f && currentHealth < maxHealth){
-            currentHealth += amount;
+        if(currentHealth > 0 && currentHealth < maxHealth){
+            currentHealth += (int) Mathf.Floor(amount);
             currentHealth = Mathf.Min(currentHealth, maxHealth);
 
             healedDelegates.Invoke(this);

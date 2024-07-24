@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 2177854590393221090}
   - component: {fileID: 2177854590393221089}
   - component: {fileID: 8107855030776698412}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyBaitfishLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

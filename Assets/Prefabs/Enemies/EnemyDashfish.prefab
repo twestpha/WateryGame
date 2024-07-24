@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 3583484366050438712}
   - component: {fileID: 9056825768378290481}
   - component: {fileID: 663982093332095413}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyDashfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}

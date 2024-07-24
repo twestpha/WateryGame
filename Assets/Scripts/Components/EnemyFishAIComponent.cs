@@ -284,7 +284,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
         for(int i = 0; i < impartedVelocities.Count; ++i){
             ImpartedVelocity v = impartedVelocities[i];
             actualVelocityToApply += v.velocity * (v.decreaseOverTime ? 1.0f - v.impartTimer.Parameterized() : 1.0f);
-            Debug.Log("actualVelocityToApply: " + actualVelocityToApply);
+
             if(v.impartTimer.Finished()){
                 impartedVelocities[i] = impartedVelocities[impartedVelocities.Count - 1];
                 impartedVelocities.RemoveAt(impartedVelocities.Count - 1);

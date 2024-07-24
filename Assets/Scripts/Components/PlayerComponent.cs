@@ -20,7 +20,7 @@ public class PlayerComponent : MonoBehaviour {
     
     private readonly Vector3 NONZERO_VECTOR = new Vector3(0.0f, 0.0f, 0.001f);
     public const float DAMAGED_VELOCITY = 5.0f;
-    public const float ABILITY_TIME = 3.0f;
+    public const float ABILITY_TIME = 10.0f;
     
     public static PlayerComponent player;
 
@@ -74,6 +74,7 @@ public class PlayerComponent : MonoBehaviour {
     
     [Header("Misc")]
     public AnimationCurve timeSlowdownCurve;
+    public bool movementInputsEnabled;
     
     private Vector3 moveVelocity;
     public Vector3 MoveVelocity {
@@ -87,15 +88,20 @@ public class PlayerComponent : MonoBehaviour {
     private Timer downVelocityApplyTimer;
     private Timer invincibilityTimer;
     private Timer abilityTimer = new Timer(ABILITY_TIME);
+    public Timer AbilityTimer { get { return abilityTimer; }}
     
     private bool invincible;
     private bool slowingTime;
     
     private AbilityType currentAbility;
+    public AbilityType CurrentAbility { get { return currentAbility; }}
+    
     
     private CharacterController characterController;
     private DamageableComponent damageable;
+    public DamageableComponent Damageable { get { return damageable; }}
     private AbilityManagerComponent abilityManager;
+    public AbilityManagerComponent AbilityManager { get { return abilityManager; }}
     
     private List<ImpartedVelocity> impartedVelocities = new();
     
@@ -133,20 +139,22 @@ public class PlayerComponent : MonoBehaviour {
         inputDirection = Vector3.zero;
         bool keyPress = false;
         
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-            inputDirection.z = -1.0f;
-            keyPress = true;
-        } else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-            inputDirection.z = 1.0f;
-            keyPress = true;
-        }
-        
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-            inputDirection.y = 1.0f;
-            keyPress = true;
-        } else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-            inputDirection.y = -1.0f;
-            keyPress = true;
+        if(movementInputsEnabled){
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
+                inputDirection.z = -1.0f;
+                keyPress = true;
+            } else if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
+                inputDirection.z = 1.0f;
+                keyPress = true;
+            }
+            
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
+                inputDirection.y = 1.0f;
+                keyPress = true;
+            } else if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
+                inputDirection.y = -1.0f;
+                keyPress = true;
+            }
         }
         
         if(Input.GetKeyDown(KeyCode.Space)){
@@ -163,11 +171,11 @@ public class PlayerComponent : MonoBehaviour {
             }
         }
         
-        if(Input.GetKeyDown(KeyCode.E) && currentAbility != AbilityType.None){
+        if(Input.GetKeyDown(KeyCode.LeftShift) && currentAbility != AbilityType.None){
             abilityManager.CastAbility(currentAbility);
         }
         
-        if(keyPress){
+        if(keyPress || !movementInputsEnabled){
             downVelocityApplyTimer.Start();
         }
         
@@ -282,6 +290,12 @@ public class PlayerComponent : MonoBehaviour {
             currentAbility = ability;
             abilityTimer.Start();
         }
+    }
+    
+    [ContextMenu("Debug Give Dash")]
+    public void DebugGiveDash(){
+        currentAbility = AbilityType.PlayerDash;
+        abilityTimer.Start();
     }
     
     public Vector3 GetPreviousMoveVelocity(){

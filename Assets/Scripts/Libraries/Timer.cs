@@ -148,4 +148,8 @@ public class Timer {
     public float Duration(){
         return duration;
     }
+    
+    public float Remaining(){
+        return Mathf.Max(duration - Elapsed(), 0.0f);
+    }
 };
