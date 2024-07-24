@@ -9,19 +9,9 @@
 
 TODO List
 ==========================================================================
-[/] Dash Fish
-    [/] Dash Fish Model
-    [/] Dash Fish Animations
-    [/] Dash Fish Ability
 [/] Ability system for both player and fish
 [/] Getting ability from dead fish, giving to player
 [/] Switch damageable to use ints
-
-[x] Player dash ability
-    - needs some more fx or something
-    - needs to be button-able with non wasd button
-        - shift?
-        - space?
 
 [x] Spike Fish
     [x] Spike Fish Fish Model
@@ -44,7 +34,7 @@ TODO List
 
 [x] Play sparkles on player during different pickups
 [x] Player model change on ability pickup
-[x] Game UI prototype
+[x] Game UI
     - health
     - time left for ability
     - Armor y/n
@@ -56,6 +46,7 @@ TODO List
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
-[s] Camera wobble on damaged (unscaled time!)
 [s] Multiple AI attackers taking turns instead of mobbing
     - not sure if needed
+[s] Player dash ability
+    - needs more polish, maybe some snapping?
