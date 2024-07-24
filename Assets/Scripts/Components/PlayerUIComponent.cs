@@ -8,7 +8,10 @@ public class PlayerUIComponent : MonoBehaviour {
     
     public Text armorText;
     public Text healthText;
-    public Text abilityText;
+    
+    public Image abilityFill;
+    
+    public Sprite dashAbilitySprite;
     
     private PlayerComponent player;
     
@@ -19,6 +22,14 @@ public class PlayerUIComponent : MonoBehaviour {
     void Update(){
         armorText.text = "Armor: " + (player.Damageable.hasArmor);
         healthText.text = "HP: " + player.Damageable.CurrentHealth() + "/" + player.Damageable.maxHealth;
-        abilityText.text = player.CurrentAbility + ": " + player.AbilityTimer.Remaining().ToString("0.00");
+        
+        Sprite targetSprite = null;
+        if(player.CurrentAbility == AbilityType.PlayerDash){
+            targetSprite = dashAbilitySprite;
+        }
+        
+        abilityFill.enabled = player.CurrentAbility != AbilityType.None;
+        abilityFill.sprite = targetSprite;
+        abilityFill.fillAmount = (1.0f - player.AbilityTimer.Parameterized());
     }
 }
