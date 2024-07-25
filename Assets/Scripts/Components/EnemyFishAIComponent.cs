@@ -305,7 +305,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private void UpdateModel(){
-        if(previousMoveVelocityRecorded.magnitude < (patrolSpeed / 4.0f)){
+        if(velocity.magnitude < (patrolSpeed / 4.0f)){
             modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
 

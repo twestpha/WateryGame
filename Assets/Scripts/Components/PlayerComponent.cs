@@ -77,6 +77,7 @@ public class PlayerComponent : MonoBehaviour {
     public GameObject healthPickupParticle;
     public GameObject armorPickupParticle;
     public GameObject lightPickupParticle;
+    public GameObject dashPickupParticle;
     
     [Header("Connections")]
     public Transform modelRoot;
@@ -320,6 +321,7 @@ public class PlayerComponent : MonoBehaviour {
                 for(int i = 0, count = dashAbilityMeshes.Length; i < count; ++i){
                     dashAbilityMeshes[i].SetActive(true);
                 }
+                dashPickupParticle.SetActive(true);
             }
         }
     }

@@ -538,7 +538,7 @@ MonoBehaviour:
   allowAttackingPlayerState: 1
   allowAttackAbilityPlayerState: 1
   allowWaitingToAttackPlayerState: 1
-  allowFleeingState: 1
+  allowFleeingState: 0
   allowDeadState: 1
   attackMesh: {fileID: 0}
   attackRange: 8
@@ -549,7 +549,7 @@ MonoBehaviour:
   deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
   deathHealthToGiveToPlayer: 0
   deathArmorToGiveToPlayer: 0
-  deathLightToGiveToPlayer: 0.2
+  deathLightToGiveToPlayer: 0
   deathAbilityToGiveToPlayer: 1
   specialAbilityChance: 1
   attackSpecialAbility: 2
