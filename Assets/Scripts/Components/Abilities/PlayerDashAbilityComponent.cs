@@ -38,6 +38,7 @@ public class PlayerDashAbilityComponent : AbilityComponent {
         player.modelAnimator.SetTrigger("abilitydash");
         player.movementInputsEnabled = false;
         player.gameObject.layer = 9 /* player no collide */;
+        player.Damageable.SetInvincible(true);
         
         windupTimer.Start();
     }
@@ -57,6 +58,7 @@ public class PlayerDashAbilityComponent : AbilityComponent {
             if(dashTimer.Finished()){
                 player.movementInputsEnabled = true;
                 needsUpdate = false;
+                player.Damageable.SetInvincible(false);
                 player.gameObject.layer = 6 /* player */;
                 player.modelAnimator.SetBool("swimming", false);
             }
