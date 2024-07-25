@@ -67,6 +67,17 @@ public class PlayerComponent : MonoBehaviour {
     [Tooltip("What radii should the light be, where when lightAmount is 0 it's x, and at 1, y")]
     public Vector2 lightRadiusRange;
     
+    [Header("AbilityMeshes")]
+    public GameObject[] dashAbilityMeshes;
+    
+    [Header("Ability Dropoff Particles")]
+    public GameObject[] dashAbilityDropoffParticles;
+    
+    [Header("Ability Pickup Particles")]
+    public GameObject healthPickupParticle;
+    public GameObject armorPickupParticle;
+    public GameObject lightPickupParticle;
+    
     [Header("Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
@@ -132,6 +143,13 @@ public class PlayerComponent : MonoBehaviour {
         }
         
         if(currentAbility != AbilityType.None && abilityTimer.Finished()){
+            if(currentAbility == AbilityType.PlayerDash){
+                for(int i = 0, count = dashAbilityMeshes.Length; i < count; ++i){
+                    dashAbilityMeshes[i].SetActive(false);
+                    dashAbilityDropoffParticles[i].SetActive(true);
+                }
+            }
+            
             currentAbility = AbilityType.None;
         }
     }
@@ -186,7 +204,7 @@ public class PlayerComponent : MonoBehaviour {
         moveVelocity = Vector3.SmoothDamp(moveVelocity, targetVelocity, ref acceleration, keyPress ? accelerationTime : decelerationTime);
         moveVelocity.x = 0.0f;
         
-        Vector3 actualVelocityToApply = moveVelocity + (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        Vector3 actualVelocityToApply = moveVelocity;
         
         // Apply imparted velocities
         for(int i = 0; i < impartedVelocities.Count; ++i){
@@ -199,13 +217,14 @@ public class PlayerComponent : MonoBehaviour {
                 i--;
             }
         }
-        
-        // Apply the move
-        characterController.Move(actualVelocityToApply * Time.deltaTime);
-        
+
         if(actualVelocityToApply.magnitude > (moveSpeed / 4.0f)){
             previousMoveVelocityRecorded = actualVelocityToApply;
         }
+        
+        // Apply the move
+        actualVelocityToApply += (Vector3.up * downVelocityApplyTimer.Parameterized() * downVelocity);
+        characterController.Move(actualVelocityToApply * Time.deltaTime);
     
         // Always hard-clamp x
         Vector3 pos = transform.position;
@@ -214,7 +233,7 @@ public class PlayerComponent : MonoBehaviour {
     }
     
     private void UpdateModelAndAnimations(){
-        if(previousMoveVelocityRecorded.magnitude < (moveSpeed / 4.0f)){
+        if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
             Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime); 
             
@@ -280,26 +299,34 @@ public class PlayerComponent : MonoBehaviour {
         if(health > 0.0f){
             Debug.Log("Player getting " + health + " health!");
             damageable.Heal(health);
+            healthPickupParticle.SetActive(true);
         }
         if(armor){
             Debug.Log("Player getting " + armor + " armor!");
             damageable.hasArmor = true;
+            armorPickupParticle.SetActive(true);
         }
         if(light > 0.0f){
             Debug.Log("Player getting " + light + " light!");
             currentLightAmount = Mathf.Clamp(currentLightAmount + light, 0.0f, 1.0f);
+            lightPickupParticle.SetActive(true);
         }
         if(ability != AbilityType.None){
             Debug.Log("Player getting " + ability + " ability!");
             currentAbility = ability;
             abilityTimer.Start();
+            
+            if(currentAbility == AbilityType.PlayerDash){
+                for(int i = 0, count = dashAbilityMeshes.Length; i < count; ++i){
+                    dashAbilityMeshes[i].SetActive(true);
+                }
+            }
         }
     }
     
     [ContextMenu("Debug Give Dash")]
     public void DebugGiveDash(){
-        currentAbility = AbilityType.PlayerDash;
-        abilityTimer.Start();
+        GiveResources(0.0f, false, 0.0f, AbilityType.PlayerDash);
     }
     
     public Vector3 GetPreviousMoveVelocity(){

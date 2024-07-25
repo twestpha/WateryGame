@@ -12,10 +12,9 @@ TODO List
 [/] Ability system for both player and fish
 [/] Can attack and ability at the same time
 [/] Spike Fish Fish Model
-
-[x] Player model change on ability pickup
+[/] Player model change on ability pickup
     - dropping/disentegrating when finished
-[x] Play sparkles on player during different small pickups
+[/] Play sparkles on player during different small pickups
 
 [x] Spike Fish
     [x] Spike Fish Fish Animations
