@@ -294,6 +294,10 @@ public class EnemyFishAIComponent : MonoBehaviour {
         
         character.Move(actualVelocityToApply * Time.deltaTime);
         
+        if(actualVelocityToApply.magnitude > (patrolSpeed / 4.0f)){
+            previousMoveVelocityRecorded = actualVelocityToApply;
+        }
+        
         // Always hard-clamp x
         Vector3 pos = transform.position;
         pos.x = 0.0f;
@@ -301,7 +305,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private void UpdateModel(){
-        if(velocity.magnitude < (patrolSpeed / 4.0f)){
+        if(previousMoveVelocityRecorded.magnitude < (patrolSpeed / 4.0f)){
             modelAnimator.SetBool("swimming", false);
             // previousMoveVelocityRecorded.y = 0.0f;
 
@@ -310,10 +314,10 @@ public class EnemyFishAIComponent : MonoBehaviour {
         } else {
             modelAnimator.SetBool("swimming", true);
 
-            Quaternion targetRotation = Quaternion.LookRotation(velocity);
+            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, movingRotationRate * Time.deltaTime);
             
-            previousMoveVelocityRecorded = velocity;
+            // previousMoveVelocityRecorded = velocity;
         }
     }
     
