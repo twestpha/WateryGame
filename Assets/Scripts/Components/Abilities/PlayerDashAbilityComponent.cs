@@ -5,6 +5,7 @@ using System;
 
 public class PlayerDashAbilityComponent : AbilityComponent {
     
+    public float windupTime;
     public float dashTime;
     public float dashDistance;
     public DamageMeshComponent damageMesh;
@@ -14,7 +15,7 @@ public class PlayerDashAbilityComponent : AbilityComponent {
     
     private PlayerComponent player;
     
-    private Timer windupTimer = new Timer(0.6f);
+    private Timer windupTimer;
     private Timer dashTimer;
     
     private enum AbilityState {
@@ -27,6 +28,7 @@ public class PlayerDashAbilityComponent : AbilityComponent {
     public override void CastAbility(){
         player = GetComponent<PlayerComponent>();
         
+        windupTimer = new Timer(windupTime);
         dashTimer = new Timer(dashTime);
         
         needsUpdate = true;
