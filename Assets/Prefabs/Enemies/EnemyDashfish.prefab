@@ -502,8 +502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 11
-  currentHealth: 11
+  maxHealth: 3
+  currentHealth: 3
   hasArmor: 0
   team: 2
   resistances: []
@@ -519,9 +519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533d4d2804c548c4aa4f5cd05193bf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 3
-  pursueSpeed: 6
-  accelerationTime: 0.2
+  patrolSpeed: 2
+  pursueSpeed: 4
+  accelerationTime: 0.85
   idleRotationRate: 50
   movingRotationRate: 360
   playerSpotDistance: 8
@@ -540,9 +540,9 @@ MonoBehaviour:
   allowFleeingState: 1
   allowDeadState: 1
   attackMesh: {fileID: 0}
-  attackRange: 5
-  attackStartDelay: 0.48
-  attackDuration: 0.15
+  attackRange: 8
+  attackStartDelay: 0.85
+  attackDuration: 0.12
   attackDamageRange: {x: 5, y: 8}
   attackDamageType: 3
   deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
@@ -600,7 +600,7 @@ MonoBehaviour:
   dashTime: 0.65
   dashDistance: 10
   damageMesh: {fileID: 5972392770703700767}
-  dashDamageRange: {x: 2, y: 3}
+  dashDamageRange: {x: 1, y: 1}
 --- !u!1 &7001458014507253890
 GameObject:
   m_ObjectHideFlags: 0
