@@ -158,7 +158,13 @@ public class PlayerComponent : MonoBehaviour {
             }
         }
         
-        if(Input.GetKeyDown(controlData.attack)){
+        if(Input.GetKeyDown(controlData.ability) && currentAbility != AbilityType.None){
+            abilityManager.CastAbility(currentAbility);
+        }
+        
+        bool casting = currentAbility != AbilityType.None && abilityManager.Casting(currentAbility);
+        
+        if(!casting && Input.GetKeyDown(controlData.attack)){
             modelAnimator.SetTrigger("basicslash");
 
             // Snap instantly to 85% of the input direction
@@ -170,10 +176,6 @@ public class PlayerComponent : MonoBehaviour {
             } else { 
                 Debug.LogError("NO ATTACK MESH");
             }
-        }
-        
-        if(Input.GetKeyDown(controlData.ability) && currentAbility != AbilityType.None){
-            abilityManager.CastAbility(currentAbility);
         }
         
         if(keyPress || !movementInputsEnabled){
