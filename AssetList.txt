@@ -3,6 +3,7 @@ https://polyhaven.com
 https://opengameart.org/
 https://www.turbosquid.com/
 https://www.mixamo.com
+https://fonts.google.com
 
 Specifically:
 https://opengameart.org/content/rocks-03
