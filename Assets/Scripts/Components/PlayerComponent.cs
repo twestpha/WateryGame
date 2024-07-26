@@ -299,21 +299,25 @@ public class PlayerComponent : MonoBehaviour {
     public void GiveResources(float health, bool armor, float light, AbilityType ability){
         if(health > 0.0f){
             Debug.Log("Player getting " + health + " health!");
+            PlayerUIComponent.instance.ShowDialogue("Transmuted to Health");
             damageable.Heal(health);
             healthPickupParticle.SetActive(true);
         }
         if(armor){
             Debug.Log("Player getting " + armor + " armor!");
+            PlayerUIComponent.instance.ShowDialogue("Transmuted to Armor");
             damageable.hasArmor = true;
             armorPickupParticle.SetActive(true);
         }
         if(light > 0.0f){
             Debug.Log("Player getting " + light + " light!");
+            PlayerUIComponent.instance.ShowDialogue("Transmuted to Light");
             currentLightAmount = Mathf.Clamp(currentLightAmount + light, 0.0f, 1.0f);
             lightPickupParticle.SetActive(true);
         }
         if(ability != AbilityType.None){
             Debug.Log("Player getting " + ability + " ability!");
+            
             currentAbility = ability;
             abilityTimer.Start();
             
@@ -322,6 +326,7 @@ public class PlayerComponent : MonoBehaviour {
                     dashAbilityMeshes[i].SetActive(true);
                 }
                 dashPickupParticle.SetActive(true);
+                PlayerUIComponent.instance.ShowDialogue("Transmuted to Dash Power");
             }
         }
     }
