@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip ambienceClip;
     public AudioSource ambienceSource;
 
-    private float combatTimer;
+    private IndependentTimer combatTimer;
     public float combatTimeout = 10f;
     private bool fading;
 
@@ -20,48 +20,59 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
 
     private void Start()
     {
         PlayIdleTrack();
         PlayAmbience();
+
+        InitializeCombatTimer();
     }
 
     private void Update()
     {
         if (!fading)
         {
-            combatTimer += Time.deltaTime;
-            if (combatTimer >= combatTimeout)
+            if (combatTimer.Finished())
             {
                 SwitchToIdleTrack();
             }
         }
 
-        // Debug hotkey for testing audio (DELETE WHEN PROPERLY IMPLEMENTED!)
+        // Debug hotkey for testing audio
         if (Input.GetKeyDown(KeyCode.P))
         {
-            SimulateCombat();
+            Debug.Log("P key pressed");
+            if (musicSource.clip == idleTrack)
+            {
+                ResetCombatTimer();
+            }
+            else
+            {
+                Debug.Log("Switching to idle track");
+                combatTimer = new IndependentTimer(combatTimeout);
+                combatTimer.Start(); // It's okat to start the combat timer without finishing it here because the Update function looks to see if it's finished
+                StartCoroutine(FadeTracks(musicSource.clip, idleTrack));
+            }
         }
     }
 
     public void ResetCombatTimer()
     {
-        combatTimer = 0f;
+        Debug.Log("Combat Timer Reset");
+        InitializeCombatTimer();
         if (musicSource.clip != combatTrack)
         {
-            StartCoroutine(FadeTracks(idleTrack, combatTrack));
+            StartCoroutine(FadeTracks(musicSource.clip, combatTrack));
         }
+    }
+
+    private void InitializeCombatTimer()
+    {
+        combatTimer = new IndependentTimer(combatTimeout);
+        combatTimer.Start();
     }
 
     private void PlayIdleTrack()
@@ -90,9 +101,13 @@ public class AudioManager : MonoBehaviour
         float startVolume = musicSource.volume;
 
         // Fade out current track
-        for (float t = 0; t <= fadeDuration; t += Time.deltaTime)
+        var fadeTimer = new IndependentTimer(fadeDuration);
+        fadeTimer.Start();
+
+        while (!fadeTimer.Finished())
         {
-            musicSource.volume = Mathf.Lerp(startVolume, 0, t / fadeDuration);
+            float t = fadeTimer.Parameterized(); 
+            musicSource.volume = Mathf.Lerp(startVolume, 0, t);
             yield return null;
         }
 
@@ -104,9 +119,11 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
 
         // Fade in new track
-        for (float t = 0; t <= fadeDuration; t += Time.deltaTime)
+        fadeTimer.Start();
+        while (!fadeTimer.Finished())
         {
-            musicSource.volume = Mathf.Lerp(0, startVolume, t / fadeDuration);
+            float t = fadeTimer.Parameterized();
+            musicSource.volume = Mathf.Lerp(0, startVolume, t);
             yield return null;
         }
 
@@ -119,17 +136,5 @@ public class AudioManager : MonoBehaviour
         ambienceSource.clip = ambienceClip;
         ambienceSource.loop = true;
         ambienceSource.Play();
-    }
-
-    private void SimulateCombat()
-    {
-        if (musicSource.clip == idleTrack)
-        {
-            ResetCombatTimer();
-        }
-        else
-        {
-            combatTimer = combatTimeout;
-        }
     }
 }
