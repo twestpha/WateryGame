@@ -910,6 +910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBaitfishHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 2177854590393221117, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
 --- !u!1001 &325589321
@@ -2266,6 +2270,10 @@ PrefabInstance:
     - target: {fileID: 2177854590393221117, guid: fcf6f265337c21a4babc50b2340c80da, type: 3}
       propertyPath: m_Name
       value: EnemyBaitfishArmor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177854590393221117, guid: fcf6f265337c21a4babc50b2340c80da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcf6f265337c21a4babc50b2340c80da, type: 3}
@@ -3670,6 +3678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBaitfishLight
       objectReference: {fileID: 0}
+    - target: {fileID: 2177854590393221117, guid: 07df9eb562abf1841b9b88509a91ec62, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07df9eb562abf1841b9b88509a91ec62, type: 3}
 --- !u!1001 &1727146815
@@ -3882,6 +3894,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 750074173470528642, guid: cf8a5328b17c0a846aca6e66d9bfa77f, type: 3}
   m_PrefabInstance: {fileID: 1805932373}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1816477879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703671138181692160, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3094236219316114493, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
+      propertyPath: m_Name
+      value: LevelRoom_FirstPass
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4aa9cf8f005787b4892ab90393296c2f, type: 3}
 --- !u!4 &1831049861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9023291939145641505, guid: 4be9870743088f5418e76eda859ed04f, type: 3}
@@ -5083,6 +5152,10 @@ PrefabInstance:
     - target: {fileID: 6847353849578145769, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_Name
       value: EnemyDashfish
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847353849578145769, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_RootOrder
@@ -6324,6 +6397,10 @@ PrefabInstance:
     - target: {fileID: 1109936173974207088, guid: 410065e3e46885b499bbb2ad87939b0f, type: 3}
       propertyPath: m_Name
       value: EnemySpikefish
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109936173974207088, guid: 410065e3e46885b499bbb2ad87939b0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 410065e3e46885b499bbb2ad87939b0f, type: 3}
