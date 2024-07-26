@@ -13,6 +13,7 @@ TODO List
     [/] Spike Fish Fish Animations
     [/] Spike Fish Fish Ability
 [/] Player death, restart game
+[/] player starts with dash ability?
 
 [x] Player Spike Ability
 [x] Boss (Electric Tentacles)
@@ -34,6 +35,7 @@ TODO List
 [x] Connor: Music player system, trigger volumes
 [x] Volume based enable/disables of groups of assets for "streaming"
     - needed?
+    - or should I just load/unload levels?
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
