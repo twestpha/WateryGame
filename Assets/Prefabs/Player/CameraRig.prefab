@@ -739,6 +739,7 @@ GameObject:
   - component: {fileID: 276627274}
   - component: {fileID: 276627273}
   - component: {fileID: 3268840743004422652}
+  - component: {fileID: 5998876260127413270}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1131,6 +1132,27 @@ MonoBehaviour:
   colorCorrectionCurvesShader: {fileID: 4800000, guid: 62bcade1028c24ca1a39760ed84b9487, type: 3}
   simpleColorCorrectionCurvesShader: {fileID: 4800000, guid: 438ddd58d82c84d9eb1fdc56111702e1, type: 3}
   colorCorrectionSelectiveShader: {fileID: 4800000, guid: e515e0f94cefc4c0db54b45cba621544, type: 3}
+--- !u!114 &5998876260127413270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279871695916854969}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730475ee64f9a894bbac0d9e6f22e813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+  sensitivityDepth: 0.8
+  sensitivityNormals: 0.6
+  lumThreshold: 0.2
+  edgeExp: 1
+  sampleDist: 0.5
+  edgesOnly: 0.085
+  edgesOnlyBgColor: {r: 0, g: 0.39470556, b: 0.5176471, a: 1}
+  edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}
 --- !u!1 &6279871696718242646
 GameObject:
   m_ObjectHideFlags: 0

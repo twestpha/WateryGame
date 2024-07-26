@@ -16,12 +16,12 @@ public enum AbilityType {
 public class AbilityManagerComponent : MonoBehaviour {
     
     private static Dictionary<AbilityType, System.Type> AbilityLookup = new(){
-        { AbilityType.PlayerDash,   typeof(PlayerDashAbilityComponent) },
-        { AbilityType.FishDash,     typeof(FishDashAbilityComponent)   },
-        { AbilityType.PlayerSpikes, typeof(PlayerDashAbilityComponent) }, // WRONG
-        { AbilityType.FishSpikes,   typeof(FishSpikeAbilityComponent)  },
-        { AbilityType.PlayerBubble, typeof(PlayerDashAbilityComponent) }, // WRONG
-        { AbilityType.FishBubble,   typeof(PlayerDashAbilityComponent) }, // WRONG
+        { AbilityType.PlayerDash,   typeof(PlayerDashAbilityComponent)  },
+        { AbilityType.FishDash,     typeof(FishDashAbilityComponent)    },
+        { AbilityType.PlayerSpikes, typeof(PlayerSpikeAbilityComponent) },
+        { AbilityType.FishSpikes,   typeof(FishSpikeAbilityComponent)   },
+        { AbilityType.PlayerBubble, typeof(PlayerDashAbilityComponent)  }, // WRONG
+        { AbilityType.FishBubble,   typeof(PlayerDashAbilityComponent)  }, // WRONG
     };
     
     private Dictionary<AbilityType, AbilityComponent> abilities = new();

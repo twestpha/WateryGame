@@ -352,6 +352,11 @@ public class PlayerComponent : MonoBehaviour {
         GiveResources(0.0f, false, 0.0f, AbilityType.PlayerDash);
     }
     
+    [ContextMenu("Debug Give Spikes")]
+    public void DebugGiveSpikes(){
+        GiveResources(0.0f, false, 0.0f, AbilityType.PlayerSpikes);
+    }
+    
     public Vector3 GetPreviousMoveVelocity(){
         return previousMoveVelocityRecorded;
     }
