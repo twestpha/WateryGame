@@ -274,8 +274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 11
-  currentHealth: 1
+  maxHealth: 2
+  currentHealth: 2
   hasArmor: 0
   team: 2
   resistances: []

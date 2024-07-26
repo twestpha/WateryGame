@@ -433,8 +433,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 11
-  currentHealth: 11
+  maxHealth: 2
+  currentHealth: 2
   hasArmor: 0
   team: 2
   resistances: []
@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533d4d2804c548c4aa4f5cd05193bf1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 1
-  pursueSpeed: 4
+  patrolSpeed: 0.75
+  pursueSpeed: 3
   accelerationTime: 0.2
   idleRotationRate: 50
   movingRotationRate: 360

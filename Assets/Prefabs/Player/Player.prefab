@@ -299,7 +299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9139407052543681277
 Transform:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   attackMesh: {fileID: 4677415248550846910}
   attackStartDelay: 0.23
   attackDuration: 0.1
-  attackDamageRange: {x: 10, y: 10}
+  attackDamageRange: {x: 1, y: 1}
   attackDamageType: 1
   invincibilityTime: 0.25
   currentLightAmount: 0
@@ -779,11 +779,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needsUpdate: 0
-  windupTime: 0
-  dashTime: 0.65
-  dashDistance: 10
+  windupTime: 0.04
+  dashTime: 0.22
+  dashDistance: 4.5
   damageMesh: {fileID: 8355659594227631595}
-  dashDamageRange: {x: 5, y: 5}
+  dashDamageRange: {x: 2, y: 2}
 --- !u!1 &1588774897853439001
 GameObject:
   m_ObjectHideFlags: 0
@@ -11453,7 +11453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3521599351335248373
 Transform:
   m_ObjectHideFlags: 0
@@ -11653,7 +11653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1724673696543925937
 Transform:
   m_ObjectHideFlags: 0
@@ -18090,7 +18090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803276046419334479, guid: 4d95b1fa499eb1049a84fd3cc5211143, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d95b1fa499eb1049a84fd3cc5211143, type: 3}

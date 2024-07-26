@@ -544,7 +544,7 @@ MonoBehaviour:
   attackRange: 4
   attackStartDelay: 0.85
   attackDuration: 0.12
-  attackDamageRange: {x: 5, y: 8}
+  attackDamageRange: {x: 1, y: 1}
   attackDamageType: 3
   deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
   deathHealthToGiveToPlayer: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsUpdate: 0
   dashTime: 0.65
-  dashDistance: 10
+  dashDistance: 7
   damageMesh: {fileID: 5972392770703700767}
   dashDamageRange: {x: 1, y: 1}
 --- !u!1 &7001458014507253890
