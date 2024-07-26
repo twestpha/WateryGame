@@ -12,6 +12,7 @@ TODO List
 [/] Spike Fish
     [/] Spike Fish Fish Animations
     [/] Spike Fish Fish Ability
+[/] Player death, restart game
 
 [x] Player Spike Ability
 [x] Boss (Electric Tentacles)
@@ -31,7 +32,6 @@ TODO List
     [x] Boss Fish Ability
 
 [x] Connor: Music player system, trigger volumes
-[x] Player death, restart game
 [x] Volume based enable/disables of groups of assets for "streaming"
     - needed?
 

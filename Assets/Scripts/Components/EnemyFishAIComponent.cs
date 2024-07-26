@@ -150,6 +150,11 @@ public class EnemyFishAIComponent : MonoBehaviour {
     }
     
     private void UpdateState(){
+        if(PlayerComponent.player.Damageable.Dead()){
+            currentState = startState;
+            return;
+        }
+        
         if(currentState == FishAIState.Motionless){
             if(CanSeePlayer()){
                 if(allowSpottedPlayerState){

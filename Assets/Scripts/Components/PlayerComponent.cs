@@ -97,6 +97,7 @@ public class PlayerComponent : MonoBehaviour {
     private Vector3 previousMoveVelocityRecorded = new Vector3(0.0f, 0.0f, 1.0f);
     private Vector3 acceleration;
     private Vector3 inputDirection;
+    private Vector3 respawnPosition;
     
     private Timer downVelocityApplyTimer;
     private Timer invincibilityTimer;
@@ -123,6 +124,8 @@ public class PlayerComponent : MonoBehaviour {
     }
     
     void Start(){
+        respawnPosition = transform.position;
+        
         characterController = GetComponent<CharacterController>();
         damageable = GetComponent<DamageableComponent>();
         abilityManager = GetComponent<AbilityManagerComponent>();
@@ -256,7 +259,7 @@ public class PlayerComponent : MonoBehaviour {
     private void OnDamaged(DamageableComponent damage){
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
-        
+
         SlowTime(0.6f);
         
         invincible = true;
@@ -265,7 +268,20 @@ public class PlayerComponent : MonoBehaviour {
     }
     
     private void OnKilled(DamageableComponent damage){
-        // TODO
+        movementInputsEnabled = false;
+        PlayerUIComponent.instance.FadeInOutForRespawn();
+    }
+    
+    public void FinalizeRespawn(){
+        currentLightAmount = 0.0f;
+        currentAbility = AbilityType.None;
+        movementInputsEnabled = true;
+        
+        characterController.enabled = false;
+        transform.position = respawnPosition;
+        characterController.enabled = true;
+        
+        damageable.Respawn();
     }
     
     // Helper functions for global interactions

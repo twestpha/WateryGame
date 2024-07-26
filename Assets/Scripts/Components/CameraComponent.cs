@@ -27,8 +27,13 @@ public class CameraComponent : MonoBehaviour {
         Vector3 playerVelocity = player.MoveVelocity;
         bool moving = playerVelocity.magnitude > 0.1f;
         playerVelocity.Normalize();
+        
+        float moveTime = moving ? movingSeekTime : stillSeekTime;
+        if(player.Damageable.Dead()){
+            moveTime = 0.0f;
+        }
  
         Vector3 targetPosition = player.transform.position + (playerVelocity * (moving ? lookAheadDistanceMoving : lookAheadDistanceStill));
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref acceleration, moving ? movingSeekTime : stillSeekTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref acceleration, moveTime);
     }
 }

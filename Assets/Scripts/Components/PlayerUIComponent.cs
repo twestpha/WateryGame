@@ -14,10 +14,15 @@ public class PlayerUIComponent : MonoBehaviour {
     public Text dialogueText;
     public Text shadowText;
     
+    [Space(10)]
+    public Image fade;
+    
+    [Space(10)]
     public Image abilityFill;
     public Image[] healthTines;
     public Image armorOverlay;
     
+    [Space(10)]
     public Sprite dashAbilitySprite;
     public Sprite spikeAbilitySprite;
     
@@ -105,5 +110,30 @@ public class PlayerUIComponent : MonoBehaviour {
         
         textState = TextState.FadingIn;
         textFadeTimer.Start();
+    }
+    
+    public void FadeInOutForRespawn(){
+        StartCoroutine(FadeInOutForRespawnCoroutine());
+    }
+    
+    private const float FADE_TIME = 1.0f;
+    private IEnumerator FadeInOutForRespawnCoroutine(){
+        IndependentTimer fadeTimer = new IndependentTimer(FADE_TIME);
+        
+        fadeTimer.Start();
+        while(!fadeTimer.Finished()){
+            fade.color = new Color(0.0f, 0.0f, 0.0f, fadeTimer.Parameterized());
+            yield return null;
+        }
+        fade.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        
+        PlayerComponent.player.FinalizeRespawn();
+        
+        fadeTimer.Start();
+        while(!fadeTimer.Finished()){
+            fade.color = new Color(0.0f, 0.0f, 0.0f, 1.0f - fadeTimer.Parameterized());
+            yield return null;
+        }
+        fade.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
 }
