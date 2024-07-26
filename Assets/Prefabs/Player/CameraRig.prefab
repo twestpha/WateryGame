@@ -1129,6 +1129,7 @@ MonoBehaviour:
   - {fileID: 6980210065226074679}
   armorOverlay: {fileID: 4760940751003131852}
   dashAbilitySprite: {fileID: 21300000, guid: 23575c24157be9b4a8696e179ccaaeb0, type: 3}
+  spikeAbilitySprite: {fileID: 21300000, guid: d231ebf5d4926cf4d93d98eb305d0040, type: 3}
   textState: 0
 --- !u!1 &6375471432008562615
 GameObject:

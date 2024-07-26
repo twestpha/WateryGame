@@ -9,17 +9,11 @@
 
 TODO List
 ==========================================================================
-[/] Ability system for both player and fish
-[/] Can attack and ability at the same time
-[/] Spike Fish Fish Model
-[/] Player model change on ability pickup
-    - dropping/disentegrating when finished
-[/] Play sparkles on player during different small pickups
+[/] Spike Fish
+    [/] Spike Fish Fish Animations
+    [/] Spike Fish Fish Ability
 
-[x] Spike Fish
-    [x] Spike Fish Fish Animations
-    [x] Spike Fish Fish Ability
-    [x] Player Spike Ability
+[x] Player Spike Ability
 [x] Boss (Electric Tentacles)
     [x] Concept
     [x] Tentacles Model

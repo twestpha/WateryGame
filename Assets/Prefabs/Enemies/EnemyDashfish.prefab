@@ -541,7 +541,7 @@ MonoBehaviour:
   allowFleeingState: 0
   allowDeadState: 1
   attackMesh: {fileID: 0}
-  attackRange: 8
+  attackRange: 4
   attackStartDelay: 0.85
   attackDuration: 0.12
   attackDamageRange: {x: 5, y: 8}

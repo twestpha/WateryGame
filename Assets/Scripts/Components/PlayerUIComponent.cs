@@ -19,6 +19,7 @@ public class PlayerUIComponent : MonoBehaviour {
     public Image armorOverlay;
     
     public Sprite dashAbilitySprite;
+    public Sprite spikeAbilitySprite;
     
     private PlayerComponent player;
     
@@ -52,7 +53,9 @@ public class PlayerUIComponent : MonoBehaviour {
         Sprite targetSprite = null;
         if(player.CurrentAbility == AbilityType.PlayerDash){
             targetSprite = dashAbilitySprite;
-        }
+        } else if(player.CurrentAbility == AbilityType.PlayerSpikes){
+            targetSprite = spikeAbilitySprite;
+        }        
         
         abilityFill.enabled = player.CurrentAbility != AbilityType.None;
         abilityFill.sprite = targetSprite;

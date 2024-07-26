@@ -33,6 +33,7 @@ public enum DamageType {
     GenericFishAttack,
     DashFishAttack,
     FishCollision,
+    SpikeFishAttack,
 }
 
 //##################################################################################################
