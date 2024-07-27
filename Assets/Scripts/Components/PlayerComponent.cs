@@ -238,7 +238,10 @@ public class PlayerComponent : MonoBehaviour {
     
     private void UpdateModelAndAnimations(){
         if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
-            Quaternion targetRotation = Quaternion.LookRotation(previousMoveVelocityRecorded + NONZERO_VECTOR);
+            Vector3 targetLook = previousMoveVelocityRecorded + NONZERO_VECTOR;
+            targetLook.y = 0.0f;
+            
+            Quaternion targetRotation = Quaternion.LookRotation(targetLook);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime); 
             
             modelAnimator.SetBool("swimming", false);
