@@ -1503,6 +1503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7636946218517345447}
+  - component: {fileID: 88738399}
   m_Layer: 0
   m_Name: model_root
   m_TagString: Untagged
@@ -1528,6 +1529,26 @@ Transform:
   m_Father: {fileID: 7636946218366466947}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &88738399
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636946218517345444}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ac28bce8b51d3f649a5510a91609127e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7771784874117764328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,7 +1991,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated (1)
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder
@@ -2044,7 +2065,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated (4)
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder
@@ -2118,7 +2139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated (2)
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder
@@ -2192,7 +2213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder
@@ -2266,7 +2287,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated (5)
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder
@@ -2340,7 +2361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3511609850667993789, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_Name
-      value: BossCreatureTentacleAnimated (3)
+      value: BossCreatureTentaclePhysics
       objectReference: {fileID: 0}
     - target: {fileID: 3511609850667993790, guid: 47b20d32d3dae6f41983cf2f0c46ffc5, type: 3}
       propertyPath: m_RootOrder

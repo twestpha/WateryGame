@@ -19,13 +19,19 @@ TODO List
 [/] Boss Concept
 [/] Boss Tentacles Model
 [/] Boss Overall model
+[/] Boss Textures
 
 [t] Connor: Music player system, trigger volumes
 
 [x] Player spike parts
 [x] Boss (Electric Tentacles)
-
-    [x] Textures
+    - Swim in animation
+    - rocks trapping you in?
+    - idle at center -> closer with tentacles
+    - idle at center -> peer at you exposing weakness
+    - damage pullback and roar moment
+    - swim away trailing blood into the depths
+    
     [x] custom scripting
     [x] custom animation
     [x] Tentacles Animations
