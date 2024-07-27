@@ -15,11 +15,19 @@ TODO List
 [/] Player death, restart game
 [/] player starts with dash ability?
 [/] Player Spike Ability
+[/] Make all fish emit a little light, as a treat
+[/] Boss Concept
+[/] Boss Tentacles Model
+[/] Boss Overall model
 
+[t] Connor: Music player system, trigger volumes
 
+[x] Player spike parts
 [x] Boss (Electric Tentacles)
-    [x] Concept
-    [x] Tentacles Model
+
+    [x] Textures
+    [x] custom scripting
+    [x] custom animation
     [x] Tentacles Animations
     [x] Tentacles Ability
 [x] Bubble Fish
@@ -33,13 +41,9 @@ TODO List
     [x] Boss Fish Animations
     [x] Boss Fish Ability
 
-[x] Connor: Music player system, trigger volumes
 [x] Volume based enable/disables of groups of assets for "streaming"
     - needed?
     - or should I just load/unload levels?
 
 Stretch Goals
 [s] Custom player attack animation because the current ones aren't great
-[s] Multiple AI attackers taking turns instead of mobbing
-    - not sure if needed
-[s] Make all fish emit a little light, as a treat
