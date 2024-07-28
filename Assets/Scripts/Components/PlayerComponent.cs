@@ -239,7 +239,7 @@ public class PlayerComponent : MonoBehaviour {
     private void UpdateModelAndAnimations(){
         if(moveVelocity.magnitude < (moveSpeed / 4.0f)){
             Vector3 targetLook = previousMoveVelocityRecorded + NONZERO_VECTOR;
-            targetLook.y = 0.0f;
+            targetLook.y = 0.0f; // Don't remove this allie, it makes the player look right/left when idling
             
             Quaternion targetRotation = Quaternion.LookRotation(targetLook);
             modelRoot.localRotation = Quaternion.RotateTowards(modelRoot.localRotation, targetRotation, idleRotationRate * Time.deltaTime); 
@@ -268,6 +268,8 @@ public class PlayerComponent : MonoBehaviour {
         invincible = true;
         damageable.SetInvincible(true);
         invincibilityTimer.Start();
+        
+        AudioManager.instance.NotifyOfCombat();
     }
     
     private void OnKilled(DamageableComponent damage){

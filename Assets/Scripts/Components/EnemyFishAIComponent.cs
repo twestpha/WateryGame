@@ -440,6 +440,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
         
         PlayerComponent.player.SlowTime(0.6f);
         PlayerComponent.player.ImpartVelocity(new ImpartedVelocity(-fromDamager.normalized * PlayerComponent.DAMAGED_VELOCITY, 0.5f, true));
+        
+        AudioManager.instance.NotifyOfCombat();
     }
     
     private void OnKilled(DamageableComponent damage){

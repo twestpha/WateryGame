@@ -3,138 +3,114 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager instance;
 
+    public float combatTimeout = 10f;
+    public float fadeDuration = 2f;
+    [Space(10)]
     public AudioClip idleTrack;
     public AudioClip combatTrack;
+    public AudioClip bossTrack;
     public AudioSource musicSource;
-
+    [Space(10)]
     public AudioClip ambienceClip;
     public AudioSource ambienceSource;
+    
+    private enum MusicState {
+        Idle,
+        Combat,
+        Boss,
+    }
+    
+    private enum FadeState {
+        None,
+        FadeOut,
+        FadeIn,
+    }
+        
+    private FadeState fadeState;
+    
+    private MusicState previousState;
+    private MusicState currentState;
 
     private IndependentTimer combatTimer;
-    public float combatTimeout = 10f;
-    private bool fading;
-
-    public float fadeDuration = 2f;
-
-    private void Awake()
-    {
-        Instance = this;
+    private IndependentTimer fadeTimer;
+    
+    void Awake(){
+        instance = this;
     }
 
-    private void Start()
-    {
-        PlayIdleTrack();
-        PlayAmbience();
-
-        InitializeCombatTimer();
-    }
-
-    private void Update()
-    {
-        if (!fading)
-        {
-            if (combatTimer.Finished())
-            {
-                SwitchToIdleTrack();
-            }
-        }
-
-        // Debug hotkey for testing audio
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log("P key pressed");
-            if (musicSource.clip == idleTrack)
-            {
-                ResetCombatTimer();
-            }
-            else
-            {
-                Debug.Log("Switching to idle track");
-                combatTimer = new IndependentTimer(combatTimeout);
-                combatTimer.Start(); // It's okat to start the combat timer without finishing it here because the Update function looks to see if it's finished
-                StartCoroutine(FadeTracks(musicSource.clip, idleTrack));
-            }
-        }
-    }
-
-    public void ResetCombatTimer()
-    {
-        Debug.Log("Combat Timer Reset");
-        InitializeCombatTimer();
-        if (musicSource.clip != combatTrack)
-        {
-            StartCoroutine(FadeTracks(musicSource.clip, combatTrack));
-        }
-    }
-
-    private void InitializeCombatTimer()
-    {
+    void Start(){
         combatTimer = new IndependentTimer(combatTimeout);
-        combatTimer.Start();
-    }
-
-    private void PlayIdleTrack()
-    {
-        musicSource.clip = idleTrack;
-        musicSource.Play();
-    }
-
-    private void PlayCombatTrack()
-    {
-        musicSource.clip = combatTrack;
-        musicSource.Play();
-    }
-
-    private void SwitchToIdleTrack()
-    {
-        if (musicSource.clip != idleTrack)
-        {
-            StartCoroutine(FadeTracks(musicSource.clip, idleTrack));
-        }
-    }
-
-    private IEnumerator FadeTracks(AudioClip from, AudioClip to)
-    {
-        fading = true;
-        float startVolume = musicSource.volume;
-
-        // Fade out current track
-        var fadeTimer = new IndependentTimer(fadeDuration);
-        fadeTimer.Start();
-
-        while (!fadeTimer.Finished())
-        {
-            float t = fadeTimer.Parameterized(); 
-            musicSource.volume = Mathf.Lerp(startVolume, 0, t);
-            yield return null;
-        }
-
-        musicSource.Stop();
-
-        // Set and play the new track
-        musicSource.clip = to;
-        musicSource.volume = 0;
-        musicSource.Play();
-
-        // Fade in new track
-        fadeTimer.Start();
-        while (!fadeTimer.Finished())
-        {
-            float t = fadeTimer.Parameterized();
-            musicSource.volume = Mathf.Lerp(0, startVolume, t);
-            yield return null;
-        }
-
-        musicSource.volume = startVolume;
-        fading = false;
-    }
-
-    private void PlayAmbience()
-    {
+        fadeTimer = new IndependentTimer(fadeDuration);
+        
+        // Always play ambient bg sfx
         ambienceSource.clip = ambienceClip;
         ambienceSource.loop = true;
         ambienceSource.Play();
+        
+        // Kick off idle music
+        musicSource.clip = idleTrack;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    void Update(){
+        // If in combat and timer elapsed, leave combat
+        if(currentState == MusicState.Combat && combatTimer.Finished()){
+            currentState = MusicState.Idle;
+        }
+        
+        // If state changed
+        if(currentState != previousState){
+            fadeState = FadeState.FadeOut;
+            fadeTimer.Start();
+        }
+        
+        if(fadeState != FadeState.None){
+            if(fadeState == FadeState.FadeOut){
+                musicSource.volume = 1.0f - fadeTimer.Parameterized();
+                
+                if(fadeTimer.Finished()){
+                    musicSource.volume = 0.0f;
+                    
+                    if(currentState == MusicState.Idle){
+                        musicSource.clip = idleTrack;
+                    } else if(currentState == MusicState.Combat){
+                        musicSource.clip = combatTrack;
+                    } else if(currentState == MusicState.Boss){
+                        musicSource.clip = bossTrack;
+                    }
+                    musicSource.Play();
+                    
+                    fadeState = FadeState.FadeIn;
+                    fadeTimer.Start();
+                }
+            } else if(fadeState == FadeState.FadeIn){
+                musicSource.volume = fadeTimer.Parameterized();
+                
+                if(fadeTimer.Finished()){
+                    musicSource.volume = 1.0f;
+                }
+            }
+        }
+        
+        previousState = currentState;
+        
+        // if(Input.GetKeyDown(KeyCode.P)){
+        //     NotifyOfCombat(true);
+        // }
+        // if(Input.GetKeyDown(KeyCode.L)){
+        //     NotifyBossfightFinished();
+        // }
+    }
+    
+    public void NotifyOfCombat(bool inBossFight = false){
+        combatTimer.Start();
+        currentState = inBossFight ? MusicState.Boss : MusicState.Combat;
+    }
+    
+    public void NotifyBossfightFinished(){
+        currentState = MusicState.Idle;
     }
 }

@@ -46,13 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22363d5ffe2234149b8ecefb4827979f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatTimeout: 6
+  fadeDuration: 0.8
   idleTrack: {fileID: 8300000, guid: 0054f68d41f98ca49b785ebbc0f7d252, type: 3}
   combatTrack: {fileID: 8300000, guid: fef1d3c3950b0454884c99f40bcc8a6e, type: 3}
+  bossTrack: {fileID: 0}
   musicSource: {fileID: 8216155739916804639}
   ambienceClip: {fileID: 8300000, guid: bcfa88ceb1244134590ed8f305734653, type: 3}
   ambienceSource: {fileID: 6262139052224873951}
-  combatTimeout: 99
-  fadeDuration: 2
 --- !u!82 &8216155739916804639
 AudioSource:
   m_ObjectHideFlags: 0

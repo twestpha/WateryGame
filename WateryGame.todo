@@ -23,13 +23,19 @@ TODO List
 
 [t] Connor: Music player system, trigger volumes
 
+Off the top of my head I'd make it so you hit the eyes, and once they are 
+all closed he starts doing the flashy attack. I don't know if we need 
+armor because the flash is countered by the dash since the player can 
+dash in and out without fear of getting flashed compared to smacking it.
+
+Maybe each has 2hp, so 1 dash/bubble/spike and 2 trident hits
+First cycle could be just flash, second could be flash while tentacles, third, more tentacles during flash
+
 [x] Player spike parts
 [x] Boss (Electric Tentacles)
-    - Swim in animation
     - rocks trapping you in?
-    - idle at center -> closer with tentacles
-    - idle at center -> peer at you exposing weakness
     - damage pullback and roar moment
+    - larger pullback in between phases
     - swim away trailing blood into the depths
     
     [x] custom scripting
