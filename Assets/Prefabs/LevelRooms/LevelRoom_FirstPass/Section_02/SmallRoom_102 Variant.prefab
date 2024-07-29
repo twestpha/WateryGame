@@ -506,11 +506,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.52
+      value: 5.49
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.99
+      value: 8.33
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalRotation.w
@@ -620,11 +620,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.51
+      value: 5.59
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.97
+      value: 20.43
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalRotation.w
@@ -677,11 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.97
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.64
+      value: 3.25
       objectReference: {fileID: 0}
     - target: {fileID: 6847353849578145783, guid: 371634e0910d0ed45a765ba398b5a137, type: 3}
       propertyPath: m_LocalRotation.w
@@ -779,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1945812209499358718, guid: 48048223b157e7d459dcd54ed78e1d90, type: 3}
       propertyPath: m_Name
-      value: SmallRoom_102
+      value: SmallRoom_102 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5733236085402127342, guid: 48048223b157e7d459dcd54ed78e1d90, type: 3}
       propertyPath: m_IsActive

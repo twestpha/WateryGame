@@ -656,11 +656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177854590393221091, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.05
+      value: -13.54
       objectReference: {fileID: 0}
     - target: {fileID: 2177854590393221091, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.42
+      value: -8.19
       objectReference: {fileID: 0}
     - target: {fileID: 2177854590393221091, guid: 817b92930d0e5f147bf02d167a91bd44, type: 3}
       propertyPath: m_LocalRotation.w
@@ -762,7 +762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1945812209499358718, guid: 48048223b157e7d459dcd54ed78e1d90, type: 3}
       propertyPath: m_Name
-      value: SmallRoom_005
+      value: SmallRoom_005 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1945812209499358718, guid: 48048223b157e7d459dcd54ed78e1d90, type: 3}
       propertyPath: m_IsActive
