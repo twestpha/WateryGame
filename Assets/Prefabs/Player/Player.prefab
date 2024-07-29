@@ -784,7 +784,7 @@ MonoBehaviour:
   dashTime: 0.22
   dashDistance: 4.5
   damageMesh: {fileID: 8355659594227631595}
-  dashDamageRange: {x: 2, y: 2}
+  dashDamageRange: {x: 3, y: 3}
 --- !u!114 &5678257076133108261
 MonoBehaviour:
   m_ObjectHideFlags: 0
