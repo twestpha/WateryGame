@@ -12,6 +12,12 @@ TODO List
 [/] Still some bugs here - tentacles retracting a bit weird?
 [/] Trigger starting fight, collapsing rocks at top
 [/] Post-fight "thanks for playing" message
+[/] Intermittent random fish spawns in boss arena
+[/] Boss
+    [/] Win fight, swim away trailing blood into the depths
+
+
+
 
 [x] Player spike parts
 [b] fix player dash animation
@@ -19,6 +25,3 @@ TODO List
 [x] Change music system to only trigger during bossfight (???)
 [x] Rocks that break when all enemies in a list are killed
 
-[x] Boss
-    [x] Win fight, swim away trailing blood into the depths
-    [x] Intermittent random spawns

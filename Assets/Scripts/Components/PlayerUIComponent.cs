@@ -31,6 +31,8 @@ public class PlayerUIComponent : MonoBehaviour {
     private Timer textTimer = new Timer(TEXT_DURATION);
     private Timer textFadeTimer = new Timer(FADE_DURATION);
     
+    private bool lockUI;
+    
     public enum TextState {
         None,
         FadingIn,
@@ -80,7 +82,7 @@ public class PlayerUIComponent : MonoBehaviour {
                 textTimer.Start();
             }
         } else if(textState == TextState.Idle){
-            if(textTimer.Finished()){
+            if(textTimer.Finished() && !lockUI){
                 textState = TextState.FadingOut;
                 textFadeTimer.Start();
             }
@@ -104,12 +106,18 @@ public class PlayerUIComponent : MonoBehaviour {
         ShowDialogue("Test Words Blah Blah Blah");
     }
     
-    public void ShowDialogue(string text){
-        dialogueText.text = text;
-        shadowText.text = text;
+    public void ShowDialogue(string text, bool neverClear = false){
+        if(!lockUI){
+            dialogueText.text = text;
+            shadowText.text = text;
+            
+            textState = TextState.FadingIn;
+            textFadeTimer.Start();
+        }
         
-        textState = TextState.FadingIn;
-        textFadeTimer.Start();
+        if(neverClear){
+            lockUI = true;
+        }
     }
     
     public void FadeInOutForRespawn(){

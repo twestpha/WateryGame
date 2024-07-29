@@ -466,4 +466,9 @@ public class EnemyFishAIComponent : MonoBehaviour {
     public Vector3 GetPreviousMoveVelocity(){
         return previousMoveVelocityRecorded;
     }
+    
+    public void ForcePursuePlayer(){
+        startState = FishAIState.PursuingPlayer;
+        SetState(FishAIState.PursuingPlayer);
+    }
 }
