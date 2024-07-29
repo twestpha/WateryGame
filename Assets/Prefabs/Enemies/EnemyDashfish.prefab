@@ -525,9 +525,9 @@ MonoBehaviour:
   accelerationTime: 0.85
   idleRotationRate: 50
   movingRotationRate: 360
-  playerSpotDistance: 8
-  playerSpotAngle: 10
-  patrolDistance: 3
+  playerSpotDistance: 10
+  playerSpotAngle: 120
+  patrolDistance: 1
   patrolHeight: 1
   goBackToIdleDistance: 0
   startState: 1

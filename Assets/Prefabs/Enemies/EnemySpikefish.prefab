@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
-  maxHealth: 20
-  currentHealth: 20
+  maxHealth: 5
+  currentHealth: 5
   hasArmor: 0
   team: 2
   resistances: []
@@ -138,8 +138,8 @@ MonoBehaviour:
   accelerationTime: 1
   idleRotationRate: 50
   movingRotationRate: 360
-  playerSpotDistance: 4
-  playerSpotAngle: 10
+  playerSpotDistance: 6
+  playerSpotAngle: 90
   patrolDistance: 3
   patrolHeight: 1
   goBackToIdleDistance: 0
