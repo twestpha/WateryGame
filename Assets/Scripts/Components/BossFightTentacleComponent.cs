@@ -7,7 +7,8 @@ public class BossFightTentacleComponent : MonoBehaviour {
     
     private const float RANDOM_ANGLE = 15.0f;
     private const float TENTACLE_LENGTH = 20.0f;
-    private const float TENTACLE_MOVE_TIME = 3.5f;
+    private const float TENTACLE_EXTEND_TIME = 3.5f;
+    private const float TENTACLE_RETRACT_TIME = 1.5f;
     private const float LIGHTNING_TIME = 2.5f;
     
     public SkinnedMeshRenderer mesh;
@@ -35,7 +36,9 @@ public class BossFightTentacleComponent : MonoBehaviour {
     private bool immediatelyRetract;
     public TentacleState tentacleState;
     
-    private Timer tentacleMoveTimer = new Timer(TENTACLE_MOVE_TIME);
+    private Timer tentacleExtendTimer = new Timer(TENTACLE_EXTEND_TIME);
+    private Timer tentacleRetractTimer = new Timer(TENTACLE_RETRACT_TIME);
+
     private Timer waitForExtendTimer = new Timer();
     private Timer lightningTimer = new Timer(LIGHTNING_TIME);
     
@@ -60,16 +63,16 @@ public class BossFightTentacleComponent : MonoBehaviour {
                     tentacleState = TentacleState.Extending;
                 }
                 
-                tentacleMoveTimer.Start();
+                tentacleExtendTimer.Start();
             }
         } else if(tentacleState == TentacleState.Extending){
-            float t = CustomMath.EaseInOut(tentacleMoveTimer.Parameterized());
+            float t = CustomMath.EaseInOut(tentacleExtendTimer.Parameterized());
             transform.position = Vector3.Lerp(retractedPosition, extendedPosition, t);
             
-            if(tentacleMoveTimer.Finished()){
+            if(tentacleExtendTimer.Finished()){
                 if(immediatelyRetract){
                     tentacleState = TentacleState.Retracting;
-                    tentacleMoveTimer.Start();
+                    tentacleExtendTimer.Start();
                 } else {
                     tentacleState = TentacleState.Idle;
                 }
@@ -79,13 +82,13 @@ public class BossFightTentacleComponent : MonoBehaviour {
                 lightningParticles.gameObject.SetActive(false);
                 tentacleState = TentacleState.Retracting;
                 lightningDamageMesh.StopCasting();
-                tentacleMoveTimer.Start();
+                tentacleRetractTimer.Start();
             }
         } else if(tentacleState == TentacleState.Retracting){
-            float t = CustomMath.EaseInOut(tentacleMoveTimer.Parameterized());
+            float t = CustomMath.EaseInOut(tentacleRetractTimer.Parameterized());
             transform.position = Vector3.Lerp(extendedPosition, retractedPosition, t);
             
-            if(tentacleMoveTimer.Finished()){
+            if(tentacleRetractTimer.Finished()){
                 tentacleState = TentacleState.None;
                 mesh.enabled = false;
             }
@@ -147,7 +150,7 @@ public class BossFightTentacleComponent : MonoBehaviour {
             lightningParticles.gameObject.SetActive(false);
             tentacleState = TentacleState.Retracting;
             lightningDamageMesh.StopCasting();
-            tentacleMoveTimer.Start();
+            tentacleRetractTimer.Start();
         }
     }
 }

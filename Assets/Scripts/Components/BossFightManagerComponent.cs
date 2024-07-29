@@ -46,6 +46,7 @@ public class BossFightManagerComponent : MonoBehaviour {
     private Timer tentacleCooldownTimer = new Timer();
     private Timer tentacleExtendTimer = new Timer(6.5f);
     private Timer tentacleLightningTimer = new Timer(6.5f);
+    private Timer bigInjuredTimer = new Timer(7.5f);
     
     private int remainingEyes;
     private int combatRound;
@@ -103,7 +104,15 @@ public class BossFightManagerComponent : MonoBehaviour {
                 tentacleCooldownTimer.Start();
             }
         } else if(bossFightState == BossFightState.InjuredBetweenStages){
-            // ???
+            if(bigInjuredTimer.Finished()){
+                AbleEyeMeshes(0, ENABLE, ALL);
+                AbleEyeDamageables(0, ENABLE, ALL);
+                RespawnAllEyeDamageables();
+                
+                bossFightState = BossFightState.IdleTentacleCooldown;
+                tentacleCooldownTimer.SetDuration(0.0f);
+                tentacleCooldownTimer.Start();
+            }
         }
     }
     
@@ -135,15 +144,15 @@ public class BossFightManagerComponent : MonoBehaviour {
         Timer blinkTimer = new Timer(0.1f);
         blinkTimer.Start();
         while(!blinkTimer.Finished()){ yield return null; }
-        
+    
         for(int i = 0, count = eyeballMeshes.Length; i < count; ++i){
             eyeballMeshes[i].gameObject.SetActive(false);
         }
-        
+    
         blinkTimer = new Timer(0.1f);
         blinkTimer.Start();
         while(!blinkTimer.Finished()){ yield return null; }
-        
+    
         for(int i = 0, count = eyeballMeshes.Length; i < count; ++i){
             eyeballMeshes[i].gameObject.SetActive(true);
         }
@@ -193,7 +202,11 @@ public class BossFightManagerComponent : MonoBehaviour {
                 // Fade out to static art screen?
             } else {
                 bossFightState = BossFightState.InjuredBetweenStages;
+                bigInjuredTimer.Start();
                 bossAnimator.SetTrigger("biginjured");
+                
+                AbleEyeMeshes(0, ENABLE, ALL);
+                AbleEyeDamageables(0, DISABLE, ALL);
             }
         } else {
             bossAnimator.SetTrigger("smallinjured");

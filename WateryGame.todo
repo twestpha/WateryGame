@@ -9,42 +9,19 @@
 
 TODO List
 ==========================================================================
-[/] Spike Fish
-    [/] Spike Fish Fish Animations
-    [/] Spike Fish Fish Ability
-[/] Player death, restart game
-[/] player starts with dash ability?
-[/] Player Spike Ability
-[/] Make all fish emit a little light, as a treat
-[/] Boss Concept
-[/] Boss Tentacles Model
 [/] Boss Overall model
 [/] Boss Textures
-
-[t] Connor: Music player system, trigger volumes
-
-Off the top of my head I'd make it so you hit the eyes, and once they are 
-all closed he starts doing the flashy attack. I don't know if we need 
-armor because the flash is countered by the dash since the player can 
-dash in and out without fear of getting flashed compared to smacking it.
-
-Maybe each has 2hp, so 1 dash/bubble/spike and 2 trident hits
-First cycle could be just flash, second could be flash while tentacles, third, more tentacles during flash
+[/] Connor: Music player system, trigger volumes
 
 [x] Player spike parts
 [x] Boss (Electric Tentacles)
-    - rocks trapping you in?
-    - larger pullback in between phases
-    - swim away trailing blood into the depths
+    [/] Larger injured animation in between rounds
+    [b] Still some bugs here - tentacles retracting a bit weird?
     
-    [x] custom scripting
-    [x] custom animation
-    [x] Tentacles Animations
-    [x] Tentacles Ability
+    [x] Trigger starting fight, collapsing rocks at top
+    [x] Win fight, swim away trailing blood into the depths
+    [x] Post-ending image? "Thanks for playing"?
 
 [x] Volume based enable/disables of groups of assets for "streaming"
     - needed?
     - or should I just load/unload levels?
-
-Stretch Goals
-[s] Custom player attack animation because the current ones aren't great
