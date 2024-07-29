@@ -59,7 +59,7 @@ public class DamageMeshComponent : MonoBehaviour {
         DamageableComponent otherDamageable = other.gameObject.GetComponentInParent<DamageableComponent>();
         
         if(otherDamageable != null && otherDamageable != casterDamageable){
-            if(DamageableComponent.Hostile(casterDamageable.team, otherDamageable.team)){
+            if(casterDamageable == null || DamageableComponent.Hostile(casterDamageable.team, otherDamageable.team)){
                 DamageResult result = otherDamageable.DealDamage(
                     UnityEngine.Random.Range(attackDamageRange.x, attackDamageRange.y),
                     attackDamageType,
@@ -68,8 +68,12 @@ public class DamageMeshComponent : MonoBehaviour {
                 );
                 
                 if(result != DamageResult.AlreadyDead){
-                    GameObject fx = GameObject.Instantiate(result == DamageResult.DealtDamage ? hitEffects : ignoredEffects);
-                    fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
+                    GameObject targetEffectsPrefab = result == DamageResult.DealtDamage ? hitEffects : ignoredEffects;
+
+                    if(targetEffectsPrefab != null){
+                        GameObject fx = GameObject.Instantiate(targetEffectsPrefab);
+                        fx.transform.position = damageCollider.ClosestPoint(otherDamageable.transform.position);
+                    }
                     
                     if(disableAfterSingleHit){
                         casting = false;
@@ -78,5 +82,10 @@ public class DamageMeshComponent : MonoBehaviour {
                 }
             }
         }
+    }
+    
+    public void StopCasting(){
+        damageCollider.enabled = false;
+        casting = false;
     }
 }

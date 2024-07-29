@@ -34,7 +34,6 @@ First cycle could be just flash, second could be flash while tentacles, third, m
 [x] Player spike parts
 [x] Boss (Electric Tentacles)
     - rocks trapping you in?
-    - damage pullback and roar moment
     - larger pullback in between phases
     - swim away trailing blood into the depths
     
@@ -42,12 +41,6 @@ First cycle could be just flash, second could be flash while tentacles, third, m
     [x] custom animation
     [x] Tentacles Animations
     [x] Tentacles Ability
-[x] Bubble Fish
-    [x] Concept
-    [x] Bubble Fish Model
-    [x] Bubble Fish Animations
-    [x] Bubble Fish Ability
-    [x] Player Bubble Ability
 
 [x] Volume based enable/disables of groups of assets for "streaming"
     - needed?

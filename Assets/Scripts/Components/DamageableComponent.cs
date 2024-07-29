@@ -34,6 +34,7 @@ public enum DamageType {
     DashFishAttack,
     FishCollision,
     SpikeFishAttack,
+    BossLightning,
 }
 
 //##################################################################################################

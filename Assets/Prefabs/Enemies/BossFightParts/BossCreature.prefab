@@ -65,7 +65,10 @@ MonoBehaviour:
   currentHealth: 2
   hasArmor: 0
   team: 2
-  resistances: []
+  resistances:
+  - type: 6
+    multiplier: 0
+    offset: 0
 --- !u!54 &7636946218563092219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,7 +150,10 @@ MonoBehaviour:
   currentHealth: 2
   hasArmor: 0
   team: 2
-  resistances: []
+  resistances:
+  - type: 6
+    multiplier: 0
+    offset: 0
 --- !u!54 &7636946218563092220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,7 +235,10 @@ MonoBehaviour:
   currentHealth: 2
   hasArmor: 0
   team: 2
-  resistances: []
+  resistances:
+  - type: 6
+    multiplier: 0
+    offset: 0
 --- !u!54 &7636946218563092221
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -311,7 +320,10 @@ MonoBehaviour:
   currentHealth: 2
   hasArmor: 0
   team: 2
-  resistances: []
+  resistances:
+  - type: 6
+    multiplier: 0
+    offset: 0
 --- !u!54 &7636946218563092222
 Rigidbody:
   m_ObjectHideFlags: 0
