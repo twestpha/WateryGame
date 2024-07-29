@@ -12,16 +12,17 @@ TODO List
 [/] Boss Overall model
 [/] Boss Textures
 [/] Connor: Music player system, trigger volumes
+[/] Boss Larger injured animation in between rounds
 
 [x] Player spike parts
+[b] fix player dash animation
+[x] Redo levels
+[x] Change music system to only trigger during bossfight (???)
+[x] Rocks that break when all enemies in a list are killed
+
 [x] Boss (Electric Tentacles)
-    [/] Larger injured animation in between rounds
     [b] Still some bugs here - tentacles retracting a bit weird?
     
     [x] Trigger starting fight, collapsing rocks at top
     [x] Win fight, swim away trailing blood into the depths
-    [x] Post-ending image? "Thanks for playing"?
-
-[x] Volume based enable/disables of groups of assets for "streaming"
-    - needed?
-    - or should I just load/unload levels?
+    [x] Post-fight "thanks for playing" message

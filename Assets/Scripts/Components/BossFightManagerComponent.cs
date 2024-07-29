@@ -31,15 +31,13 @@ public class BossFightManagerComponent : MonoBehaviour {
     public BossFightState bossFightState;
     public bool injuredState;
     public Animator bossAnimator;
+    public Animator rockAnimator;
     [Space(10)]
     public MeshRenderer[] eyeballMeshes;
     public DamageableComponent[] eyeballDamageables;
     [Space(10)]
     public BossFightTentacleComponent[] lightningTentacles;
-    
-    // public Animator lightAnimator;
-    // public Collider playerHideSpots; // TODO
-    
+        
     // And also, have places for fish to spawn into level in a hidden way?
     // use timer for this, spawn type randomly (health or dash?)
     
@@ -56,13 +54,6 @@ public class BossFightManagerComponent : MonoBehaviour {
             eyeballDamageables[i].damagedDelegates.Register(OnEyeballDamaged);
             eyeballDamageables[i].killedDelegates.Register(OnEyeballKilled);
         }
-        
-        // TODO make a box trigger the intro and animation
-        bossFightState = BossFightState.Intro;
-        AudioManager.instance.NotifyOfCombat(true);
-        
-        AbleEyeMeshes(0, DISABLE, ALL);
-        AbleEyeDamageables(0, DISABLE, ALL);
     }
     
     void Update(){
@@ -210,6 +201,19 @@ public class BossFightManagerComponent : MonoBehaviour {
             }
         } else {
             bossAnimator.SetTrigger("smallinjured");
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other){
+        if(other.tag == "Player" && bossFightState == BossFightState.None){
+            bossFightState = BossFightState.Intro;
+            bossAnimator.SetTrigger("entrance");
+            AudioManager.instance.NotifyOfCombat(true);
+            
+            rockAnimator.SetTrigger("close");
+            
+            AbleEyeMeshes(0, DISABLE, ALL);
+            AbleEyeDamageables(0, DISABLE, ALL);
         }
     }
 }

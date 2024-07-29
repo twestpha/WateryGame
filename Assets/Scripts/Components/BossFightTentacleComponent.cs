@@ -72,7 +72,7 @@ public class BossFightTentacleComponent : MonoBehaviour {
             if(tentacleExtendTimer.Finished()){
                 if(immediatelyRetract){
                     tentacleState = TentacleState.Retracting;
-                    tentacleExtendTimer.Start();
+                    tentacleRetractTimer.Start();
                 } else {
                     tentacleState = TentacleState.Idle;
                 }
