@@ -188,9 +188,8 @@ public class BossFightManagerComponent : MonoBehaviour {
             remainingEyes = MAX_EYES;
             
             if(combatRound == MAX_COMBAT_ROUNDS){
-                Debug.Log("FIGHT OVER");
                 AudioManager.instance.NotifyBossfightFinished();
-                // Fade out to static art screen?
+                PlayerUIComponent.instance.ShowDialogue("Charybdis Defeated\nThanks for Playing!");
             } else {
                 bossFightState = BossFightState.InjuredBetweenStages;
                 bigInjuredTimer.Start();

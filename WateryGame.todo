@@ -9,10 +9,9 @@
 
 TODO List
 ==========================================================================
-[/] Boss Overall model
-[/] Boss Textures
-[/] Connor: Music player system, trigger volumes
-[/] Boss Larger injured animation in between rounds
+[/] Still some bugs here - tentacles retracting a bit weird?
+[/] Trigger starting fight, collapsing rocks at top
+[/] Post-fight "thanks for playing" message
 
 [x] Player spike parts
 [b] fix player dash animation
@@ -20,9 +19,6 @@ TODO List
 [x] Change music system to only trigger during bossfight (???)
 [x] Rocks that break when all enemies in a list are killed
 
-[x] Boss (Electric Tentacles)
-    [b] Still some bugs here - tentacles retracting a bit weird?
-    
-    [x] Trigger starting fight, collapsing rocks at top
+[x] Boss
     [x] Win fight, swim away trailing blood into the depths
-    [x] Post-fight "thanks for playing" message
+    [x] Intermittent random spawns
