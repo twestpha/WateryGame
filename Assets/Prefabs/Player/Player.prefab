@@ -802,7 +802,7 @@ MonoBehaviour:
   holdSpikesTime: 0.5
   cooldownTime: 0.5
   damageMesh: {fileID: 6678863118427415880}
-  spikeDamageRange: {x: 1, y: 1}
+  spikeDamageRange: {x: 3, y: 3}
 --- !u!1 &1588774897853439001
 GameObject:
   m_ObjectHideFlags: 0
