@@ -378,7 +378,7 @@ MonoBehaviour:
   attackDamageRange: {x: 1, y: 1}
   attackDamageType: 2
   deathEffectsPrefab: {fileID: 2153184763520750094, guid: 26b6a6d11925f964daf39008e13693db, type: 3}
-  deathHealthToGiveToPlayer: 1
+  deathHealthToGiveToPlayer: 2
   deathArmorToGiveToPlayer: 0
   deathLightToGiveToPlayer: 0
   deathAbilityToGiveToPlayer: 0
