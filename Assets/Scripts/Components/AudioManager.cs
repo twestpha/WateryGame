@@ -109,6 +109,7 @@ public class AudioManager : MonoBehaviour
     }
     
     public void NotifyOfCombat(bool inBossFight = false){
+        if(!inBossFight){ return; }// temp
         combatTimer.Start();
         
         if(currentState != MusicState.Boss){
