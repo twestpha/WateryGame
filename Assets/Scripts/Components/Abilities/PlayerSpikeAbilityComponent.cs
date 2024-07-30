@@ -10,7 +10,8 @@ public class PlayerSpikeAbilityComponent : AbilityComponent {
     public float cooldownTime;
     public DamageMeshComponent damageMesh;
     public Vector2 spikeDamageRange;
-        
+    public AudioSource abilitySound;
+    
     private PlayerComponent player;
     
     private bool setup;
@@ -47,6 +48,7 @@ public class PlayerSpikeAbilityComponent : AbilityComponent {
         player.modelAnimator.SetTrigger("abilityspikes");
         
         windupTimer.Start();
+        abilitySound.Play();
     }
     
     public override void CustomUpdate(){

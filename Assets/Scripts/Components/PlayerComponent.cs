@@ -83,6 +83,10 @@ public class PlayerComponent : MonoBehaviour {
     public GameObject dashPickupParticle;
     public GameObject spikePickupParticle;
     
+    [Header("Audio")]
+    public AudioSource attackSound;
+    public AudioSource damagedSound;
+    
     [Header("Connections")]
     public Transform modelRoot;
     public Animator modelAnimator;
@@ -197,6 +201,7 @@ public class PlayerComponent : MonoBehaviour {
         
         if(!casting && Input.GetKeyDown(controlData.attack)){
             modelAnimator.SetTrigger("basicslash");
+            attackSound.Play();
 
             // Snap instantly to 85% of the input direction
             Quaternion targetRotation = Quaternion.LookRotation(inputDirection + NONZERO_VECTOR);
@@ -271,6 +276,8 @@ public class PlayerComponent : MonoBehaviour {
     private void OnDamaged(DamageableComponent damage){
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));
+        
+        damagedSound.Play();
 
         SlowTime(0.6f);
         

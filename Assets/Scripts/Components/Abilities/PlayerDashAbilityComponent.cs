@@ -10,6 +10,7 @@ public class PlayerDashAbilityComponent : AbilityComponent {
     public float dashDistance;
     public DamageMeshComponent damageMesh;
     public Vector2 dashDamageRange;
+    public AudioSource abilitySound;
     
     private Vector3 cachedDirection;
     
@@ -39,6 +40,8 @@ public class PlayerDashAbilityComponent : AbilityComponent {
         player.movementInputsEnabled = false;
         player.gameObject.layer = 9 /* player no collide */;
         player.Damageable.SetInvincible(true);
+        
+        abilitySound.Play();
         
         windupTimer.Start();
     }

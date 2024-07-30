@@ -41,6 +41,9 @@ public class BossFightManagerComponent : MonoBehaviour {
     [Space(10)]
     public Transform[] fishSpawnTransforms;
     public GameObject[] fishPrefabs;
+    [Space(10)]
+    public AudioSource smallRoarSound;
+    public AudioSource largeRoarSound;
     
     private Timer tentacleCooldownTimer = new Timer();
     private Timer tentacleExtendTimer = new Timer(6.1f);
@@ -222,12 +225,14 @@ public class BossFightManagerComponent : MonoBehaviour {
                 bossFightState = BossFightState.InjuredBetweenStages;
                 bigInjuredTimer.Start();
                 bossAnimator.SetTrigger("biginjured");
+                largeRoarSound.Play();
                 
                 AbleEyeMeshes(0, ENABLE, ALL);
                 AbleEyeDamageables(0, DISABLE, ALL);
             }
         } else {
             bossAnimator.SetTrigger("smallinjured");
+            smallRoarSound.Play();
         }
     }
     

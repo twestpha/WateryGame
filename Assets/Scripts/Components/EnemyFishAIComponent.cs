@@ -81,6 +81,10 @@ public class EnemyFishAIComponent : MonoBehaviour {
     [Tooltip("type of damage applied on an attack hit")]
     public DamageType attackDamageType;
     
+    [Header("Audio")]
+    public AudioSource attackSound;
+    public AudioSource damagedSound;
+    
     [Header("Dying Attributes")]
     public GameObject deathEffectsPrefab;
     public float deathHealthToGiveToPlayer;
@@ -353,6 +357,7 @@ public class EnemyFishAIComponent : MonoBehaviour {
             modelRoot.localRotation = Quaternion.Slerp(modelRoot.localRotation, targetRotation, 0.85f);
             
             modelAnimator.SetTrigger("attack");
+            attackSound.Play();
             
             if(attackMesh != null){
                 attackMesh.CastDamageMesh(gameObject, attackStartDelay, attackDuration, attackDamageRange, attackDamageType);
@@ -434,6 +439,8 @@ public class EnemyFishAIComponent : MonoBehaviour {
     
     private void OnDamaged(DamageableComponent damage){
         SetState(FishAIState.Damaged);
+        
+        damagedSound.Play();
         
         Vector3 fromDamager = transform.position - damageable.GetDamagerOrigin();
         ImpartVelocity(new ImpartedVelocity(fromDamager.normalized * DAMAGED_VELOCITY, 0.5f, true));

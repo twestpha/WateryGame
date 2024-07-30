@@ -36,8 +36,11 @@ public class AudioManager : MonoBehaviour
     private IndependentTimer combatTimer;
     private IndependentTimer fadeTimer;
     
+    private float maxVolume;
+    
     void Awake(){
         instance = this;
+        maxVolume = musicSource.volume;
     }
 
     void Start(){
@@ -69,7 +72,7 @@ public class AudioManager : MonoBehaviour
         
         if(fadeState != FadeState.None){
             if(fadeState == FadeState.FadeOut){
-                musicSource.volume = 1.0f - fadeTimer.Parameterized();
+                musicSource.volume = maxVolume * (1.0f - fadeTimer.Parameterized());
                 
                 if(fadeTimer.Finished()){
                     musicSource.volume = 0.0f;
@@ -87,10 +90,10 @@ public class AudioManager : MonoBehaviour
                     fadeTimer.Start();
                 }
             } else if(fadeState == FadeState.FadeIn){
-                musicSource.volume = fadeTimer.Parameterized();
+                musicSource.volume = maxVolume * fadeTimer.Parameterized();
                 
                 if(fadeTimer.Finished()){
-                    musicSource.volume = 1.0f;
+                    musicSource.volume = maxVolume;
                 }
             }
         }
@@ -107,7 +110,10 @@ public class AudioManager : MonoBehaviour
     
     public void NotifyOfCombat(bool inBossFight = false){
         combatTimer.Start();
-        currentState = inBossFight ? MusicState.Boss : MusicState.Combat;
+        
+        if(currentState != MusicState.Boss){
+            currentState = inBossFight ? MusicState.Boss : MusicState.Combat;
+        }
     }
     
     public void NotifyBossfightFinished(){

@@ -50,7 +50,7 @@ MonoBehaviour:
   fadeDuration: 0.8
   idleTrack: {fileID: 8300000, guid: 0054f68d41f98ca49b785ebbc0f7d252, type: 3}
   combatTrack: {fileID: 8300000, guid: fef1d3c3950b0454884c99f40bcc8a6e, type: 3}
-  bossTrack: {fileID: 0}
+  bossTrack: {fileID: 8300000, guid: fef1d3c3950b0454884c99f40bcc8a6e, type: 3}
   musicSource: {fileID: 8216155739916804639}
   ambienceClip: {fileID: 8300000, guid: bcfa88ceb1244134590ed8f305734653, type: 3}
   ambienceSource: {fileID: 6262139052224873951}
@@ -66,7 +66,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -162,7 +162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

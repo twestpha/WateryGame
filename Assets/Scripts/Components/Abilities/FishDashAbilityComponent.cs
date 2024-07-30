@@ -9,6 +9,7 @@ public class FishDashAbilityComponent : AbilityComponent {
     public float dashDistance;
     public DamageMeshComponent damageMesh;
     public Vector2 dashDamageRange;
+    public AudioSource abilitySound;
     
     private Vector3 cachedDirection;
     
@@ -34,6 +35,7 @@ public class FishDashAbilityComponent : AbilityComponent {
         
         state = AbilityState.WindingUp;
         fish.modelAnimator.SetTrigger("abilityattack");
+        abilitySound.Play();
         
         windupTimer.Start();
     }

@@ -9,7 +9,8 @@ public class FishSpikeAbilityComponent : AbilityComponent {
     public float holdSpikesTime;
     public DamageMeshComponent damageMesh;
     public Vector2 spikeDamageRange;
-        
+    public AudioSource abilitySound;
+    
     private EnemyFishAIComponent fish;
     
     private Timer windupTimer;
@@ -35,6 +36,8 @@ public class FishSpikeAbilityComponent : AbilityComponent {
         
         windupTimer.Start();
         fish.StopMoving();
+        
+        abilitySound.Play();
     }
     
     public override void CustomUpdate(){
