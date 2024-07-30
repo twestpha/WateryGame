@@ -9,19 +9,22 @@
 
 TODO List
 ==========================================================================
-[/] Still some bugs here - tentacles retracting a bit weird?
-[/] Trigger starting fight, collapsing rocks at top
-[/] Post-fight "thanks for playing" message
 [/] Intermittent random fish spawns in boss arena
 [/] Boss
     [/] Win fight, swim away trailing blood into the depths
+[/] Player spikefish parts
 
-
-
-
-[x] Player spike parts
 [b] fix player dash animation
-[x] Redo levels
-[x] Change music system to only trigger during bossfight (???)
-[x] Rocks that break when all enemies in a list are killed
+[x] Spike animation fix, trident behaves weird
 
+[x] Rocks that break when all enemies in a list are killed
+[x] Redo levels
+[x] Change music system to only trigger during bossfight (Or get chiller combat track?)
+[x] Hook up or make SFX
+    - swish
+    - player oof
+    - fish hit
+    - boss small groan
+    - boss large groan
+    - dash power
+    - spike power

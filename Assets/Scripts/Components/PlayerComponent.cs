@@ -69,15 +69,18 @@ public class PlayerComponent : MonoBehaviour {
     
     [Header("AbilityMeshes")]
     public GameObject[] dashAbilityMeshes;
+    public GameObject[] spikeAbilityMeshes;
     
     [Header("Ability Dropoff Particles")]
     public GameObject[] dashAbilityDropoffParticles;
+    public GameObject[] spikeAbilityDropoffParticles;
     
     [Header("Ability Pickup Particles")]
     public GameObject healthPickupParticle;
     public GameObject armorPickupParticle;
     public GameObject lightPickupParticle;
     public GameObject dashPickupParticle;
+    public GameObject spikePickupParticle;
     
     [Header("Connections")]
     public Transform modelRoot;
@@ -151,6 +154,11 @@ public class PlayerComponent : MonoBehaviour {
                 for(int i = 0, count = dashAbilityMeshes.Length; i < count; ++i){
                     dashAbilityMeshes[i].SetActive(false);
                     dashAbilityDropoffParticles[i].SetActive(true);
+                }
+            } else if(currentAbility == AbilityType.PlayerSpikes){
+                for(int i = 0, count = spikeAbilityMeshes.Length; i < count; ++i){
+                    spikeAbilityMeshes[i].SetActive(false);
+                    spikeAbilityDropoffParticles[i].SetActive(true);
                 }
             }
             
@@ -348,7 +356,13 @@ public class PlayerComponent : MonoBehaviour {
                 }
                 dashPickupParticle.SetActive(true);
                 PlayerUIComponent.instance.ShowDialogue("Transmuted to Dash Power");
-            }
+            } else if(currentAbility == AbilityType.PlayerSpikes){
+                for(int i = 0, count = spikeAbilityMeshes.Length; i < count; ++i){
+                    spikeAbilityMeshes[i].SetActive(true);
+                }
+                spikePickupParticle.SetActive(true);
+                PlayerUIComponent.instance.ShowDialogue("Transmuted to Spike Power");
+            }        
         }
     }
     
