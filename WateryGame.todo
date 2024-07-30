@@ -14,6 +14,7 @@ TODO List
 [/] Rocks that break when all enemies in a list are killed
 [/] Change respawn to simply load level?
 
+[b] Fish charge in wrong direction
 [x] Redo levels as arenas with fish gauntlets
 [x] Change music system to only trigger during bossfight (Or get chiller combat track?)
 [x] Hook up or make SFX
