@@ -356,12 +356,20 @@ public class PlayerComponent : MonoBehaviour {
                 }
                 dashPickupParticle.SetActive(true);
                 PlayerUIComponent.instance.ShowDialogue("Transmuted to Dash Power");
+                
+                for(int i = 0, count = spikeAbilityMeshes.Length; i < count; ++i){
+                    spikeAbilityMeshes[i].SetActive(false);
+                }
             } else if(currentAbility == AbilityType.PlayerSpikes){
                 for(int i = 0, count = spikeAbilityMeshes.Length; i < count; ++i){
                     spikeAbilityMeshes[i].SetActive(true);
                 }
                 spikePickupParticle.SetActive(true);
                 PlayerUIComponent.instance.ShowDialogue("Transmuted to Spike Power");
+                
+                for(int i = 0, count = dashAbilityMeshes.Length; i < count; ++i){
+                    dashAbilityMeshes[i].SetActive(false);
+                }
             }        
         }
     }
