@@ -1,5 +1,6 @@
-using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System;
 
@@ -286,15 +287,19 @@ public class PlayerComponent : MonoBehaviour {
     }
     
     public void FinalizeRespawn(){
-        currentLightAmount = 0.0f;
-        currentAbility = AbilityType.None;
-        movementInputsEnabled = true;
-        
-        characterController.enabled = false;
-        transform.position = respawnPosition;
-        characterController.enabled = true;
-        
-        damageable.Respawn();
+        #if UNITY_EDITOR
+            currentLightAmount = 0.0f;
+            currentAbility = AbilityType.None;
+            movementInputsEnabled = true;
+            
+            characterController.enabled = false;
+            transform.position = respawnPosition;
+            characterController.enabled = true;
+            
+            damageable.Respawn();
+        #else
+            SceneManager.LoadScene(0);
+        #endif
     }
     
     // Helper functions for global interactions

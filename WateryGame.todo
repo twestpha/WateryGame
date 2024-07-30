@@ -9,13 +9,10 @@
 
 TODO List
 ==========================================================================
-[/] Intermittent random fish spawns in boss arena
-[/] Boss
-    [/] Win fight, swim away trailing blood into the depths
-[/] Player spikefish parts
 [/] fix player dash animation
 [/] Spike animation fix, trident behaves weird
 [/] Rocks that break when all enemies in a list are killed
+[/] Change respawn to simply load level?
 
 [x] Redo levels as arenas with fish gauntlets
 [x] Change music system to only trigger during bossfight (Or get chiller combat track?)
@@ -27,4 +24,3 @@ TODO List
     - boss large groan
     - dash power
     - spike power
-[x] Change respawn to simply load level?
