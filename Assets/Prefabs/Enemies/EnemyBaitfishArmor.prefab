@@ -280,7 +280,10 @@ MonoBehaviour:
   currentHealth: 2
   hasArmor: 0
   team: 2
-  resistances: []
+  resistances:
+  - type: 6
+    multiplier: 0
+    offset: 0
 --- !u!114 &2177854590393221089
 MonoBehaviour:
   m_ObjectHideFlags: 0
