@@ -14,6 +14,7 @@ public class DialogueVolumeComponent : MonoBehaviour {
     private void OnTriggerEnter(Collider other){
         if(other.tag == "Player"){
             if(repeatable || !triggered){
+                triggered = true;
                 PlayerUIComponent.instance.ShowDialogue(dialogue);
             }
         }
