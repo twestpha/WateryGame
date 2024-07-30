@@ -15,9 +15,9 @@ TODO List
 [/] Player spikefish parts
 [/] fix player dash animation
 [/] Spike animation fix, trident behaves weird
+[/] Rocks that break when all enemies in a list are killed
 
-[x] Rocks that break when all enemies in a list are killed
-[x] Redo levels
+[x] Redo levels as arenas with fish gauntlets
 [x] Change music system to only trigger during bossfight (Or get chiller combat track?)
 [x] Hook up or make SFX
     - swish
@@ -27,3 +27,4 @@ TODO List
     - boss large groan
     - dash power
     - spike power
+[x] Change respawn to simply load level?
